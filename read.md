@@ -1,5 +1,5 @@
 版本更新真是一个坑
-pip freeze > requirements.txt
+pip3 freeze > requirements.txt
 
 1. 系统初始化脚本
 2. 脚本上传保存脚本
@@ -14,3 +14,8 @@ pip freeze > requirements.txt
 
  --skip-broken
  rpm -Va --nofiles --nodigest
+ 
+ 启动： systemctl start firewalld
+查看状态： systemctl status firewalld 
+停止： systemctl disable firewalld
+禁用： systemctl stop firewalld

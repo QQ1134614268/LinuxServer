@@ -16,6 +16,7 @@
 # firewall-cmd --reload #重启firewall
 # systemctl stop firewalld.service #停止firewall
 # systemctl disable firewalld.service #禁止firewall开机启动
+# systemctl enable firewalld.service
 # firewall-cmd --state #查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
 
 systemctl start firewalld
@@ -24,3 +25,7 @@ firewall-cmd --zone=public --add-port=22/tcp --permanent
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=3306/tcp --permanent
 firewall-cmd --reload
+
+
+#删除
+# firewall-cmd --zone=public --remove-port=80/tcp --permanent
