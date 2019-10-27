@@ -1,11 +1,10 @@
 #!/bin/bash
 #1.准备编译环境 centos7.5 时间: 2019.10.23
-# yum -y groupinstall "Development tools"
-# yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
-
 yum -y install gcc gcc-c++
-yum -y install zlib-devel
+yum -y install zlib zlib-devel
 yum -y install libffi-devel
+yum -y install bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+
 
 #2. 下载python3.7包
 wget https://www.python.org/ftp/python/3.7.5/Python-3.7.5.tgz

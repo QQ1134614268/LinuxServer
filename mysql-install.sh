@@ -16,20 +16,18 @@ systemctl status mysqld.service
 systemctl enable mysqld
 systemctl daemon-reload
 
-grep 'temporary password' /var/log/mysqld.log
-mysql -uroot -p
+# 安装后修改初始密码,创建新用户
+# grep 'temporary password' /var/log/mysqld.log
+# mysql -uroot -p
 
-SHOW VARIABLES LIKE 'validate_password.%';
-set global validate_password.length=6;
-set global validate_password.policy=0;
-set global validate_password.check_user_name=off;
+# SHOW VARIABLES LIKE 'validate_password.%';
+# set global validate_password.length=6;
+# set global validate_password.policy=0;
+# set global validate_password.check_user_name=off;
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+# ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 
-
-create user 'root'@'%' identified with mysql_native_password by '123456';
-grant all privileges on *.* to 'root'@'%' with grant option;
-flush privileges;
-exit;
-
-
+# create user 'root'@'%' identified with mysql_native_password by '123456';
+# grant all privileges on *.* to 'root'@'%' with grant option;
+# flush privileges;
+# exit;
