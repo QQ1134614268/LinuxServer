@@ -16,6 +16,7 @@ nohup python3 /app/world/src/main/python/app.py &
 # ps -ef | grep python3
 # netstat -ntulp |grep 80
 # kill -s 9 1827
-# pgrep python3
-# pkill -f python3
+# pgrep "python3 /app/world/src/main/python/app.py"
+# pkill -f "python3"
+# pkill -f "python3 /app/world/src/main/python/app.py"
 # pidof python3
