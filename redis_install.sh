@@ -5,7 +5,7 @@ cd /usr/local/redis-5.0.7
 make MALLOC=libc
 cd src && make install
 
-# 后台运行
+# 后台运行 将redis设为守护进程  = 把/usr/local/redis-5.0.7/redis.conf文件中 "daemonize no"  改为 "daemonize yes"
 sed -i 's/daemonize no/daemonize yes/g' /usr/local/redis-5.0.7/redis.conf
 
 # 开机启动
