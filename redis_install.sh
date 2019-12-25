@@ -1,0 +1,18 @@
+#下载 编译
+wget -P /tmp http://download.redis.io/releases/redis-5.0.7.tar.gz
+tar -zxvf /tmp/redis-5.0.7.tar.gz -C /usr/local
+cd /usr/local/redis-5.0.7
+make MALLOC=libc
+cd src && make install
+
+# 后台运行
+sed -i 's/daemonize no/daemonize yes/g' /usr/local/redis-5.0.7/redis.conf
+
+# 开机启动
+mkdir /etc/redis
+cp /usr/local/redis-5.0.7/redis.conf /etc/redis/6379.conf
+cp /usr/local/redis-5.0.7/utils/redis_init_script /etc/init.d/redisd
+service redisd start
+
+# 关闭redis服务
+# service redisd stop
