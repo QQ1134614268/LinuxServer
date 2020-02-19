@@ -10,7 +10,8 @@ firewall-cmd --reload
 # 与脚本相关设置参考网址
 # mysql
 # use mysql;
-# update user set host='%' where user='root';
-# ALTER USER 'root'@'%' IDENTIFIED BY '123456';
-# FLUSH  PRIVILEGES;
-#
+# ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+# create user 'wg'@'%' identified with mysql_native_password by '123456';
+# grant all privileges on *.* to 'root'@'%' with grant option;
+# flush privileges;
+# exit;
