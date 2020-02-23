@@ -28,6 +28,6 @@ systemctl daemon-reload
 # ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 
 # create user 'wg'@'%' identified with mysql_native_password by '123456';
-# grant all privileges on *.* to 'root'@'%' with grant option;
+# grant all privileges on *.* to 'wg'@'%' with grant option;
 # flush privileges;
 # exit;
