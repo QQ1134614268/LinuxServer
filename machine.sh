@@ -1,4 +1,11 @@
+# 重启
+reboot
 shutdown -r now
+
+查找
+find
+grep
+ps -ef | grep python3
 
 # 查看磁盘
 df -hl

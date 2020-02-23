@@ -1,7 +1,9 @@
 
 # 添加开机自启
 # 1. 启动脚本
-echo "python3.7 /app/world/src/app.py &
+echo "date >> /root/a.txt
+/bin/bash /root/world_update.sh
+echo '666' >> /root/a.txt
 " >  /etc/systemd/system/world_start.sh
 
 # 2. 执行权限
@@ -17,6 +19,8 @@ ExecStart=/bin/sh /etc/systemd/system/world_start.sh
 
 [Install]
 WantedBy=ssh.target
+WantedBy=multi-user.target
+
 " > /etc/systemd/system/world_start.service
 
 # 4. 开机自启服务
