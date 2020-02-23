@@ -7,6 +7,11 @@ find
 grep
 ps -ef | grep python3
 
+/etc/sysconfig/network-scripts
+
+echo 1 > 1.txt
+echo date >> 1.txt
+
 # 查看磁盘
 df -hl
 # 查看cpu

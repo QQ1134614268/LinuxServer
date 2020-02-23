@@ -1,5 +1,6 @@
 cd  /app/world
 git pull
+cd
 # git --git-dir /app/world/.git pull
 nohup pip3.7 install -r /app/world/requirements.txt  &
 cd /app/world/src/

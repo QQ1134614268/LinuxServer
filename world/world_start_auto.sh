@@ -16,7 +16,7 @@ Description=world auto start
 ExecStart=/bin/sh /etc/systemd/system/world_start.sh
 
 [Install]
-WantedBy=ssh.target
+WantedBy=multi-user.target
 " > /etc/systemd/system/world_start.service
 
 # 4. 开机自启服务
