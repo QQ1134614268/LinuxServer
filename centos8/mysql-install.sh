@@ -1,4 +1,3 @@
-
 # 安装mysql
 dnf install mysql
 systemctl enable mysqld

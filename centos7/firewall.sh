@@ -1,5 +1,5 @@
 # 查看已经开放的端口：
-# firewall-cmd --list-ports
+firewall-cmd --list-ports
 # 开启端口
 #     firewall-cmd --zone=public --add-port=80/tcp --permanent
 # 	–zone #作用域
@@ -21,4 +21,6 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --reload
 
 #删除
+
 # firewall-cmd --zone=public --remove-port=80/tcp --permanent
+
