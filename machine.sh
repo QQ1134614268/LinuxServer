@@ -8,19 +8,14 @@ uname -a
 查找
 find
 grep
-ps -ef
-ps -ef | grep python3
 netstat -tunlp|grep 3306
 
-/etc/sysconfig/network-scripts
-
-echo 1 > 1.txt
-echo date >> 1.txt
-
-# 查看磁盘
+资源使用--cpu 内存 磁盘 带宽
+top -p id
+ps -ef
+ps -ef | grep python3
 df -hl
-# 查看cpu
-top
+iftop 带宽
 
 # ps -ef | grep "python3" | grep -v grep | awk '{print $2}'
 # process_name=$1
