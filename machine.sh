@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # 重启
 reboot
 shutdown -r now

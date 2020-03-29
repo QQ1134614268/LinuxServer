@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # 查看已经开放的端口：
 firewall-cmd --list-ports
 # 开启端口

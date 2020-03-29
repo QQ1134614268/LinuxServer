@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # 下载代码
 mkdir -p /app/world
 git clone  https://gitee.com/biaozhun/world.git /app/world

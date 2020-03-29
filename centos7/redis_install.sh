@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #下载 编译
 wget -P /tmp http://download.redis.io/releases/redis-5.0.7.tar.gz
 tar -zxvf /tmp/redis-5.0.7.tar.gz -C /usr/local

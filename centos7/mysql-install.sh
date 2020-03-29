@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 # centos7 tar包:
 #     https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.18-1.el7.x86_64.rpm-bundle.tar

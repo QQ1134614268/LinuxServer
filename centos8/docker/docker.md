@@ -1,3 +1,8 @@
+daemonize no
+chmod -R 777 /opt/docker/mysql
+docker 限制日志
+du -sh ./*
+
 # 目录挂载 -- 配置文件 数据目录 日志目录
 
 docker search|pull|rmi 镜像名字

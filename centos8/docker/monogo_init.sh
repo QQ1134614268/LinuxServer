@@ -1,13 +1,11 @@
-mkdir -p  /opt/docker/mongo/db
+#!/usr/bin/env bash
+rm -rf /opt/docker/mongo
+mkdir -p  /opt/docker/mongo
 
-docker pull mongo:4.0.17-xenial
-docker run -p 27017:27017  --auth --restart=always -v /opt/docker/mongo/db:/data/db --name docker_mongodb -d mongo:4.0.17-xenial
+docker stop mongo && docker rm mongo
 
-#admin进入
-docker exec -it 10b15378e5ae  mongo admin
-#创建用户和密码
-db.createUser({ user: 'admin', pwd: '123', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
-#验证一下对不对
-db.auth("admin","123");
-#退出
-exit
+docker run --name mongo --restart=always -p 27017:27017 -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone -v /opt/docker/mongo/:/data -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root1234567890 -d mongo:4.2.5
+
+docker exec -it mongo mongo admin -u root -p root1234567890  --authenticationDatabase admin --eval '
+db.createUser({ user: "world", pwd: "world1234567890", roles: [{ role: "dbAdmin", db: "world" }] });
+'

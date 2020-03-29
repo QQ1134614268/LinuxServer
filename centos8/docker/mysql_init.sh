@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 docker stop mysql && docker rm mysql
 rm -rf /opt/docker/
 mkdir -p  /opt/docker/mysql/data  /opt/docker/mysql/conf /opt/docker/mysql/logs /opt/docker/mysql/mysql-files

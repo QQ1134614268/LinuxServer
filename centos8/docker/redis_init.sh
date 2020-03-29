@@ -1,19 +1,20 @@
+#!/usr/bin/env bash
 docker stop redis && docker rm redis
 rm -rf /opt/docker/redis
 mkdir -p /opt/docker/redis/conf  /opt/docker/redis/data
 
 docker pull redis:rc-alpine3.11
-echo 'dir /data
-bind 0.0.0.0
+echo '# daemonize yes 会导致容器启动失败
+daemonize no
+dir /data
 port 6379
 appendonly yes
 requirepass 1234567890
-daemonize yes
 pidfile redis_6379.pid
 loglevel debug
 logfile log-redis.log
+protected-mode no
 
-protected-mode yes
 tcp-backlog 511
 timeout 0
 tcp-keepalive 300
@@ -67,5 +68,5 @@ hz 10
 dynamic-hz yes
 aof-rewrite-incremental-fsync yes
 rdb-save-incremental-fsync yes
-'>/opt/docker/conf/redis.conf
-docker run -d --privileged=true -p 6379:6379 --restart always -v /root/docker/redis/conf/redis.conf:/etc/redis/redis.conf -v /root/docker/redis/data:/data --name redis redis:rc-alpine3.11 redis-server /etc/redis/redis.conf
+'>/opt/docker/redis/conf/redis.conf
+docker run -d --privileged=true -p 6379:6379 --restart always -v /opt/docker/redis/conf/redis.conf:/etc/redis/redis.conf -v /opt/docker/redis/data:/data --name redis redis:rc-alpine3.11 redis-server /etc/redis/redis.conf  --appendonly yes

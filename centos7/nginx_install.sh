@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #下载 编译
 cd /tmp
 wget http://nginx.org/download/nginx-1.9.9.tar.gz
