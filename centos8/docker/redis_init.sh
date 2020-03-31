@@ -3,7 +3,6 @@ docker stop redis && docker rm redis
 rm -rf /opt/docker/redis
 mkdir -p /opt/docker/redis/conf  /opt/docker/redis/data
 
-docker pull redis:rc-alpine3.11
 echo '# daemonize yes 会导致容器启动失败
 daemonize no
 dir /data
@@ -14,6 +13,7 @@ pidfile redis_6379.pid
 loglevel debug
 logfile log-redis.log
 protected-mode no
+stop-writes-on-bgsave-error no
 
 tcp-backlog 511
 timeout 0
@@ -24,7 +24,6 @@ always-show-logo yes
 save 900 1
 save 300 10
 save 60 10000
-stop-writes-on-bgsave-error yes
 rdbcompression yes
 rdbchecksum yes
 dbfilename dump.rdb
