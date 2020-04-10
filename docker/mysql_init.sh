@@ -23,6 +23,8 @@ create user 'wg'@'%' identified with mysql_native_password by '123456';
 grant all privileges on *.* to 'wg'@'%' with grant option;
 flush privileges;"
 
+# docker exec -it mysql mysql -uroot -p1234567890 -e "source /var/lib/mysql/sqlfile.sql"
+
 # firewall-cmd --zone=public --add-port=3306/tcp --permanent
 # firewall-cmd --reload
 # systemctl restart docker
