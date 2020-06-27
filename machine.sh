@@ -16,6 +16,10 @@ top -p id
 ps aux --sort -rss
 ps -ef
 ps -ef | grep python3
+pgrep -f "python3.7"
+netstat -nap|grep 3306
+netstat -tunlp|grep 3306
+
 df -hl
 iftop 带宽
 # ps -ef | grep "python3" | grep -v grep | awk '{print $2}'
