@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+## 测试服务器联通
+#ping 159.75.92.195
+## 测试服务器端口
+#telnet 159.75.92.195 3306
+
 # 查看已经开放的端口：
 firewall-cmd --list-ports
 # 开启端口
@@ -24,4 +29,3 @@ firewall-cmd --reload
 #删除
 
 # firewall-cmd --zone=public --remove-port=80/tcp --permanent
-

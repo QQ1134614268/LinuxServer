@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 下载代码
-mkdir -p /app/world
-git clone  https://gitee.com/biaozhun/world.git /app/world
+mkdir -p /app/world_web
+git clone  https://gitee.com/biaozhun/world_web.git /app/world_web
 
 pip3.7 install -r /app/world/requirements.txt
 
