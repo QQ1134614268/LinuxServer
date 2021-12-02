@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+ping 159.75.92.195
+telnet 159.75.92.195 80
+
 # 重启
 reboot
 shutdown -r now
@@ -29,4 +32,5 @@ iftop 带宽
 # pgrep "python3 /app/world/src/main/python/app.py"
 # pkill -f "python3 /app/world/src/main/python/app.py"
 # pidof python3
+
 
