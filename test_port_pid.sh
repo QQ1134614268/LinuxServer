@@ -22,11 +22,18 @@ shutdown -r now
 cat /proc/version
 uname -a
 
-# 资源使用--cpu 内存 磁盘 带宽
-top -p id
+# 资源使用--cpu
+top
 
+#内存
+top -p id
+free
+
+# 磁盘
 df -hl
-iftop 带宽
+
+# 带宽
+iftop
 # ps -ef | grep "python3" | grep -v grep | awk '{print $2}'
 # process_name=$1
 # eg: pid=$(ps -ef | grep $process_name | grep '/bin/java' | grep -v grep | awk '{print $2}')
