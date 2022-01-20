@@ -40,7 +40,6 @@ http {
     server {
         listen       80 default_server;
         listen       [::]:80 default_server;
-        server_name  182.254.161.54;
         root         /usr/share/nginx/html;
 
         # Load configuration files for the default server block.
@@ -65,5 +64,5 @@ http {
     }
 
 }
-">/opt/docker/nginx/conf/nginx.conf
-docker run --name mynginx -d -p 80:80  -v /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf  -v /data/nginx/logs:/var/log/nginx -d nginx:perl
+">/etc/nginx/nginx.conf
+docker run -d --name nginx -d -p 80:80  -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf  -v /var/nginx/logs:/var/log/nginx nginx

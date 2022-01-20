@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
-docker stop redis && docker rm redis
-rm -rf /opt/docker/redis
-mkdir -p /opt/docker/redis/conf  /opt/docker/redis/data
+docker stop redis && docker rm redis && docker rmi redis
+docker pull redis
 
-echo '# daemonize yes 会导致容器启动失败
-daemonize no
-dir /data
+echo 'daemonize yes
+dir /var/redis/data
 port 6379
 appendonly yes
 requirepass 1234567890
@@ -67,5 +65,5 @@ hz 10
 dynamic-hz yes
 aof-rewrite-incremental-fsync yes
 rdb-save-incremental-fsync yes
-'>/opt/docker/redis/conf/redis.conf
-docker run -d --privileged=true -p 6379:6379 --restart always -v /opt/docker/redis/conf/redis.conf:/etc/redis/redis.conf -v /opt/docker/redis/data:/data --name redis redis:rc-alpine3.11 redis-server /etc/redis/redis.conf  --appendonly yes
+'>/etc/redis/redis.conf
+docker run -d --name redis -v /etc/redis/redis.conf:/etc/redis/redis.conf -v /var/docker/redis/data:/var/redis/data -p 6379:6379 --privileged=true --restart always  redis redis-server /etc/redis/redis.conf --appendonly yes
