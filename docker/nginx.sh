@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-mkdir -p /opt/docker/nginx/{conf,conf.d,html,logs}
 echo "# For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
@@ -65,4 +64,4 @@ http {
 
 }
 ">/etc/nginx/nginx.conf
-docker run -d --name nginx -d -p 80:80  -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf  -v /var/nginx/logs:/var/log/nginx nginx
+docker run -d --name nginx -d -p 80:80  -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf  -v /var/log/nginx:/var/log/nginx nginx

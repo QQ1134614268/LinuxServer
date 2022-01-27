@@ -1,5 +1,4 @@
 daemonize no
-chmod -R 777 /opt/docker/mysql
 docker 限制日志
 du -sh ./*
 
@@ -29,7 +28,7 @@ docker run -itd -p port:port -v /宿主机/目录:/容器目录 镜像名
 docker cp 容器名:/容器目录/文件名 /宿主机目录/文件名
 docker cp /宿主机目录/文件名 容器名:/容器目录/文件名
 #容器互联--一个容器提供一个服务 -e 传参
-docker run -itd --name mysql9 -p 43306:3306 -v /root/docker/mysql:/var/lib/mysql/  -e MYSQL_ROOT_PASSWORD=123456 --restart=always mysql
+docker run -itd --name mysql9 -p 43306:3306 -v /var/lib/mysql:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=123456 --restart=always mysql
 docker run -itd --name mysql --link 名:名 mysql
 #运行dockerfile,构建镜像
 docker build -t 镜像名:tag -f dockerfile .
