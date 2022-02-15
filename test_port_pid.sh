@@ -2,6 +2,8 @@
 find / -name *.png
 grep "123" info.log
 
+find / -name file_xxx | grep content_xxx
+
 ping 159.75.92.195
 telnet 159.75.92.195 80
 
