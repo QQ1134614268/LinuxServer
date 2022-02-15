@@ -66,5 +66,5 @@ dynamic-hz yes
 aof-rewrite-incremental-fsync yes
 rdb-save-incremental-fsync yes
 '>/etc/redis/redis.conf
-chmod 766 /var/redis/data/log-redis.log
+chmod 644 /var/redis/data/log-redis.log
 docker run -d --name redis -v /etc/redis/redis.conf:/etc/redis/redis.conf -v /var/log/redis/redis.log:/var/log/redis/redis.log -v /var/redis/data:/var/redis/data -p 6379:6379 --privileged=true --restart always  redis redis-server /etc/redis/redis.conf --appendonly yes
