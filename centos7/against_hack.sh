@@ -2,7 +2,7 @@
 pstree
 ps -ejH
 
-top -b -n1 | mail -s 'Process snapshot' 1134614268@qq.com
+top -b -n1 | mail -s '证书记录' 1134614268@qq.com
 
 ps -eLf
 ps axms
