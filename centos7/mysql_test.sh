@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mysql -uroot -pxxx -e "source /root/mysql_data.sql"
+mysql -uroot -pxxx -e "source /root/xxx.sql"

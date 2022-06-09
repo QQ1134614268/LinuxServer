@@ -2,7 +2,6 @@
 # 1. yum安装
 # yun install -y nginx
 # 2. Nginx的源码 复杂安装
-
 #下载 编译
 cd /tmp
 wget http://nginx.org/download/nginx-1.9.9.tar.gz

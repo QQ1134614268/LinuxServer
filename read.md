@@ -1,3 +1,5 @@
+# 常用命令, find,grep,ps,netstat,vim,top,free,cat,uname,ping,telnet,cp,tar,systemctl,date,echo,>,>>,whereis
+# firewall-cmd, yum, ls,ll,ln,wget,curl,sed,cd,mv,
 版本更新真是一个坑
 pip3 freeze > requirements.txt
 

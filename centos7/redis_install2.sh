@@ -8,11 +8,8 @@ yum -y install redis
 #redis-cli --version
 
 #启动
-service redis start
-
-# service redis restart
-#开机启动
 systemctl start redis
+
 # /etc/redis.conf
 # bind 127.0.0.1
 # requirepass 123456

@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 find / -name *.png
-grep "123" info.log
-
 find / -name file_xxx | grep content_xxx
 
-ping 159.75.92.195
-telnet 159.75.92.195 80
+grep "123" info.log
+
+
+## 测试服务器联通
+#ping 159.75.92.195
+## 测试服务器端口
+#telnet 159.75.92.195 3306
 
 netstat -tunlp|grep 3306
 netstat -nap|grep 3306

@@ -14,7 +14,7 @@ sed -i 's/daemonize no/daemonize yes/g' /usr/local/redis-5.0.7/redis.conf
 mkdir /etc/redis
 cp /usr/local/redis-5.0.7/redis.conf /etc/redis/6379.conf
 cp /usr/local/redis-5.0.7/utils/redis_init_script /etc/init.d/redisd
-service redisd start
+systemctl start redis
 
 # 关闭redis服务
-# service redisd stop
+# systemctl stop redis
