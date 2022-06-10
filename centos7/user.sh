@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-useradd world -c world项目管理员 -g root -G adm -s /bin/bash
-useradd wg -c wg理员 -g root -G adm -s /bin/bash
-# whereis git
-# ls -l /usr/bin/git 查看权限
-chmod 命令
+groupadd  world_group
+useradd   world_user -g world_group
+echo 'world_user' | passwd es_user --stdin
+su world_user
 
-chgrp ［选项］ group filename
+# ls -l /usr/bin/git 查看权限
+# chmod 命令
+
+#chgrp ［选项］ group filename
   #-c或–changes 效果类似”-v”参数，但仅回报更改的部分。
   #-f或–quiet或–silent 　不显示错误信息。
   #-h或–no-dereference 　只对符号连接的文件作修改，而不更动其他任何相关文件。
@@ -14,7 +16,7 @@ chgrp ［选项］ group filename
   #–help 　在线帮助。
   #–reference=&lt;参考文件或目录&gt; 　把指定文件或目录的所属群组全部设成和参考文件或目录的所属群组相同。
   #–version 　显示版本信息。
-chown ［选项］ 用户或组 文件
+#chown ［选项］ 用户或组 文件
   #user : 新的档案拥有者的使用者 ID
   #group : 新的档案拥有者的使用者群体(group)
   #-c : 若该档案拥有者确实已经更改，才显示其更改动作
