@@ -6,8 +6,26 @@ docker stop kafka && docker rm kafka
 
 docker run -d --name kafka \
   -p 9092:9092 \
+  -m 512M \
   -e KAFKA_BROKER_ID=0 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
   -e KAFKA_ZOOKEEPER_CONNECT=ggok.top:2181 \
   -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://ggok.top:9092 \
   -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 bitnami/kafka
+
+#docker run -d --name kafka \
+#  -p 9092:9092 \
+#  -e KAFKA_BROKER_ID=0 \
+#  -e ALLOW_PLAINTEXT_LISTENER=yes \
+#  -e KAFKA_ZOOKEEPER_CONNECT=ggok.top:2181 \
+#  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://ggok.top:9092 \
+#  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 bitnami/kafka
+#
+#docker run -d --name kafka \
+#  -p 9092:9092 \
+#  -e JAVA_OPTS='-Xmx512m -Xms512m' \
+#  -e KAFKA_BROKER_ID=0 \
+#  -e ALLOW_PLAINTEXT_LISTENER=yes \
+#  -e KAFKA_ZOOKEEPER_CONNECT=ggok.top:2181 \
+#  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://ggok.top:9092 \
+#  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 bitnami/kafka
