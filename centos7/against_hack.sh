@@ -1,3 +1,4 @@
+#todo hack记录
 #进程
 pstree
 ps -ejH
@@ -51,4 +52,4 @@ netstat -ltnp
 # note: 命令被替换
 # 开机启动项
 # 定时任务
-# 安全策略 -- todo
+# 安全策略

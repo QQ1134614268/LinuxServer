@@ -34,6 +34,6 @@ spring.datasource.username=root
 spring.datasource.password=123456
 
 sh /usr/local/apache-dolphinscheduler-1.3.9/script/create-dolphinscheduler.sh
-# todo sh /usr/local/apache-dolphinscheduler-1.3.9/bin/create-dolphinscheduler.sh
+# sh /usr/local/apache-dolphinscheduler-1.3.9/bin/create-dolphinscheduler.sh
 #
-#sh /usr/local/apache-dolphinscheduler-1.3.9/bin/dolphinscheduler-daemon.sh start standalone-server
+# sh /usr/local/apache-dolphinscheduler-1.3.9/bin/dolphinscheduler-daemon.sh start standalone-server
