@@ -1,3 +1,4 @@
+#todo
 # 申请证书 https://blog.csdn.net/v6543210/article/details/121487387
 # acm.sh申请
 # 自动续期
@@ -10,15 +11,14 @@ echo 'alias acme.sh=~/.acme.sh/acme.sh' >>/etc/profile
 ./acme.sh  --set-default-ca --server zerossl
 ./acme.sh  --issue -d  goodboy.com   --standalone  -m  goodboy@gmail.com
 
-00 00 * * * root /root/.acme.sh/acme.sh --cron --home /root/.acme.sh &>/var/log/acme.sh.logs
+
+echo '0 0 * * * root /root/.acme.sh/acme.sh --cron --home /root/.acme.sh &>/var/log/acme.sh.logs'>>/var/spool/cron/root
 
 acme.sh  --issue  -d clsn.io -d *.clsn.io  --webroot  /www/wwwroot/clsn.io/
 
 
 acme.sh --issue  -d clsn.io   --clsn.io
 acme.sh --issue  -d clsn.io  --nginx
-
-
 
 acme.sh  --installcert  -d  <domain>.com   \
         --key-file   /etc/nginx/ssl/<domain>.key \

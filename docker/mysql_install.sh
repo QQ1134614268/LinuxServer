@@ -12,7 +12,14 @@ max_connections=100' > /etc/mysql/conf/my.cnf
 
 chmod 644 /etc/mysql/conf/my.cnf
 
-docker run  -d --name mysql -p 3306:3306 --privileged=true -v /etc/mysql/conf/my.cnf:/etc/mysql/my.cnf -v /var/lib/mysql-files:/var/lib/mysql-files -v /var/lib/mysql:/var/lib/mysql -v /var/log/mysql:/var/log/mysql -e MYSQL_ROOT_PASSWORD=1234567890 --restart=always mysql:8.0.19
+docker run  --name mysql --restart=always  --privileged=true \
+-p 3306:3306 \
+-v /etc/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+-v /var/lib/mysql-files:/var/lib/mysql-files \
+-v /var/lib/mysql:/var/lib/mysql \
+-v /var/log/mysql:/var/log/mysql \
+-e MYSQL_ROOT_PASSWORD=1234567890 \
+-d mysql:8.0.19
 sleep 20
 docker exec -it mysql mysql -uroot -p1234567890 -e "
 use mysql;

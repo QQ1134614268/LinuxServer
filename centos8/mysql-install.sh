@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 安装mysql
+# 安装mysql centos8
 dnf install mysql
 systemctl enable mysqld
 

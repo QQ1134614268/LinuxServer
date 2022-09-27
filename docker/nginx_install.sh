@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "# For more information on configuration, see:
+echo """# For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
 
@@ -37,15 +37,15 @@ http {
     include /etc/nginx/conf.d/*.conf;
 
     server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
+        listen       9000 default_server;
+        listen       [::]:9000 default_server;
         root         /usr/share/nginx/html;
 
         # Load configuration files for the default server block.
         include /etc/nginx/default.d/*.conf;
 
         location / {
-        proxy_pass http://pic;
+          proxy_pass http://pic;
         }
 
         error_page 404 /404.html;
@@ -58,10 +58,13 @@ http {
     }
 
     upstream pic{
-                server 182.254.161.54:8088 weight=5;
-                server 182.254.161.54:8089 weight=5;
+                server 182.254.161.54:19000;
     }
 
 }
-">/etc/nginx/nginx.conf
-docker run -d --name nginx -d -p 80:80  -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf  -v /var/log/nginx:/var/log/nginx nginx
+""">/etc/nginx/nginx.conf
+
+docker run --name nginx -p 80:80  \
+  -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf  \
+  -v /var/log/nginx:/var/log/nginx \
+  -d nginx

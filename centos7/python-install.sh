@@ -18,3 +18,6 @@ make install
 ln -s /usr/local/python3.7/bin/python3.7 /usr/bin/python3.7
 ln -s /usr/local/python3.7/bin/pip3 /usr/bin/pip3.7
 
+#5. 更换源
+echo '[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple' > ~/.pip/pip.conf

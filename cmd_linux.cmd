@@ -1,1 +1,0 @@
-ssh root@ggok.top

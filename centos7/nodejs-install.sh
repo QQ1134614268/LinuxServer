@@ -6,4 +6,3 @@ mv node-v12.13.0-linux-x64 /usr/local
 
 ln -s /usr/local/node-v12.13.0-linux-x64/bin/npm /usr/bin/
 ln -s /usr/local/node-v12.13.0-linux-x64/bin/node /usr/bin/
-

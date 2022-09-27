@@ -1,4 +1,3 @@
-#todo hack记录
 #进程
 pstree
 ps -ejH

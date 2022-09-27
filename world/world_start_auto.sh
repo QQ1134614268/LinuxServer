@@ -2,11 +2,10 @@
 
 # 添加开机自启
 # 1. 启动脚本
-echo "python3.7 /app/world/src/app.py &
-" >  /etc/systemd/system/world_start.sh
+echo "nohup python3.7 /app/world/src/app.py &" >  /etc/systemd/system/world_start.sh
 
 # 2. 执行权限
-chmod 777  /etc/systemd/system/world_start.sh
+chmod +x  /etc/systemd/system/world_start.sh
 
 # 3. service服务脚本
 echo "#  参考: https://www.cnblogs.com/q149072205/p/11541693.html

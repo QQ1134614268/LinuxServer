@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+# awk sed grep
 find / -name *.png
 find / -name file_xxx | grep content_xxx
 
 grep "123" info.log
-
 
 ## 测试服务器联通
 #ping 159.75.92.195
