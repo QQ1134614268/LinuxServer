@@ -1,11 +1,16 @@
-# todo
-docker pull python:3.7.7-slim-buster
-docker cp /app/world python3:/opt
-docker exec -it python3 sh
-pip install --no-cache-dir -r /opt/world/requirements.txt -i http://mirrors.aliyun.com/pypi/simple/  --trusted-host mirrors.aliyun.com
+# 如果没有安装docker, 安装docker
 
-docker run -it --name python3 \
-  -d python:3.7.7-slim-buster
+# 如果没有git 安装git
 
-# docker export elated_kare > world_export.tar
-# docker stop python3 && docker rm python3
+cd
+# 如果没有克隆,就克隆
+
+# 拉取最新代码
+cd  world && git pull
+docker bulid world.dockerfile
+docker build -t world:1.0.1 -f world.dockerfile .
+
+docker run -it --name world \
+  -v /opt/world/data/upload /home/world/data/upload \
+  -v /opt/world/data/log /home/world/data/log \
+  -d world:1.0.1
