@@ -1,7 +1,9 @@
 
-mkdir -m 777 -p /opt/elasticsearch/config
-mkdir -m 777 -p /opt/elasticsearch/data
-mkdir -m 777 -p /opt/elasticsearch/plugins
+mkdir -m 777 -p /opt/es_docker/config
+mkdir -m 777 -p /opt/es_docker/data
+mkdir -m 777 -p /opt/es_docker/plugins
+
+# chmod 777 /opt/es_docker
 
 echo 'http.host: 0.0.0.0
 
@@ -26,7 +28,9 @@ docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
  -v /opt/es_docker/data:/usr/share/elasticsearch/data \
  -v /opt/es_docker/plugins:/usr/share/elasticsearch/plugins \
  -d elasticsearch:7.12.0
- 
+
+# --privileged=true \ # 使用该参数，container内的root拥有真正的root权限
+
 # -e ELASTIC_PASSWORD="123456"   # 账号密码默认是elastic  这里设置密码 123456
 
 
