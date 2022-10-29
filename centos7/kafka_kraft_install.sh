@@ -28,6 +28,8 @@ wget https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz
 docker pull kubebiz/kafka:2.13-3.3.1
 
 mkdir -p  /opt/kafka/config/kraft
+mkdir -p  /opt/kafka/logs
+
 echo "process.roles=broker,controller
 node.id=1
 controller.quorum.voters=1@localhost:9093
@@ -57,6 +59,7 @@ docker run --name kafka -p 9092:9092 \
   -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
   -e KAFKA_HEAP_OPTS="-Xms256M -Xmx512m" \
   -v /opt/kafka/config/kraft/server.properties:/opt/kafka/config/kraft/server.properties \
+  -v /opt/kafka/logs:/tmp/logs \
   -d kubebiz/kafka:2.13-3.3.1  /bin/bash -c "kafka-storage.sh format -t 3dTO5CPBTbO2EPqSqQR02g -c /opt/kafka/config/kraft/server.properties && kafka-server-start.sh /opt/kafka/config/kraft/server.properties"
 
 # -v /tmp/kraft-combined-logs:/tmp/kraft-combined-logs \

@@ -1,9 +1,9 @@
 
-mkdir -m 777 -p /opt/es_docker/config
-mkdir -m 777 -p /opt/es_docker/data
-mkdir -m 777 -p /opt/es_docker/plugins
+mkdir -m 777 -p /opt/elasticsearch/config
+mkdir -m 777 -p /opt/elasticsearch/data
+mkdir -m 777 -p /opt/elasticsearch/plugins
 
-# chmod 777 /opt/es_docker
+# chmod 777 /opt/elasticsearch
 
 echo 'http.host: 0.0.0.0
 
@@ -15,7 +15,7 @@ http.cors.allow-headers: Content-Type,Accept,Authorization,x-requested-with,toke
 xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
 
-'> /opt/es_docker/config/elasticsearch.yml
+'> /opt/elasticsearch/config/elasticsearch.yml
 
 docker pull elasticsearch:7.12.0
 
@@ -24,9 +24,9 @@ docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
  -e "discovery.type=single-node" \
  -e ELASTIC_PASSWORD="123456" \
  -e ES_JAVA_OPTS="-Xms256M -Xmx512m" \
- -v /opt/es_docker/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
- -v /opt/es_docker/data:/usr/share/elasticsearch/data \
- -v /opt/es_docker/plugins:/usr/share/elasticsearch/plugins \
+ -v /opt/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+ -v /opt/elasticsearch/data:/usr/share/elasticsearch/data \
+ -v /opt/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
  -d elasticsearch:7.12.0
 
 # --privileged=true \ # 使用该参数，container内的root拥有真正的root权限
@@ -42,5 +42,5 @@ docker stop elasticsearch
 
 docker ps -a
 docker exec -it elasticsearch /bin/bash
-ll /opt/es_docker/config
+ll /opt/elasticsearch/config
 
