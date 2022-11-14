@@ -57,12 +57,14 @@ docker run --name kafka -p 9092:9092 \
   -e KAFKA_BROKER_ID=0 \
   -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://ggok.top:9092 \
   -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
-  -e KAFKA_HEAP_OPTS="-Xms256M -Xmx512m" \
+  -e KAFKA_HEAP_OPTS="-Xms256M -Xmx256M" \
   -v /opt/kafka/config/kraft/server.properties:/opt/kafka/config/kraft/server.properties \
   -v /opt/kafka/logs:/tmp/logs \
   -d kubebiz/kafka:2.13-3.3.1  /bin/bash -c "kafka-storage.sh format -t 3dTO5CPBTbO2EPqSqQR02g -c /opt/kafka/config/kraft/server.properties && kafka-server-start.sh /opt/kafka/config/kraft/server.properties"
 
 # -v /tmp/kraft-combined-logs:/tmp/kraft-combined-logs \
+
+# --ignore-formatted
 
 docker stop kafka && docker rm kafka
 

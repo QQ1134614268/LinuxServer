@@ -12,8 +12,8 @@ http.cors.allow-origin: "*"
 http.cors.allow-methods: OPTIONS,HEAD,GET,POST,PUT,DELETE
 http.cors.allow-headers: Content-Type,Accept,Authorization,x-requested-with,token
 
-xpack.security.enabled: true
-xpack.security.transport.ssl.enabled: true
+#xpack.security.enabled: true
+#xpack.security.transport.ssl.enabled: true
 
 '> /opt/elasticsearch/config/elasticsearch.yml
 
@@ -23,7 +23,7 @@ docker pull elasticsearch:7.12.0
 docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
  -e "discovery.type=single-node" \
  -e ELASTIC_PASSWORD="123456" \
- -e ES_JAVA_OPTS="-Xms256M -Xmx512m" \
+ -e ES_JAVA_OPTS="-Xms256M -Xmx256M" \
  -v /opt/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
  -v /opt/elasticsearch/data:/usr/share/elasticsearch/data \
  -v /opt/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
@@ -33,6 +33,7 @@ docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
 
 # -e ELASTIC_PASSWORD="123456"   # 账号密码默认是elastic  这里设置密码 123456
 
+# elasticsearch -Xms256M 实际占用两倍? 有两个进程
 
 docker logs elasticsearch
 
