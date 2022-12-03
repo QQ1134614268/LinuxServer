@@ -1,9 +1,9 @@
-TODO
-service服务有问题
-
 yum
 docker
-gitlab mysql nginx python java nodejs redis 
+mysql redis
+nginx 
+python 
+nodejs  
 
 git.ggok.top
 jiangxin
