@@ -1,5 +1,7 @@
-# nginx代理转发
+# docker环境
+# git
 # mysql
+# nginx代理转发
 # redis
 # nodejs编译
 

@@ -2,6 +2,16 @@ daemonize no
 docker 限制日志
 du -sh ./*
 
+# docker debug 调试 如何不启动容器，直接进入Docker镜像里执行命令
+docker run --rm -it --entrypoint=/bin/bash image-name # docker run --rm -it /bin/bash image-name
+docker ps -a --no-trunc | grep container_name   # 通过docker --no-trunc参数来详细展示容器运行命令
+docker inspect <container_name>   # 可以是container_name或者container_id
+docker inspect --format='{{.NetworkSettings.Networks.bridge.IPAddress}}' <container_name>      # format是go语言的template，还有其他的用法   
+ps -ef    # 如果在容器内部。其中1号进程就是command启动命令
+
+docker  update --restart=always  容器名字或者容器ID
+--restart=on-failure:10 ： 表示最多重启10次
+
 # 目录挂载 -- 配置文件 数据目录 日志目录
 docker search|pull|rmi 镜像名字
 docker images

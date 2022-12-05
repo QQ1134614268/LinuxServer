@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 安装需要的软件包 ,yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
-yum install -y yum-utils device-mapper-persistent-data lvm2
+# yum install -y yum-utils device-mapper-persistent-data lvm2
 
 # 添加yum源
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo

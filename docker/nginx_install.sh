@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-echo """# For more information on configuration, see:
+echo "# For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
 
-user nginx;
+# user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
@@ -16,9 +16,9 @@ events {
 }
 
 http {
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format  main  '\$remote_addr - \$remote_user [\$time_local] \"\$request\" '
+                      '\$status \$body_bytes_sent \"\$http_referer\" '
+                      '\"\$http_user_agent\" \"\$http_x_forwarded_for\"';
 
     access_log  /var/log/nginx/access.log  main;
 
@@ -62,7 +62,7 @@ http {
     }
 
 }
-""">/etc/nginx/nginx.conf
+">/etc/nginx/nginx.conf
 
 docker run --name nginx -p 80:80  \
   -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf  \

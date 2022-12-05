@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
+# rm -rf /usr/local/redis
+mkdir -m 777 -p /usr/local/redis/etc
+mkdir -m 777 -p /usr/local/redis/data
+
 echo '# daemonize yes docker中导致异常
 daemonize no
-dir /var/redis/data
+dir /usr/local/redis/data
 port 6379
 appendonly yes
 requirepass 1234567890
@@ -63,15 +67,14 @@ hz 10
 dynamic-hz yes
 aof-rewrite-incremental-fsync yes
 rdb-save-incremental-fsync yes
-'>/etc/redis/redis.conf
+'>/usr/local/redis/etc/redis.conf
 
 docker pull redis
 
-docker run --name redis  -p 6379:6379 --privileged=true --restart always  --appendonly yes\
--v /etc/redis/redis.conf:/etc/redis/redis.conf \
--v /var/redis/data:/var/redis/data \
+docker run --name redis  -p 6379:6379 --privileged=true --restart always \
+-v /usr/local/redis/etc/redis.conf:/etc/redis/redis.conf \
+-v /usr/local/redis/data:/usr/local/redis/data \
 -d redis redis-server /etc/redis/redis.conf
 
-# docker stop redis && docker rm redis && docker rmi redis
+# docker stop redis && docker rm redis
 # docker pull redis
-
