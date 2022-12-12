@@ -1,3 +1,4 @@
+# todo 保留此处,world项目共享
 # docker环境
 # git
 # mysql 优化内存
@@ -17,15 +18,28 @@ git clone https://gitee.com/biaozhun/world.git
 # 代码同级目录
 cp world/world.dockerfile world.dockerfile
 
-docker bulid world.dockerfile
-docker build -t world:1.0.1 -f world.dockerfile .
+docker build -t world-api:1.0 -f world.dockerfile .
+
+# 优化 环境变量 output目录清理; 挂载目录,log config upload todo
+mkdir -p /usr/local/world/data
+mkdir -p /usr/local/world/log
+
 docker run -it --name world \
-  -v /opt/world/data/upload /home/world/data/upload \
-  -v /opt/world/data/log /home/world/data/log \
-  -d world:1.0.1
+  -v /usr/local/world/data/upload:/root/lvying/world-api/world/data/upload \
+  -v /usr/local/world/data/log:/root/lvying/world-api/world/data/log \
+  -p 9090:9090 \
+  --privileged=true \
+  --restart=always \
+  -d world-api:1.0 /bin/bash -c "cd /root/lvying/world-api/src && python app.py"
+
+# docker exec -it world /bin/bash
+# docker commit world world:v1.0
+
+# docker logs world
+# docker stop world && docker rm world
 
 # 一键打包部署 https://blog.csdn.net/qq_29170455/article/details/125558065
-
+# todo
 #每次更新--重新build,install依赖 -- 使用挂载模式 ?? 细小的优化,定制化?
 # 官方软件-- 稳定, 安装迅速, 意外情况少,可脱离docker
 # sdk工具包,稳定,可脱离docker
