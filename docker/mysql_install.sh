@@ -3,14 +3,16 @@
 # rm -rf /etc/mysql
 mkdir -m 644 -p /etc/mysql/conf
 
-echo '[client]
+echo '
+[client]
 port=3306
 default-character-set=UTF8MB4
 [mysql]
 default-character-set=UTF8MB4
 [mysqld]
 character_set_server=UTF8MB4
-max_connections=100' > /etc/mysql/conf/my.cnf
+max_connections=100
+' > /etc/mysql/conf/my.cnf
 
 docker pull mysql:8.0.19
 
