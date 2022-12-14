@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-echo "# For more information on configuration, see:
-#   * Official English Documentation: http://nginx.org/en/docs/
-#   * Official Russian Documentation: http://nginx.org/ru/docs/
-
+echo "
 # user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
@@ -31,9 +28,6 @@ http {
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
 
-    # Load modular configuration files from the /etc/nginx/conf.d directory.
-    # See http://nginx.org/en/docs/ngx_core_module.html#include
-    # for more information.
     include /etc/nginx/conf.d/*.conf;
 
     server {
@@ -58,7 +52,7 @@ http {
     }
 
     upstream pic{
-                server 182.254.161.54:19000;
+        server 182.254.161.54:19000;
     }
 
 }
