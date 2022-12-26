@@ -1,4 +1,4 @@
-echo "# 先编译
+# 先编译
 FROM node:14.15.0-slim AS myBuildImg
 # 添加源码
 # RUN echo '开始添加源码'
@@ -13,9 +13,4 @@ RUN npm run build
 FROM nginx:1.23.3
 #copy jar from the first stage
 COPY --from=myBuildImg /root/web/dist /usr/share/nginx/html/
-CMD nginx -g 'daemon off;'" > web.dockerfile
-
-docker build -t web:1.0 -f web.dockerfile world/web/dist
-
-# 配置文件
-docker run -itd --name web-world -p 9020:80 web:1.0
+CMD nginx -g 'daemon off;'

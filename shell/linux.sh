@@ -6,10 +6,16 @@ ps -ef | grep 14045
 pstree -V
 #网络: netstat ping, ip addr, telnet, firewall-cmd, wget curl iftop(带宽) ssh
 netstat -tunlp|grep 3306
-netstat -nap|grep 3306
+netstat -anp|grep 3306
+
 telnet 159.75.92.195 3306
 
 #磁盘: df du
+du -sh
+du -h --max-depth=1 /
+du -sh ./* | sort -rn
+du -sk ./* | sort -rn # -r 降序; -n选项，来告诉sort，“要以数值来排序”！
+
 #内存 cpu: top free
 top -p pidxxx
 
@@ -31,8 +37,14 @@ mysql -uroot -pxxx -e "source /root/xxx.sql"
 #ls -R       //将目录下所有的子目录的文件都列出来，相当于我们编程中的“递归”实现
 #ls -L       //列出文件的链接名
 #ls -S       //以文件的大小进行排序
+
 #编辑: sed
-#复制移动: cv mv
+#复制移动: cp mv
+# /usr 与 /usr/ 没区别
+# /usr/*  文件夹下文件
+cp 目录不在时  cp -r /source    /dist
+cp 目录存在时  cp -r /source/*  /dist
+
 #压缩: tar
 #写入: >,>>
 #系统: cd user su chown mkdir reboot
