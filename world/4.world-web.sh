@@ -15,4 +15,4 @@ CMD nginx -g 'daemon off;'" > web.dockerfile
 docker build -t web:1.0 -f web.dockerfile .
 
 # 配置文件
-docker run -itd --name web:1.0  -p 8010:80 --privileged=true --restart=always web:1.0
+docker run -itd --name world-web  -p 8010:80 --privileged=true --restart=always web:1.0
