@@ -6,7 +6,7 @@ git show --raw
 
 /usr/local/python3.7/bin/pyinstaller -p /root/PythonTemplate/src --noconfirm -F main.py
 
-# mysql  查看mysql连接情况(进入mysql)
-show processlist;
+# mysql  查看mysql连接情况(进入mysql) show processlist
+SELECT * from information_schema.processlist;
 
 python3 -m venv fastapi_test
