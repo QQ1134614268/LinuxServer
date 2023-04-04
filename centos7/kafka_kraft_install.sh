@@ -24,7 +24,7 @@ log.dirs=D:/dev/kafka_2.13-3.3.2/logs/zookeeper-logs
 
 .\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 .\bin\windows\kafka-server-start.bat .\config\server.properties
- .\kafka_2.13-3.3.2\bin\windows\kafka-server-start.bat .\kafka_2.13-3.3.2\config\server.properties
+
 # 2. Linux
 wget https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz
 
