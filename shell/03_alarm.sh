@@ -1,6 +1,7 @@
 #!/bin/bash
 export BUILD_ID=dontKillMe
 project_dir='/home/ns-coastal/coastal_be/xc-alarm'
+project_name2='xc-alarm'
 project_name='xc-alarm.jar'
 log_dir='/home/ns-coastal/coastal_be/logs/xc-alarm/xc-alarm.log'
 
@@ -48,7 +49,7 @@ then
   scp -r $alarm_dir/target/lib/ $project_dir
   scp  $alarm_dir/target/$project_name $project_dir
 
-  pid1=`ps -ef | grep $project_name  | grep -v grep | awk '{print $2}'`
+  pid1=`ps -ef | grep $project_name | grep -v grep | awk '{print $2}'`
 
 
   if [ -n "$pid1" ]
@@ -57,7 +58,7 @@ then
      kill -9 $pid1
   fi
   cd  $project_dir
-  java -Xms1000m -Xmx1000m -Djava.security.egd=file:/dev/./urandom -jar -Dspring.profiles.active=dev  $project_name > $log_dir 2>&1 &
+  java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name2 -Dname=$project_name2 -Duser.timezone=Asia/Shanghai  $project_dir/$project_name > $log_dir 2>&1 &
 
   echo $alarm_new_version > $alarm_version_file
 fi

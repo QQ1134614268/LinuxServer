@@ -1,6 +1,7 @@
 #!/bin/bash
 export BUILD_ID=dontKillMe
 project_dir='/home/ns-coastal/coastal_be/xc-ship'
+project_name2='xc-ship'
 project_name='xc-ship.jar'
 log_dir='/home/ns-coastal/coastal_be/logs/xc-ship/xc-ship.log'
 
@@ -57,7 +58,7 @@ then
      kill -9 $pid1
   fi
   cd  $project_dir
-  java -Xms1000m -Xmx1000m -Djava.security.egd=file:/dev/./urandom -jar -Dspring.profiles.active=dev  $project_name > $log_dir 2>&1 &
+  java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name2 -Dname=$project_name2 -Duser.timezone=Asia/Shanghai  $project_dir/$project_name > $log_dir 2>&1 &
 
   echo $ship_new_version > $ship_version_file
 fi
