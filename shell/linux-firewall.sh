@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 查看已经开放的端口：
 firewall-cmd --list-ports
-# systemctl start|stop|disable|enable|state firewalld
+# systemctl stop firewalld
 #开放 22,80,3306, 8000-10000端口 # mysql,redis,nginx,
 firewall-cmd --permanent --zone=public --add-port=22/tcp
 firewall-cmd --permanent --zone=public --add-port=80/tcp
