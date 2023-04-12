@@ -1,9 +1,9 @@
 #!/bin/bash
 export BUILD_ID=dontKillMe
 project_dir='/home/ns-coastal/coastal_be/xc-ship'
-project_name2='xc-ship'
-project_name='xc-ship.jar'
-log_dir='/home/ns-coastal/coastal_be/logs/xc-ship/xc-ship.log'
+project_name='xc-ship'
+project_jar='xc-ship.jar'
+log_file='/home/ns-coastal/coastal_be/logs/xc-ship/xc-ship.log'
 
 common_dir='/root/.jenkins/workspace/xc-coastal-java/xc-common'
 common_version_file='/root/.jenkins/workspace/xc-coastal-java/common_version_file.log'
@@ -47,9 +47,9 @@ then
 
   mvn clean install
   scp -r $ship_dir/target/lib/ $project_dir
-  scp  $ship_dir/target/$project_name $project_dir
+  scp  $ship_dir/target/$project_jar $project_dir
 
-  pid1=`ps -ef | grep $project_name | grep -v grep | awk '{print $2}'`
+  pid1=`ps -ef | grep $project_jar | grep -v grep | awk '{print $2}'`
 
 
   if [ -n "$pid1" ]
@@ -58,7 +58,7 @@ then
      kill -9 $pid1
   fi
   cd  $project_dir
-  java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name2 -Dname=$project_name2 -Duser.timezone=Asia/Shanghai  $project_dir/$project_name > $log_dir 2>&1 &
+  java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name -Dname=$project_name -Duser.timezone=Asia/Shanghai  $project_dir/$project_jar > $log_file 2>&1 &
 
   echo $ship_new_version > $ship_version_file
 fi
