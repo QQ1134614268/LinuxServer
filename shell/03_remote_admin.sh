@@ -21,7 +21,7 @@ admin_old_version=$([ -e $admin_version_file ] && cat $admin_version_file)
 
 echo debugger 当前版本: $admin_new_version , 日志版本: $admin_old_version , 模式: $build_mode ;
 
-if [[ $admin_new_version != $admin_old_version || $build_mode != '手动' ]] # bug
+if [[ $admin_new_version == $admin_old_version && $build_mode == '自动' ]]
 then
   echo "没有自动更新, 退出执行"
   exit 0
