@@ -1,9 +1,9 @@
 #!/bin/bash
 export BUILD_ID=dontKillMe
-project_dir='/home/ns-coastal/coastal_be/xc-admin'
-project_name='xc-admin'
-project_jar='xc-admin.jar'
-log_file='/home/ns-coastal/coastal_be/logs/xc-admin/xc-admin.log'
+project_dir='/home/ns-coastal/coastal_be/xc-alarm'
+project_name='xc-alarm'
+project_jar='xc-alarm.jar'
+log_file='/home/ns-coastal/coastal_be/logs/xc-alarm/xc-alarm.log'
 
 common_dir='/root/.jenkins/workspace/xc-coastal-java/xc-common'
 common_version_file='/root/.jenkins/workspace/xc-coastal-java/common_version_file.log'
@@ -11,17 +11,17 @@ common_version_file='/root/.jenkins/workspace/xc-coastal-java/common_version_fil
 api_dir='/root/.jenkins/workspace/xc-coastal-java/xc-api'
 api_version_file='/root/.jenkins/workspace/xc-coastal-java/api_version_file.log'
 
-admin_dir='/root/.jenkins/workspace/xc-coastal-java/xc-modules/xc-admin'
-admin_version_file='/root/.jenkins/workspace/xc-coastal-java/admin_version_file.log'
+alarm_dir='/root/.jenkins/workspace/xc-coastal-java/xc-modules/xc-alarm'
+alarm_version_file='/root/.jenkins/workspace/xc-coastal-java/alarm_version_file.log'
 
-cd $admin_dir
+cd $alarm_dir
 
-admin_new_version=$(git log  --oneline -n 1 $admin_dir | awk '{print $1}')
-admin_old_version=$([ -e $admin_version_file ] && cat $admin_version_file)
+alarm_new_version=$(git log  --oneline -n 1 $alarm_dir | awk '{print $1}')
+alarm_old_version=$([ -e $alarm_version_file ] && cat $alarm_version_file)
 
-echo debugger 当前版本: $admin_new_version , 日志版本: $admin_old_version , 模式: $build_mode ;
+echo debugger 当前版本: $alarm_new_version , 日志版本: $alarm_old_version , 模式: $build_mode ;
 
-if [[ $admin_new_version != $admin_old_version || $build_mode == '手动' ]] # bug
+if [[ $alarm_new_version != $alarm_old_version || $build_mode == '手动' ]] # bug
 then
   for i in {1..10} ;
   do
@@ -46,8 +46,8 @@ then
   done
 
   mvn clean install
-  scp -r $admin_dir/target/lib/ root@44.39.251.244:$project_dir
-  scp  $admin_dir/target/$project_jar root@44.39.251.244:$project_dir
+  scp  -r $alarm_dir/target/lib/         $project_dir
+  scp  $alarm_dir/target/$project_jar   $project_dir
 
   pid1=`ps -ef | grep $project_jar | grep -v grep | awk '{print $2}'`
 
@@ -60,5 +60,5 @@ then
   cd  $project_dir
   java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name -Dname=$project_name -Duser.timezone=Asia/Shanghai  $project_dir/$project_jar > $log_file 2>&1 &
 
-  echo $admin_new_version > $admin_version_file
+  echo $alarm_new_version > $alarm_version_file
 fi
