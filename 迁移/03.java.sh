@@ -18,7 +18,6 @@ grep -r server-addr  *yml
 
 grep -Pnr "\d{3}" `find | grep -P ".(xml)"`
 grep -E "aa|bb" filename
-egrep "aa|bb" filename
 awk "/aa|bb" filename
 
 
