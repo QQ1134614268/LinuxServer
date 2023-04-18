@@ -1,6 +1,5 @@
 # 免密登录
 # 生成ssh密钥
-#方案1: ssh key
 ssh-keygen -t rsa
 #三次enter
 复制 .ssh/id_rsa.pub 到 B机器 .ssh/id_rsa.pub

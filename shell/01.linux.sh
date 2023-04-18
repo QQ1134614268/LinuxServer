@@ -7,10 +7,7 @@ pstree -V
 find / -name *.png | grep content_xxx
 
 #复制移动: cp mv
-# /usr 与 /usr/ 没区别
-# /usr/*  文件夹下文件
-cp -r /source    /dist # cp 目录不在时
-cp -r /source/*  /dist # cp 目录存在时
+
 
 #系统: cd user su chown mkdir reboot tar >,>>
 cat /proc/version
@@ -36,5 +33,5 @@ top -p pidxxx
 ### 文件上传下载
 ftpput -u root -p xxx -P 50221 44.39.19.14
 scp
-sshpass
+sshpass -p "password" scp -r -o StrictHostKeyChecking=no /root/.jenkins root@44.39.19.14:/root/.jenkins # 一键 , 无交互式
 sftp
