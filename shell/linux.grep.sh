@@ -1,6 +1,15 @@
 
+grep -rl server-addr /home/ns-coastal/coastal_be
+grep -r server-addr /home/ns-coastal/coastal_be
+grep -r server-addr `find /home/ns-coastal/coastal_be -name *.yml`
 
+grep -r server-addr  *
+grep -r server-addr  *yml
 
+grep -Pnr "\d{3}" `find | grep -P ".(xml)"`
+grep -E "aa|bb" filename
+
+###
 Usage: grep [OPTION]... PATTERN [FILE]...
 Search for PATTERN in each FILE or standard input.
 PATTERN is, by default, a basic regular expression (BRE).

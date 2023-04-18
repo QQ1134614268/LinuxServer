@@ -49,6 +49,8 @@ scp  $admin_dir/target/$project_jar root@44.39.247.244:$project_dir
 #/root/.jenkins/workspace/xc-coastal-java/xc-modules/xc-admin/target/lib/*
 #/home/ns-coastal/coastal_be/xc-admin/lib/
 
-# kill -9 $(ps -ef | grep xc-admin.jar | grep -v grep | awk '{print $2}') ; nohup /usr/local/jdk1.8.0_341/bin/java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=xc-admin -Dname=xc-admin -Duser.timezone=Asia/Shanghai  /home/ns-coastal/coastal_be/xc-admin/xc-admin.jar > /home/ns-coastal/coastal_be/logs/xc-admin/xc-admin.log 2>&1 &
+# [[ $(ls -lc --time-style=+'%Y%m%d%H%M%S' /home/ns-coastal/coastal_be/xc-admin/xc-admin.jar | awk '{print $6}') >  $(date -d'-5 min' +'%Y%m%d%H%M%S') ]] \
+# && kill -9 $(ps -ef | grep xc-admin.jar | grep -v grep | awk '{print $2}') ;\
+# nohup /usr/local/jdk1.8.0_341/bin/java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=xc-admin -Dname=xc-admin -Duser.timezone=Asia/Shanghai  /home/ns-coastal/coastal_be/xc-admin/xc-admin.jar > /home/ns-coastal/coastal_be/logs/xc-admin/xc-admin.log 2>&1 &
 echo $admin_new_version > $admin_version_file
 echo '开始传输到远程服务器'

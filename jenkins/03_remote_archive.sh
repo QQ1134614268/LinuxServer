@@ -49,6 +49,8 @@ scp  $archive_dir/target/$project_jar root@44.39.251.15:$project_dir
 #/root/.jenkins/workspace/xc-coastal-java/xc-modules/xc-archive/target/lib/*
 #/home/ns-coastal/coastal_be/xc-archive/lib/
 
-# kill -9 $(ps -ef | grep xc-archive.jar | grep -v grep | awk '{print $2}'); nohup /usr/local/jdk1.8.0_341/bin/java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=xc-archive -Dname=xc-archive -Duser.timezone=Asia/Shanghai  /home/ns-coastal/coastal_be/xc-archive/xc-archive.jar > /home/ns-coastal/coastal_be/logs/xc-archive/xc-archive.log 2>&1 &
+# [[ $(ls -lc --time-style=+'%Y%m%d%H%M%S' /home/ns-coastal/coastal_be/xc-archive/xc-archive.jar | awk '{print $6}') >  $(date -d'-5 min' +'%Y%m%d%H%M%S') ]] \
+# && (kill -9 $(ps -ef | grep xc-archive.jar | grep -v grep | awk '{print $2}');\
+# nohup /usr/local/jdk1.8.0_341/bin/java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=xc-archive -Dname=xc-archive -Duser.timezone=Asia/Shanghai  /home/ns-coastal/coastal_be/xc-archive/xc-archive.jar > /home/ns-coastal/coastal_be/logs/xc-archive/xc-archive.log 2>&1 &)
 echo $archive_new_version > $archive_version_file
 echo '开始传输到远程服务器'

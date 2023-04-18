@@ -1,3 +1,8 @@
+du -sh
+du -h --max-depth=1 /
+du -sh ./* | sort -rn
+du -sk ./* | sort -rn # -r 降序; -n选项，来告诉sort，“要以数值来排序”！
+
 #df -lh
 #
 #du 语法：

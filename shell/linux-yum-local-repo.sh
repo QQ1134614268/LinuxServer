@@ -1,3 +1,5 @@
+# yum install -y xxx
+
 # 制作离线安装镜像源
 iso-DVD: 包含系统文件和部分RPM包
 iso-everything: 包含系统文件和全部RPM包
