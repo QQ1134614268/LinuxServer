@@ -18,6 +18,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic USER_TOP
 
 # git
 git log -n 1 --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:%cd path/to/dir
+git log --oneline -n 1 path/to/dir | awk '{print $1}' # 获取指定目录最新提交记录的commitId
 #最后一次提交时间
 git show --pretty=format:"%ci %cr" | head -1
 #查看最后一次提交记录的修改文件信息
