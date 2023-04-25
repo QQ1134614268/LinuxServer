@@ -1,7 +1,5 @@
-# mysql  查看mysql连接情况(进入mysql) show processlist
+# mysql  执行脚本
 mysql -uroot -pxxx -e "source /root/xxx.sql"
-
-SELECT * from information_schema.processlist;
 
 # Python
 python3 -m venv fastapi_test
