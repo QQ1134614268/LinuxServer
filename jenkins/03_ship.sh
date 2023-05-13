@@ -58,7 +58,7 @@ then
      kill -9 $pid1
   fi
   cd  $project_dir
-  java -jar -server -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name -Dname=$project_name -Duser.timezone=Asia/Shanghai  $project_dir/$project_jar > $log_file 2>&1 &
+  java -jar -server -Xms2048m -Xmx2048m -Djava.security.egd=file:/dev/./urandom -DprojectName=$project_name -Dname=$project_name -Duser.timezone=Asia/Shanghai  $project_dir/$project_jar > $log_file 2>&1 &
 
   echo $ship_new_version > $ship_version_file
 fi

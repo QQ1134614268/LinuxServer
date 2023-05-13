@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # 查看已经开放的端口：
+firewall-cmd --list-all
 firewall-cmd --list-ports
 # systemctl stop firewalld
 #开放 22,80,3306, 8000-10000端口 # mysql,redis,nginx,
