@@ -20,10 +20,19 @@
 
     (location =) > (location 完整路径) > (location ^~ 路径) > (location ~ ,~* 正则顺序) > (location 部分起始路径) > (/)
 
-
 4. proxy_pass :
-   参考: https://www.jb51.net/article/227243.htm
-   类似 path.join()  相对路径与绝对路径拼接
+     参考: https://www.jb51.net/article/227243.htm
+
+     http://localhost/proxy/abc.html:
+          /proxy    http://127.0.0.1:8080        ->  http://localhost/proxy/abc.html
+          /proxy/   http://127.0.0.1:8080        ->  http://localhost/proxy/abc.html
+          /proxy/   http://127.0.0.1:8080/       ->  http://127.0.0.1:8080/abc.html
+          /proxy/   http://127.0.0.1:8080/api/   ->  http://localhost/api/abc.html
+          /proxy/   http://127.0.0.1:8080/api    ->  http://localhost/apiabc.html
+          /proxy    http://127.0.0.1:8080/api    ->  http://localhost/api/abc.html
+          /proxy    http://127.0.0.1:8080/       ->  http://localhost//abc.html
+
+     相对路径与绝对路径拼接, 类似 os.path.join("/api", "/proxy/", "abc.html")  ??
 
 5. rewrite :
     rewrite: rewrite跳转实现
