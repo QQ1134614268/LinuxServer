@@ -15,3 +15,5 @@ firewall-cmd --reload # 重启firewall
 # 	–zone #作用域
 # 	–add-port=80/tcp #添加端口，格式为：端口/通讯协议
 # 	–permanent #永久生效，没有此参数重启后失效
+
+firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="44.39.0.0/16" port port="1-65535" protocol="tcp" accept'
