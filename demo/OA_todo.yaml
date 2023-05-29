@@ -1,0 +1,48 @@
+业务todo:
+    password
+    事务
+    多部门
+    staff与username
+    表:
+      外键
+      唯一
+      级联删除
+      捕获异常
+    用户组织- 一张表
+    用户-平台
+    办公物资--使用一张表
+    业务记录,状态流转,统计(办公物资)
+    模块分类
+    指标库
+    审批流程
+    树形结构, 嵌套对象, 最后一条
+    覆盖更新删除
+    /api/enum/consumeGoodsType -- 前端路径接口
+    
+代码优化:
+  枚举:
+    系统枚举
+    用户枚举 多张表还是一张表
+    枚举--用户, 系统
+    枚举值
+    中文 英文大写 数字
+        1 2 3 数字行,数据库友好
+        英文全大写, 表名是枚举数据
+        中文 已与理解,不翻译
+  日志位置异常
+  mpj 自联表
+  parentId 与 parentCode
+  对象复制
+  测试流程
+  日志记录
+  swagger3.0 冲突
+  单元测试
+  处理告警: is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+  用户jwt 异常
+    捕获 o.a.shiro.authc.AbstractAuthenticator: Authentication
+    复现 :getUserByName 返回null
+    验证 是否捕获异常
+  Gitlab:
+      CI/CD与 jenkins
+      发微信?钉钉?
+	  代码仓库使用外部数据库

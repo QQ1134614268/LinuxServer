@@ -1,0 +1,26 @@
+面试题:
+  kafka
+  threadlock
+  构造器 set
+  Redis的内存淘汰策略
+  Mysql的四种隔离级别
+  秒杀实现
+  AIO NIO BIO
+  规则引擎
+  Synchronize
+  redis 数据库 保持一致性 锁
+  线程池  操作线程
+  算法 树 快排 二分查找
+  kafka顺序 分区  架构
+  线程池参数 作用
+  nacos
+  dubbo
+  hash冲突算法
+  说话 为人处世
+  分库 分表
+  红黑树
+  幂等
+  事物失效
+  mysql事物log
+  可靠性 生产者 mq 消费者
+  幂等性 
