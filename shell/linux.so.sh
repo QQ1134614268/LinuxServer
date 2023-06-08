@@ -1,0 +1,3 @@
+ldconfig
+
+ldd ffmpeg
