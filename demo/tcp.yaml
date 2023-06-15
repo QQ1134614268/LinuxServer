@@ -1,0 +1,14 @@
+https://blog.csdn.net/qq_37674086/article/details/117754310
+https://blog.csdn.net/qq_42986622/article/details/120989919
+https://www.cnblogs.com/codingMozart/p/14210403.html
+一：进程B Crash，但进程B所在的宿主机仍然正常工作。
+二：进程B所在的宿主机宕机，又迅速重启。
+三：进程B所在的宿主机宕机，短时间内没有重启，从A出发的所有报文都被网络丢弃。
+四：B已经断网/宕机/进程Crash，但此时A主机也没有需要向B发送的数据。
+
+http://t.zoukankan.com/alway6s-p-3717854.html
+
+打开 KeepAlive 10分钟
+ACK
+Socket流这里还存在另外一个问题，socket流和文件流不太一样，文件流很容易知道文件末尾，到了文件末尾，直接就把流close掉就OK了。但是socket 流不一样，你无法知道它什么时候到末尾，所以连接一直保持着，流也一直保持阻塞状态。即使用了带参数的read方法，返回了有效数据，但其实流仍然没有关闭，处于阻塞状态。
+针对这种请情况，一般就需要通信的双方约定数据传输的协议了。比如，约定消息的头部首先明确此次传输数据的大小。这样服务端就可以有目的性的读取数据。

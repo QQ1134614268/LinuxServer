@@ -1,0 +1,80 @@
+服务端:
+  BossGroup:
+    eventLoopGroup(简单理解为一个线程池,默认初始化 CPU核心数*2 个EventLoop-):
+      eventLoop:
+        轮巡select上channel
+        在对应的Channel处理IO事件
+        执行任务队列中的任务
+        一个线程
+        taskQueue
+        selector:
+          channel1:
+            buffer
+            client
+            ChannelPipline:
+              ChannelHandler1
+              ChannelintboundHandler编码、解码、加密、解密
+              ChanneloutboundHandler编码、解码、加密、解密
+              ChannelHandler2
+              ChannelintboundHandler编码、解码、加密、解密
+              ChanneloutboundHandler编码、解码、加密、解密
+              ChannelHandler2
+              ChannelintboundHandler编码、解码、加密、解密
+              ChanneloutboundHandler编码、解码、加密、解密
+          channel2:
+            buffer
+            client
+          channel3:
+            buffer
+            client
+
+      eventLoop2:
+        selector:
+          channel1:
+            buffer
+            client
+            ChannelPipline:
+              ChannelHandler1
+              ChannelintboundHandler编码、解码、加密、解密
+              ChanneloutboundHandler编码、解码、加密、解密
+              ChannelHandler2
+              ChannelintboundHandler编码、解码、加密、解密
+              ChanneloutboundHandler编码、解码、加密、解密
+              ChannelHandler2
+              ChannelintboundHandler编码、解码、加密、解密
+              ChanneloutboundHandler编码、解码、加密、解密
+          channel2:
+            buffer
+            client
+          channel3:
+            buffer
+            client
+        taskQueue
+        一个线程
+
+  WorkerGroup:
+    客户端首先会向指定地址的指定端口发送一个连接请求，服务器会有个NioServerSocketChannel监听此端口，当有连接请求发送过来后，会将此请求发送给EventLoopGroup(boss)，然后EventLoopGroup会将此请求分配一个EventLoop，并和该EventLoop的Selector绑定。
+    当客户端和boss的EventLoop绑定完成之后，会生成一个SocketChannel并将其注册到worker的EventLoopGroup里，worker的EventLoopGroup会将他和自己组内的一个EventLoop绑定，之后客户端的channel和服务端的channel之间就可以进行网络通信了，EventLoop(worker)的selector会持续监听该channel里的读写时间并处理。
+
+  ServerBootstrap:配置整个 Netty 程序、设置业务处理类（Handler）、绑定端口、发起连接等
+  ChannelFuture:
+    addListener:
+      ChannelFutureListener
+客户端:
+  pass
+
+bytebuf:
+  一个端口 对应 一个eventloopgroup
+  零拷贝- 内存泄露
+
+QA:
+  1. 多个channel场景:
+    channel代表的一个连接，每个client请求都会对应到具体的一个channel。
+
+  2. 一个eventloopgroup = n* eventLoop = 一个线程
+  3. 一个eventloop = n* client
+
+cankao:
+  https://blog.csdn.net/LT11hka/article/details/125336349
+  https://www.cnblogs.com/lancelee98/p/15336698.html
+  http://t.zoukankan.com/chensisi-p-13164402.html
