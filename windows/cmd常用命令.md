@@ -9,3 +9,11 @@ start /b  打开应用,命令eg: start taskmgr (同 taskmgr)
 start 打开应用,命令eg: start taskmgr (同 taskmgr)  新窗口
 
 start cmd /k "cd E:\three.js&&node server.js"
+
+pause 暂停
+
+睡眠
+TIMEOUT /T 10
+
+echo %1 
+test.bat 2
