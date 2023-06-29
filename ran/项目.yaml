@@ -1,4 +1,52 @@
 
+暂停, 触发无人观看, 前端取消暂停
+-rtsp_transport tcp 默认udp??
+-stream_loop 为循环读取视频源的次数，-1为无限循环；
+-stimeout 30000000 为等待RTSP 流连接的时间，单位为us微秒，30000000 为等待 30 秒，如果连接失败则退出。特别注意该字段要放在rtsp地址之前，否者无效。
+ 
+
+# 帧率: 30; -f: gdi录屏; -i desktop 整个屏幕; -vcodec libx264: 编解码h264; -an 没有音频 -t 600: 600秒
+ffmpeg -r 30 -f gdigrab -i desktop -vcodec libx264 -an out.desktop.mp4
+
+https://www.python100.com/html/80310.html:
+# 推流到rtmp服务器：
+    ffmpeg -re -i D:\桌面文件夹\input.mp4 -c copy -f rtsp  rtsp://127.0.0.1/live/test 
+    # rtsp://127.0.0.1:8888/live/test 
+
+    ffmpeg -re -i D:\桌面文件夹\input.mp4 -vcodec copy -codec copy -f flv rtmp://127.0.0.1/live/test
+
+    ffmpeg -re -an -i D:\桌面文件夹\input.mp4 -c copy -f rtp rtp://127.0.0.1/live/test
+
+    ffmpeg -re -i test.mp4 -vcodec h264 -acodec aac -f rtsp -rtsp_transport tcp rtsp://127.0.0.1/live/test
+
+rtsp://127.0.0.1/live/test
+http://127.0.0.1/live/test/hls.m3u8
+http://127.0.0.1/live/test.live.ts
+http://127.0.0.1/live/test.live.mp4  
+
+
+
+ffmpeg -f concat -safe 0 -i D:\桌面文件夹\input.txt -c copy -y D:\桌面文件夹\out.mp4
+
+ffmpeg -re -i input1.mp4 -re -i input2.mp4 -filter_complex "[0:v:0][1:v:0]hstack=2" -c:v libx264 -f flv rtmp://example.com/live/streamkey
+ffmpeg -re -i input.flv -c copy -f flv rtmp://example.com/live/streamkey
+ffmpeg -re -i input.flv -bufsize 512k -maxrate 2M -c copy -f flv rtmp://example.com/live/streamkey
+ffmpeg -re -i localvideo.mp4 -c copy -f flv rtmp://localhost/myapp/mystream
+ffmpeg -f x11grab -s 1920x1080 -i :0 -f mpegts tcp://localhost:1234
+ffmpeg -i http://website.com/stream.m3u8 -c copy -f mp4 output.mp4
+ffmpeg -rtsp_transport tcp -i rtsp://example.com/stream -c copy -f flv rtmp://example.com/live/stream
+
+rtmp://127.0.0.1:1935/live/test
+
+http://127.0.0.1:
+
+    ffmpeg -re -i D:\桌面文件夹\test.mp4 -c copy -f flv rtmp://127.0.0.1/live/streamkey
+    ffmpeg -re -i D:\桌面文件夹\test.mp4 -c copy -f flv rtmp://127.0.0.1/live/streamkey
+    ffmpeg -re -i D:\桌面文件夹\test.mp4 -c copy -f flv rtmp://127.0.0.1/live/streamkey
+
+rtsp://__defaultVhost__/live/streamkey
+
+
 
 失乐园
 
