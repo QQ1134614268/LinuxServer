@@ -1,17 +1,16 @@
 idea:
-  自动格式化(ctrl+s)
-  自动格式化
-  自动去除无效导入
-  自动下载文档
-  git
-  maven 配置 自动下载文档
-  jdk
-  大小写提示
-  自动更新maven依赖
-  注释在文字前
-  热加载:
-    build ../deployment/options/ upload changed fields ..
-    build ../build tools/ reload project after changes ...
-    build ../compiler/ build project automatically ...
-  Advanced Setting
-  allow auto-make ...
+  - 自动格式化(ctrl+s)
+  - 自动格式化 method chain, 注释, 关闭窗口
+  - 自动去除无效导入
+  - 自动下载文档
+  - git
+  - maven 配置 自动下载文档
+  - jdk
+  - 大小写提示
+  - 自动更新maven依赖
+  - 注释在文字前
+  - 热加载:
+      Configuration/on update action/ update class and resource
+      Configuration/on frame deactivation/ update class and resource
+      build ../compiler/ build project automatically ...
+      Advanced Setting/ allow auto-make ...
