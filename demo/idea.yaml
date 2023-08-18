@@ -14,3 +14,8 @@ idea:
       Configuration/on frame deactivation/ update class and resource
       build ../compiler/ build project automatically ...
       Advanced Setting/ allow auto-make ...
+idea 查看类:
+	ctrl+H 接口 显示实现, 类显示继承
+	ctrl+alt+u 继承,网图
+	
+	diagram 按钮
