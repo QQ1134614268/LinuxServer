@@ -1,4 +1,20 @@
 
+idea注释不顶行：
+    file/settings/editor/code style/java/codegenerator/line comment at first Colum
+    
+    file/settings/editor/code style/wrapping and braces/comment at first colmun
+    
+热部署策略(https://blog.csdn.net/qq_34381842/article/details/118339905)：
+    1. spring-boot-devtools
+        导入jar包
+        bulid project automatically
+        compiler.automake.allow.when.app.running
+    2. idea自动更新
+        on ‘update’ action
+        on frame deactivation
+        
+        点击按钮， 我们每次修改代码后，可以点击该按钮，idea就会更新并加载class文件
+
 失乐园
 
 编码:
