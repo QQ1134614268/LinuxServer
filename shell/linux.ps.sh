@@ -1,3 +1,17 @@
+# todo 进程与信号量
+1.通过ps命令查看进程信号信息
+ps -p pid -o pid,comm,sig,sigcatch,sigign
+
+2.通过kill命令查看进程信号信息
+kill -l
+
+
+3.通过strace命令查看进程信号信息
+
+strace -p pid -e signal
+
+4.通过signal命令查看进程信号信息
+signal -l
 
 
 Usage:
