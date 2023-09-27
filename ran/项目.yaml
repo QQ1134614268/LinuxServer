@@ -1,4 +1,13 @@
 
+首页加载：
+    拆分js vender.js
+    element-ui 按需引入
+    压缩文件
+    使用script 
+    
+    测试服务器速度 iperl3 todo
+    
+
 idea注释不顶行：
     file/settings/editor/code style/java/codegenerator/line comment at first Colum
     
