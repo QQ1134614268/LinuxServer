@@ -13,6 +13,22 @@ strace -p pid -e signal
 4.通过signal命令查看进程信号信息
 signal -l
 
+# 查看进程
+cat /proc/950285/status
+
+ps -p 950285
+# 进程下线程数量
+ps -l 950285
+ps -eLF
+# 进程使用内存
+ps -m 950285
+# 进程使用cpu
+ps -T 950285
+
+# 进程执行代码
+
+# 线程
+strace -p 950285
 
 Usage:
  ps [options]

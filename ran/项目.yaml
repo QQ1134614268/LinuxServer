@@ -1,12 +1,6 @@
-测试服务器速度 iperf3 todo
-    
-服务器被黑：
-    重装系统
-    迁移文件
-        nginx
-        home目录
-            项目
-            docker
+todo:
+    member api
+
 失乐园
 编码:
   自动生成代码-- vue  class dto 模式, 抽离函数,更加模板化
