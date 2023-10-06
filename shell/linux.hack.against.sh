@@ -1,3 +1,10 @@
+服务器被黑：
+    重装系统
+    迁移文件
+        nginx
+        home目录
+            项目
+            docker
 #进程
 pstree
 ps -ejH

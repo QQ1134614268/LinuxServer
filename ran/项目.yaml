@@ -1,52 +1,14 @@
-
-首页加载：
-    拆分js vender.js
-    element-ui 按需引入
-    压缩文件
-    使用script 
+测试服务器速度 iperf3 todo
     
-    测试服务器速度 iperl3 todo
-    
-
-idea注释不顶行：
-    file/settings/editor/code style/java/codegenerator/line comment at first Colum
-    
-    file/settings/editor/code style/wrapping and braces/comment at first colmun
-    
-热部署策略(https://blog.csdn.net/qq_34381842/article/details/118339905)：
-    1. spring-boot-devtools
-        导入jar包
-        bulid project automatically
-        compiler.automake.allow.when.app.running
-    2. idea自动更新
-        on ‘update’ action
-        on frame deactivation
-        
-        点击按钮， 我们每次修改代码后，可以点击该按钮，idea就会更新并加载class文件
-
+服务器被黑：
+    重装系统
+    迁移文件
+        nginx
+        home目录
+            项目
+            docker
 失乐园
-
 编码:
-  前端：
-    布局 gride flex float table 响应式 静态 流式 
-  css：   
-    定位 布局 行
-    宽高 缩放
-    行高 字体(标题，加粗，倾斜，艺术字)
-    背景 边框
-    空白 间隙
-    
-    层级组合， 
-    透明 动画 
-    选中 触发
-    
-    颜色
-    图标，按钮 链接
-    输入框 单选 多选 级联 开关
-    
-  
-    
-    
   自动生成代码-- vue  class dto 模式, 抽离函数,更加模板化
   独立工程:
     1. 伙伴?
