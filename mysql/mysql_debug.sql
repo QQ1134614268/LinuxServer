@@ -21,9 +21,9 @@ SELECT * from information_schema.processlist;
 
 select * from information_schema.innodb_trx;
 
-select * from information_schema.innodb_locks;
+select * from performance_schema.data_locks;
 
-select * from information_schema.innodb_lock_waits;
+select * from performance_schema.data_lock_waits;
 
 SHOW TABLE STATUS LIKE 'securities_score';
 
