@@ -1,49 +1,46 @@
-todo 书籍
-#
+# todo 书籍
 pid:     每个进程有一个,唯一标识
-    tid:     线程id, 唯一标识, 轻量级进程(LWP:Light weight process)
-      堆栈:   线程堆栈
-    tgid:    线程组id, 当前进程的id
+ppid:    父进程id 子进程的创建进程的id, 若父id死亡??
 pgid:    进程组id, 简化组内发送信号, 组长的pid, 通过调用 setpgrp 归为一组
-sid     通过setsid, 进程归为一个会话, 终端中会自动调用, 组内进程有相同sid
-spid    系统id, 就是pid,
-ppid    父进程id 子进程的创建进程的id, 若父id死亡??
+sid:     通过setsid, 进程归为一个会话, 终端中会自动调用, 组内进程有相同sid
 
+tid:     线程id, 唯一标识, 轻量级进程(LWP:Light weight process)
+tgid:    线程组id, 当前进程的id
 #
-shell: 一个程序,接收键盘命令,返回结果, 翻译成内核语言,传给内核执行, 操作系统会把terminal与shell结合,shell负责解释语言; 命令: cd, ps, ll
-bash    名为bash的shell程序(shell的一种,sh csh), 与shell为父子关系
-terminal 图形化界面,和shell交互
-cli     命令行交互
+同一个连接:
+    pid:        唯一
+    sid:        相同
+    ppid:    父进程id, 父进程死亡,设为系统pid
+    pgid:   首个进程pid, 没有设置进程组, 就是自己的pid
+    nohup:  产生子进程, 替换nohup进程
 #
-前台进程
-后台进程
-孤儿进程
-守护进程
-
-# 打开xshell, ssh连接, 会话, 进程组, 命令
-
-查看 sid,pgid,pid
-ps ajx
-
-1.通过ps命令查看进程信号信息
-ps -p pid -o pid,comm,sig,sigcatch,sigign
-
-2.通过kill命令查看进程信号信息
-kill -l
-
-
-3.通过strace命令查看进程信号信息, 进程执行代码
-
-strace -p pid -e signal
-strace -e trace=signal -p 1359
-
-4.通过signal命令查看进程信号信息
-signal -l
-
-# 查看进程
-cat /proc/950285/status
+shell: 一个程序,接收键盘命令,返回结果, 翻译成内核语言,传给内核执行, 操作系统会把terminal与shell结合,shell负责解释语言; 有自带命令cd
+bash:    名为bash的shell程序(shell的一种,sh csh), 与shell为父子关系
+terminal: 图形化界面,和shell交互
+cli:     命令行交互
+#
+进程调试:
+    1.通过ps命令查看进程信号信息
+        ps ajx # 查看 sid,pgid,pid
+        ps -p pid -o pid,comm,sig,sigcatch,sigign
+    2.通过kill命令查看进程信号信息, 
+        kill -l
+        kill -9 pidxxx # 发送信号
+    3.通过strace命令查看进程信号信息, 进程堆栈
+        strace -p pid -e signal
+        strace -e trace=signal -p 1359
+    4.通过signal命令查看进程信号信息
+        signal -l
+    # 查看进程
+    5. cat /proc/950285/status
 
 执行脚本方式:
     shell, sh, bash 执行
     source 和 . 执行  当前环境生效
     exec 执行 替换当前进程
+# 打开xshell, ssh连接, 会话, 进程组, 命令
+类别:
+    前台进程
+    后台进程
+    孤儿进程
+    守护进程

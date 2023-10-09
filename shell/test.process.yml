@@ -10,41 +10,12 @@
   setsid
   diswn
 
-测试:
-  # 屏蔽1-15信号(9不能捕捉), shell退出 还是中断进程了
-  nohup sleep 300 &
-  nohup python iss_catch_signal.py & 
-  nohup /usr/local/jdk1.8.0_341/bin/java -jar /home/ns-coastal/coastal_be/xc-gb28181/xc-gb28181.jar > /home/ns-coastal/coastal_be/logs/xc-gb28181/xc-gb28181.log 2>&1 &
-  
-  sleep 300 &
-  sleep 301 &
-  nohup sleep 400 &
-  bash -c "sleep 500 &"
-  sleep 600
-  
-  ssh连接 
-      开启子进程bash
-      bash 开启 sleep 30    前台进程:
-      bash 开启 sleep 300 & 后台进程
-      bash 执行 sleep脚本
-      nohup 执行
-  同一个连接:
-      pid:        唯一
-      sid:        相同
-      ppid:    父进程id, 父进程死亡,设为系统pid
-      pgid:   首个进程pid, 没有设置进程组, 就是自己的pid
-      nohup:  产生子进程, 替换nohup进程
+strace跟踪进程信号(nohup sleep 300 &):
+    exit: 不发送信号; 没有用nohup指令, 后台也可以继续运行
+    直接关闭: 发送 SIGHUP; nohup 屏蔽SIGHUP, 可以继续运行;
 
-  进程: ps ajx | grep -E "PP|sleep|xc|bash|ssh"
+    异常服务器(systemd发出SIGTERM信号):
+        直接关闭, 收到SIGTERM; 结束 (bash 执行SIGCONT, SIGCHLD)
+        执行exit, 收到SIGTERM; 结束 (bash 执行SIG_BLOCK, SIGCHLD, SIGTTIN等)
 
-  数据:
-    PPID    PID   PGID    SID TTY       TPGID STAT   UID   TIME COMMAND
-       1   1977   1977   1977 ?            -1 Ss       0   0:00 /usr/sbin/sshd -D
-    1977  81612  81612  81612 ?            -1 Ss       0   0:00 sshd: root@pts/0
-   81612  81684  81684  81684 pts/0     85027 Ss       0   0:00 -bash
-   81684  84685  84685  81684 pts/0     85027 S        0   0:00 sleep 300
-   81684  84686  84686  81684 pts/0     85027 S        0   0:00 sleep 301
-   81684  84687  84687  81684 pts/0     85027 S        0   0:00 sleep 400
-       1  84738  84737  81684 pts/0     85027 S        0   0:00 sleep 500
-
-
+          # 屏蔽1-15信号(9不能捕捉), shell退出 还是中断进程了, killed
