@@ -1,4 +1,4 @@
--- jsonTest
+-- TestJson
 -- 创建测试表
 -- drop table if exists json_test;
 CREATE TABLE `json_test` (
