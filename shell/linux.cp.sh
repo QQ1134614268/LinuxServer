@@ -1,7 +1,7 @@
 # /usr 与 /usr/ 没区别
 # /usr/*  文件夹下文件
-cp -r /source    /dist # cp 目录不在时(目录不在时: 相当于文件夹重命名; 存在: 相当于复制到目录内)
-cp -r /source/*  /dist # cp 目录存在时
+cp -r /source    /dist # 复制文件到目录,如果文件不存在,就移动,重命名文件
+cp -r /source/*  /dist # 复制目录下的文件,到指定目录, 目录不存在就创建
 
 Usage: cp [OPTION]... [-T] SOURCE DEST
   or:  cp [OPTION]... SOURCE... DIRECTORY

@@ -1,9 +1,21 @@
 #1. 常用命令:
-#进程: ps pstree kill
+#进程: ps pstree kill pkill pgrep
 ps -ef
-ps -ef | grep python3
-ps -ef | grep 14045
+ps -ef | grep 14045 | grep -V grep | awk "{print $1}"
 pstree -V
+#查找: find whereis grep awk ls ll cat uname
+find / -name *.png | grep content_xxx todo
+
+#复制移动: cp mv
+
+
+#系统: cd user su chown mkdir reboot tar >,>>
+cat /proc/version
+uname -a
+reboot
+shutdown -r now
+source /etc/profile
+
 #网络: netstat ping, ip addr, telnet, firewall-cmd, wget curl iftop(带宽) ssh
 netstat -tunlp|grep 3306
 netstat -anp|grep 3306
@@ -54,3 +66,8 @@ reboot
 shutdown -r now
 source /etc/profile
 
+### 文件上传下载
+ftpput -u root -p xxx -P 50221 44.39.19.14
+scp
+sshpass -p "password" scp -r -o StrictHostKeyChecking=no /root/.jenkins root@44.39.19.14:/root/.jenkins # 一键 , 无交互式
+sftp

@@ -1,0 +1,461 @@
+ran:
+    自己写的 与 别人写的差距 -- 对接视频:
+        接口参数
+        接口场景
+        接口校验
+        接口异常返回
+        接口拓展性
+    01.问题:
+        关键因素
+        持续
+        头脑计算多位乘法 事件多参数,多结果,头脑很难分析清楚
+        效率提升: 专人技术点,两人主副备份??  已用 全面 稳定的功能, 顺序, 不可逾越, 挑战,名与职合, 专一,工具
+        对接, 参数不确定,回炉
+        构造数据
+        整体的, 分时间段的, 统计分析的
+        强行指挥-- 没有明显的优点
+        历史分析-oa系统??
+
+        视频预警, 实时指挥问题总结:
+            多个人负责,三个和尚没水吃,单一责任人
+        接口稳定性:
+            数据源验证, 自动上报 避免反复追踪,接口不稳定
+        redis数据可视化-->文件(类linux/proc等,有文件,有加载,可使用)
+        位置 时间: 轨迹分析
+        idVo 封装--
+        怎么快的:
+            策略:
+                封装(领域)
+                拆分
+
+            质量保证:
+                pass
+            业务梳理:
+                pass
+            sql:
+                pass
+            算法:
+                pass
+            未知的技术(框架):
+                pass-- 文档, 理解 , 推导,举一反三 全局梳理
+            未知的业务(全面??):
+               正确的理解,推导,不停从未知中获取, 全部因素
+               实战 与 多准备??
+
+            记住相关:
+                背诵
+            诀窍: 经验
+
+    02.困难度(问题来源,解决问题的困难点):
+        kafka新版本:
+            学习资料少
+            bug资料少
+            第三方库少, 框架,第三方库没有适配, 版本内嵌协议,需要适配?
+        版本升级:
+            先查阅升级依赖在升级
+
+        依赖精确度, 精确度不是完全准确,有误差;
+    
+        引入技术解决问题, 但是复杂, 以后有关联,重复统计
+        
+        复杂参数 多领域  领域更加丰富,包容性多
+
+        获取场所的设备(交集):
+            根据场所 获取设备; 根据名称过滤,根据xx过滤; 或者场所逻辑特别复杂 间接的           优??
+            根据设备 过滤场所           如果场所,逻辑复杂,结果具有传递性
+
+            封装: 领域;
+
+            最终目标??
+
+        函数多场景:
+            eg:
+                一般:  根据id删除
+                特殊: 根据布控内容删除
+            解决方案:
+                类似Python:  多参数,分支
+                场景: 复用,更多场景
+
+
+    03.解决问题:
+        一切反馈到文本文件中,引用,git对比
+
+        代码重构:
+            智慧指挥-回放
+                原子函数,
+                编排不同,业务逻辑相似, 类似压缩至0?? 不能无限优化, 嵌套层级, 
+                
+                编排优化
+        shell脚本优化:
+            系统的语法
+            合适的变量命,相似的内容
+
+        mapreduce异常复杂分析(记一次脚本开发感受):
+            拆分,产生大量mapreduce, 增加复杂度:
+                拆小变多,也是复杂度
+            依赖其他mapreduce
+            初始数据不是格式化, 增加if分支 
+                -- if可以合并到map中, 避免更多函数, 需要环境变量,依赖其他mapreduce
+                -- 格式化数据,预处理??
+            MapReduce: 增加if判断, 数据缺失,需要类似环境参数, 多个mapreduce
+            单个对象与list,不能融合 -- ?? 装饰器,统一批量
+            链式,核心,修饰--主次重要不分,重复修改,没有内核,导致思维混乱,
+            
+            环境处理法, env={arg:{},result:{}}
+            
+            结合,
+
+    导入:
+        测试的建议
+        导出的结果,添加复杂逻辑
+        拟合效果的url
+        沟通交流的复杂
+        导入导出文件不同的思维限制
+    分析:
+        对象-- 属性
+
+        数据--
+        规则--
+
+        规则内的行为--
+        规则外的行为--
+
+    思考:  静态与动态,怎么转换的? 模拟动脉
+
+
+    配置文件:
+        默认文件
+        指定路径
+            环境变量
+            命令行指定
+
+
+  临时性的(个人需要灵活,不死板):
+    随机mmsi查询:
+        一般不使用临时性的  个人不喜欢这种,想要保持一致的,查询空要么分页,要么判断参数返回空,接口有复用,(问题: 空的条件,代表空过滤还是缺失条件返回空呢?) (但是抖机灵也是可以的)
+        优先融合id,再mmsi
+        查空,保留结构
+        if 逻辑判断, 所有抽出,局部(复杂的)抽出  -- 思维局限,全部抽出?? (多了之后抽出, 避免过度设计?)(临时,局部,特殊处理,难以想到,违背大道至简,难以考虑到,难以理解,难以监控,抖机灵)
+
+    嵌套层级:
+        套娃式,不知多少逻辑;
+        mp, 变量式,逻辑清晰,遵循单一智能原则
+        表结构,属性虽多,关注的少,感觉逻辑也清晰
+            类似 多对多关联, 逗号拼接,删除增加新的一条,查询需要正则,业务处理需要判空拆分等, 数据冗余与符合单一职能,符合mp
+
+  历史记录: 根据场所查询,  缺陷,场所的设备是不固定的,统计有变化;  优化:根据设备查询; 场所落库;
+
+  自我-反馈: 单选题, 题目明显不会, 看到选项 突然有把握了
+        问题--充足的证据  重点场所与 布控区域 稳重,必中,准确; 看着像要确认下
+
+        感觉不准-- 放大或者缩小(累比时, 或者替代时) 形成偷换概念, eg: 上次说的没实现,下次也没实现
+        mp 是线性(树)结构; 还有 树结构, 有向图结构, 循环图结构,,网结构
+  测试:
+        接口 表的字段 特别是 非线性的(eg: 状态)
+        仔细深入,(eg: 印泥,水笔事件)
+        相同的相似的
+        走流程 关键点
+        
+        判断 经验级别
+        
+        测试不能考虑全部的
+        
+        最终测试 eg:页面功能
+
+        做的时候仔细,做抽取,预言,验证,筛选, 不是单选,凭感觉, 累比选择题; eg: 地区查询,id_code
+
+        详细(钥匙带走时间, 拿出来看一下),全部, 关键节点
+
+  布控单位 审批部门, 个人喜欢动态关联, 反思
+        创建人部门id
+        
+        布控建表(拆分表??)-- 分页 , 人车 船舶 黑名单, 重点场所
+  矛盾:
+    网络幽灵实践
+    视频推送预警, 测试和生产可以相互下发指令, 生产自己不行
+        参数: 设备ip参数相同, 推送url不同
+        环境: 防火墙不同
+  规则破坏:
+    标签事件:
+        标签: 手动 或者自动创建, 只有名称,id
+        
+        船舶的新标签:
+            场所自动生成标签, 场所创建的标签(mark,来源标识)
+            手动添加标签
+            
+            场所可以删除,标签名不能重复, mark字段需要更新
+        
+        问题: 场所名称重复, 名称 历史记录的意义变更
+        
+        处理: 场所自动生成标签
+        
+        总结: 新标签创建受限,产生新的规则(字段), 破坏原有的标签规则
+
+  测试思维, 场景分支:
+      删日志
+      时间
+      大小
+      
+      大小时间同时满足
+      
+      大小时间单项
+      大小到了,时间不足, 导致丢失当前数据
+      时间到了,大小不足, 导致丢失当前数据
+
+  查找场所的设备:
+    过程有很多,
+    根据场所查询, 部门查询, 场所部门查询 
+    复用, 放到最终目标上(设备)
+
+
+开发:
+    开发文档:
+        流程图
+        表结构
+        背景
+    接口开发:
+        查询:
+            条件
+            name type等
+            list单表查询--分布式
+        新增:
+            createby 等
+            防重 
+            幂等
+            一对多
+        表结构:
+            主键
+            索引
+            注释
+            类型
+            长度
+            
+            宽表设计
+            逻辑删除
+               
+            枚举表 -- 系统 自定义  -- 枚举 不再使用枚举Id关联, 使用value,code 或者, 翻译 字段使用
+                常量表
+                用户枚举
+                场景: world -- 数字(不变化) 省市信息(很少变化), 百度api地址等
+
+                增加枚举-- 运行枚举,同步数据库?? 还是代码中数据库查询???
+
+            表结构设计(json嵌套与打平):
+                布控表:
+                    布控类别:
+                        船舶: 布控条件,审批条件,布控状态
+                        人车: 布控条件,审批条件,布控状态
+                        场所: 布控条件
+                        黑名单: 布控条件
+
+                    一个字段:
+                        json, 嵌套, 类别,条件等
+                    两个字段:
+                        类别
+                        条件,等
+                    多个字段:
+                        类别
+                        条件拆出
+                        布控状态
+                    极致扁平化:
+                        类别中字段拆出
+                        所有字段单独在表
+
+                    数据库设计:
+                        一个表,不存在传递依赖
+                        字段冗余,序列化
+
+                form 表单:
+                    表单大导致 字段增多
+                    类别 导致字段需求不一致
+
+                    引入json:
+                        减少字段,易于理解, json字段不易查询, json字段产生 字符串sql,难以修改
+                    
+                        复杂, 字段多,相互影响; 嵌套层级多逻辑复杂
+                        
+                        极致场景推论, 全用字段, 难以理解(作为出入参); 
+                        
+                        封装,领域-- 
+                        
+                        使用多字段, 使用函数封装, 而不是数据库字段封装???
+
+        测试文件
+            数据
+            查询
+            增加
+            修改
+            隐藏删除
+            测试与优化提单
+            构建测试用例:
+                idea-httpclient
+                单元测试
+                代码优化--应该是更快的?
+
+    归类与统计 -- 布控多表统计,, 为了统计,增加标识,写入库复杂; 为了解决问题引入未知,改变前提条件,(思考本质?还是未解决当前问题偷懒?)
+        -- 统计依赖标识  设备视频预警时间
+        
+    阶段推进, 紧密关联的一起
+    需求文档阅读不方便,UI可能隐藏, 需求串讲
+    一条数据异常,导致列表查询异常
+    常见使用小内存,异常,热点导致资源更多,导致异常
+    idea 代码检查
+    swagger --
+        Q: consumes 设置consumes / 特殊符号路径问题   springboot 版本
+        1. 全局设置consumes 无效
+        2. get 使用 urlencode ; post使用json
+        3. swagger3 默认 json urlencode; swagger1 默认空
+    更新与修改合并-- ??
+	图形结构(多参数,形成笛卡尔积场景, 参数相互影响):
+		eg: json序列化,, 注入类型, 序列化类, 操作数据类型 添加@type 支持自动映射
+		只面对单一参数:
+            - 1. 不同序列化类 生成数据对比
+            - 2. 不同参数(@type) 测试反序列化
+            - 3. 多参数, 测试注入, debugger, 查看注入的实际类型
+            - 4. 测试操作数据类型(string hash)
+            - 5. 测试数组与Object 序列化与返许泪花, 思考mybatisPlus自动映射类型, kafka数据序列化
+            - 6. 思考springboot接口, 自动序列化类型,, 自定义序列化类(LocalDate等), MessageConvert
+    关于日期边界:
+        - 范围查询, 由前端补齐
+        - 所有时间,都带秒级数据
+        - 日期补全
+        - 日期默认值
+        - 日期包含右边界, 日期加一预处理, 或 数据库时间转日期
+    maven 插件:
+        maven-jar-plugin: 默认打包插件,打成普通的jar包, 可配置打包内容
+        maven-shade-plugin: 可执行jar包, fat jar
+        maven-assebly-plugiin: 支持自定义打包结构,定制依赖项等
+        spring-boot-maven-plugin: springboot专用插件 可定制
+        
+        maven-dependency-plugin: 复制依赖的jar包到指定的文件夹里
+        maven-resources-plugin: 用于复制指定的文件
+        maven-surefire-plugin: 跳过单元测试等
+        maven-compiler-plugin: 早期编译插件??
+    maven:
+        下载jar包时:
+            - 生成 _remote.repositories
+            - 向 _remote.repositories 写入 仓库名称, 代表通过验证
+
+        删除 _remote.repositories:
+            - 不会自动生成, 触发下载时才会生成(首次下载)
+            - 不验证配置文件仓库名
+
+        存在 _remote.repositories 文件时: 验证 _remote.repositories 包含 配置文件仓库名
+
+        maven仓库名不存在_remote.repositories时(配置文件仓库更改),重新验证 jar包:
+            验证失败: idea提示异常 , 生成.lastUpdated 文件生成规律
+            验证通过: 并往_remote.repositories 写入仓库名称
+        maven爆红:
+            现象: 提示Failure to transfer xxx (全体爆红)
+            原因: maven 加载依赖, 会根据pom中的配置的版本查找依赖, 离线时不能下载
+            解决方案: 排除依赖(解决爆红), 添加依赖(指定版本,解决依赖); 或者配置dependencyManagement
+
+    ffmpeg 源码编译:
+        ./configure --prefix=/home/ns-coastal/ffmpeg34 --enable-shared --enable-static --disable-asm
+        make -j8
+        make install
+        
+        添加 /home/ns-coastal/ffmpeg34/lib 到 /etc/ld.so.conf  
+        
+        配置生效 ldconfig 
+        
+        --prefix=/usr/lib
+
+    推送数据:
+        - 最新  标识 记录上次访问的,类似kafka,携带上次请求记录
+        - 轨迹数据
+        - 实时数据
+
+    wireshark:
+        卡死:
+          - 取消 编辑/首选项/Protocols/TLS 选项
+          - 取消 接口混杂模式
+   
+windows 异常追踪:
+	事件查看器
+	/控制面板/所有控制面板/安全和维护/可靠性监视程序
+    sfc 
+    Dism
+    重置系统 /设置/更新和安全/恢复/重置系统
+    winRE模式
+    系统还原
+
+SpringBoot配置文件:
+    优先级:
+        同优先级: 覆盖
+        高优先级: 直接返回
+    激活配置:
+        运行命令指定配置
+        配置文件中 spring.profiles.active
+    查找jar包(配置文件)(本地):
+        运行参数:
+            -classpath
+            -cp
+            -Djava.ext.dirs
+        运行参数eg:
+            java -cp foo.jar full.package.name.ClassName
+            java -classpath C:\java\MyClasse1;C:\java\MyClass2 com.yiibai.MainApp
+            java -Djava.ext.dirs=<多个jar包的目录> com.test.HelloWordMain
+        tomcat启动加载目录(https://www.cnblogs.com/zjdxr-up/p/17111093.html):
+            1. $java_home/lib 目录下的java核心api
+            2. $java_home/lib/ext 目录下的java扩展jar包
+            3. java -classpath/-Djava.class.path所指的目录下的类与jar包
+            4. $CATALINA_HOME/common目录下按照文件夹的顺序从上往下依次加载
+            5. $CATALINA_HOME/server目录下按照文件夹的顺序从上往下依次加载
+            6. $CATALINA_BASE/shared目录下按照文件夹的顺序从上往下依次加载
+            7. 项目路径/WEB-INF/classes下的class文件
+            8. 项目路径/WEB-INF/lib下的jar文件
+        SpringBoot启动加载目录(项目路径:运行时目录):
+            1. $java_home/lib 目录下的java核心api
+            2. $java_home/lib/ext 目录下的java扩展jar包
+            3. java -classpath/-Djava.class.path所指的目录下的类与jar包
+            
+            4. MANIFEST.MF中配置目录
+            
+            5. 项目路径下的config目录
+            6. 项目路径
+            7. classpath下的config目录
+            8. classpath目录
+    配置中心(nacos):
+        1. 本地查找bootstrap.yaml
+        2. 本地查找bootstrap-env.yaml
+        3. 查找 application.yaml
+        4. 查找 application-env.yaml
+    输出加载目录:
+        1. System.getProperty("java.class.path");
+        2. jdk8 可以通过     -XX:+TraceClassPaths    参数进行查看jar包的加载顺序
+        3. jdk11 可以通过    -Xlog:class+path=info   参数进行查看jar包的加载顺序
+
+git本地仓库:
+    服务端:
+        git config --global receive.denyCurrentBranch ignore
+        git init --bare
+    本地主机 remote url: git clone D:\\localGitServer\\PythonTemplate
+    服务器主机:
+        - git clone \\\\44.39.247.240\\localGitServer\\xc-coastal
+        - git clone \\\\YAN09\\localGitServer\\xc-coastal
+
+浏览器缓存(效率):
+    expires 1d;
+        Cache-Control: max-age=172800
+        Expires: Sat, 28 Oct 2023 13:37:58 GMT
+    add_header cache control: no cache
+        304
+    disk cache
+    membery cache
+
+
+test:
+    取消 assert 断言:
+        普通项目使用 junit4 asserttions
+        boot 项目 使用 spring asserttions
+    junit4 与 junit5
+        idea - maven添加 org.junit.platform:junit-platform-launcher:1.3.1
+
+
+分页查询,id查询, 条件单个查询:
+    结果: 使用单个查询
+    原因:
+        结构不一样, 参数返回值不一样
+        预期是一个,如果报错,就是参数有问题, 返回list同是
+        优化数据量, 预期一个
