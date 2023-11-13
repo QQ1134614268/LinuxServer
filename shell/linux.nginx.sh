@@ -51,16 +51,20 @@
             redirect是302,临时重定向,浏览器每次请求都请求原网址,搜索引擎不会记住新网址,而且还可能认为是作弊
             permanent是301,永久重定向,浏览器缓存会记住新网址,当请求原网址,会直接向新网址请求,搜索引擎也会记住新网址;这样就可以减少中间过程,目的只是保留之前被大家熟知的域名
 
-6. upstream :
-   server {
-       server_name gitee.com;
-       location / {
-           proxy_pass   http://myipconfig1;
-       }
-   }
-   upstream myipconfig1{
-       server gitee.com;
-   }
+6. stream: 代理流
+   stream {
+      upstream mysql {
+          hash $remote_addr consistent;
+          server 127.0.0.1:3306; # MySQL数据库集群 #server 192.168.1.111:3306;
+      }
+      server {
+          listen 13306;
+          proxy_connect_timeout 3s;
+          proxy_timeout 3s;
+          proxy_pass mysql; #通过mysql代理名称访问127.0.0.1:3306
+      }
+  }
+
 7. return
     location | if 中: return 301 https://$host\$request_uri;
 

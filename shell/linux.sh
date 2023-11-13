@@ -3,11 +3,9 @@
 ps -ef
 ps -ef | grep 14045 | grep -V grep | awk "{print $1}"
 pstree -V
-#查找: find whereis grep awk ls ll cat uname
-find / -name *.png | grep content_xxx todo
+#查找: whereis grep awk ls ll cat uname
 
 #复制移动: cp mv
-
 
 #系统: cd user su chown mkdir reboot tar >,>>
 cat /proc/version
