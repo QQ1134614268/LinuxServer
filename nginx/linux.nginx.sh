@@ -21,18 +21,33 @@
     (location =) > (location 完整路径) > (location ^~ 路径) > (location ~ ,~* 正则顺序) > (location 部分起始路径) > (/)
 
 4. proxy_pass :
-     参考: https://www.jb51.net/article/227243.htm
-
      http://localhost/proxy/abc.html:
-          /proxy    http://127.0.0.1:8080        ->  http://localhost/proxy/abc.html
-          /proxy/   http://127.0.0.1:8080        ->  http://localhost/proxy/abc.html
-          /proxy/   http://127.0.0.1:8080/       ->  http://127.0.0.1:8080/abc.html
-          /proxy/   http://127.0.0.1:8080/api/   ->  http://localhost/api/abc.html
-          /proxy/   http://127.0.0.1:8080/api    ->  http://localhost/apiabc.html
-          /proxy    http://127.0.0.1:8080/api    ->  http://localhost/api/abc.html
-          /proxy    http://127.0.0.1:8080/       ->  http://localhost//abc.html
+        /proxy 	http://127.0.0.1:20090 		http://127.0.0.1:20090/proxy/abc
+        /proxy 	http://127.0.0.1:20090/ 	http://127.0.0.1:20090//abc
+        /proxy 	http://127.0.0.1:20090/api 	http://127.0.0.1:20090/api//abc
+        /proxy 	http://127.0.0.1:20090/api/ http://127.0.0.1:20090/api/abc
+        /proxy/ http://127.0.0.1:20090 		http://127.0.0.1:20090/proxy/abc
+        /proxy/ http://127.0.0.1:20090/ 	http://127.0.0.1:20090/abc
+        /proxy/ http://127.0.0.1:20090/api 	http://127.0.0.1:20090/apiabc
+        /proxy/ http://127.0.0.1:20090/api/ http://127.0.0.1:20090/api/abc
 
      相对路径与绝对路径拼接, 类似 os.path.join("/api", "/proxy/", "abc.html")  ??
+     location /ytq_visualization/proxy {
+        proxy_pass http://10_21_232_23_50001/proxy;	# 转发到 中的服务器中
+        proxy_http_version 1.1;           # 默认http1.0, 不支持块传输,长连接等
+        proxy_set_header Connection "";   # 默认 Connection close
+        proxy_set_header Host $http_host; # 默认 upstream 代理名称
+
+        # proxy_cache my_cache;
+      }
+			upstream 10_21_232_23_50001 {
+        server  10.21.232.23:50001;     # 代理服务器
+
+        keepalive	32;                   # 长连接
+        keepalive_timeout  65;
+        keepalive_requests 1000;
+        keepalive_time 1h;
+      }
 
 5. rewrite :
     rewrite: rewrite跳转实现
@@ -78,14 +93,10 @@
     /bar 表示我们把bar当成一个文件,想要访问bar文件
     bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
 
-   9. nginx静态资源优化:
+ 9. nginx静态资源优化:
    使用 gzip 压缩
    合并文件
    redis缓存,浏览器缓存
    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
 
    cdn,硬件,带宽
-
-# host文件
-# 159.75.92.195 gitee.com
-
