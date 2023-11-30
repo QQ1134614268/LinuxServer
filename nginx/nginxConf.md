@@ -31,18 +31,16 @@
         /proxy/ http://127.0.0.1:20090/api 	http://127.0.0.1:20090/apiabc
         /proxy/ http://127.0.0.1:20090/api/ http://127.0.0.1:20090/api/abc
 
-     相对路径与绝对路径拼接, 类似 os.path.join("/api", "/proxy/", "abc.html")  ??
+     相对路径与绝对路径拼接, 类似 os.path.join("/api", "/proxy/", "abc.html")
      location /ytq_visualization/proxy {
         proxy_pass http://10_21_232_23_50001/proxy;	# 转发到 中的服务器中
         proxy_http_version 1.1;           # 默认http1.0, 不支持块传输,长连接等
         proxy_set_header Connection "";   # 默认 Connection close
         proxy_set_header Host $http_host; # 默认 upstream 代理名称
-
         # proxy_cache my_cache;
       }
-			upstream 10_21_232_23_50001 {
+     upstream 10_21_232_23_50001 {
         server  10.21.232.23:50001;     # 代理服务器
-
         keepalive	32;                   # 长连接
         keepalive_timeout  65;
         keepalive_requests 1000;
@@ -66,37 +64,36 @@
             redirect是302,临时重定向,浏览器每次请求都请求原网址,搜索引擎不会记住新网址,而且还可能认为是作弊
             permanent是301,永久重定向,浏览器缓存会记住新网址,当请求原网址,会直接向新网址请求,搜索引擎也会记住新网址;这样就可以减少中间过程,目的只是保留之前被大家熟知的域名
 
-6. stream: 代理流
-   stream {
-      upstream mysql {
-          hash $remote_addr consistent;
-          server 127.0.0.1:3306; # MySQL数据库集群 #server 192.168.1.111:3306;
-      }
-      server {
-          listen 13306;
-          proxy_connect_timeout 3s;
-          proxy_timeout 3s;
-          proxy_pass mysql; #通过mysql代理名称访问127.0.0.1:3306
-      }
-  }
-
-7. return
-    location | if 中: return 301 https://$host\$request_uri;
-
-8. root alias
-    root,会把请求url的 ip/域名+port替换为root指定的目录,访问资源
-    alias,会把请求url的ip/域名+port+匹配到的路径替换为alias指定的目录,访问资源
-    
-    index的作用是,当实际访问的是一个目录时,会返回该目录中index指定的文件,如果该目录中不存在index指定的文件,则会返回403
-    
+6. root, alias
+    http://example.com/foo/bar/hello.html
+        root 	/home/hfy/;		/home/hfy/foo/bar/hello.html # 不替换匹配的路径
+        alias	/home/hfy/;		/home/hfy/hello.html # 替换匹配的路径
     末尾 '/'
     /bar 表示我们把bar当成一个文件,想要访问bar文件
     bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
 
- 9. nginx静态资源优化:
+7. index
+    当查找的文件是目录, 会自动指向 index指定的文件, 如果该目录中不存在index指定的文件,则会返回403
+8. try_files
+
+9. nginx静态资源优化:
    使用 gzip 压缩
    合并文件
-   redis缓存,浏览器缓存
+   redis缓存, 浏览器缓存
    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
-
    cdn,硬件,带宽
+10. return
+     location | if 中: return 301 https://$host\$request_uri;
+11. stream: 代理流
+    stream {
+       upstream mysql {
+           hash $remote_addr consistent;
+           server 127.0.0.1:3306; # MySQL数据库集群 #server 192.168.1.111:3306;
+       }
+       server {
+           listen 13306;
+           proxy_connect_timeout 3s;
+           proxy_timeout 3s;
+           proxy_pass mysql; #通过mysql代理名称访问127.0.0.1:3306
+       }
+    }

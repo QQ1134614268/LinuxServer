@@ -30,7 +30,7 @@ du -sk ./* | sort -rn # -r 降序; -n选项，来告诉sort，“要以数值来
 top -p pidxxx
 
 #查找: find whereis grep awk
-find / -name *.png
+find / -name '*.png' # 正则 加上 引号
 find / -name file_xxx | grep content_xxx
 
 #软件: yum nginx mysql docker
@@ -50,10 +50,6 @@ mysql -uroot -pxxx -e "source /root/xxx.sql"
 
 #编辑: sed
 #复制移动: cp mv
-# /usr 与 /usr/ 没区别
-# /usr/*  文件夹下文件
-cp 目录不在时  cp -r /source    /dist
-cp 目录存在时  cp -r /source/*  /dist
 
 #压缩: tar
 #写入: >,>>

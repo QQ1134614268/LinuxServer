@@ -6,7 +6,7 @@
 # 方案2: 追加 B机器 id_rsa.pub 到 A机器的 known_hosts
 
 # 验证1: ssh A机器 传输到 B机器
-scp scp -p 22 -r /root/test.txt root@192.168.251.10:/root/test.txt
+scp -P 22 -r /root/source/*   root@192.168.251.10:/root/dst # 确保目录存在,否则复制文件异常
 # 验证2: 登陆B机器, 无需密码 直接登录成功
 ssh 192.168.251.10
 
