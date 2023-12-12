@@ -4,7 +4,7 @@
 ffmpeg -i input.mp4 output.mp4
 ffmpeg -i rtmp://127.0.0.1/live/123456 -c copy out.flv
 # ffmpeg 推流
-ffmpeg -re -i /home/input.mp4 -c copy -f flv rtmp://127.0.0.1/live/123456 # 推流到流媒体踢
+ffmpeg -re -i /home/input.mp4 -c copy -f flv rtmp://127.0.0.1/live/123456 # 推流到流媒体
 ffmpeg -f gdigrab -i desktop -vcodec libx264 -pix_fmt yuv420p -t 300 -y -f flv out.mp4 # 录屏推流
 
 #
