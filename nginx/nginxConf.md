@@ -73,7 +73,8 @@
     bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
 
 7. index
-    当查找的文件是目录, 会自动指向 index指定的文件, 如果该目录中不存在index指定的文件,则会返回403
+    当查找的文件是目录, 会自动指向该目录下 index指定的文件(绝对路径,遵循路径拼接), 如果该目录中不存在index指定的文件,则会返回403
+    eg: http://localhost:20080/dir1/ D:\dev\nginx-1.22.0\html\dir1\index.html
 8. try_files
 
 9. nginx静态资源优化:
