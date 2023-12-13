@@ -1,8 +1,9 @@
+# 参考: https://blog.csdn.net/m0_51504545/article/details/123278429
 curl -Lkv http://example.com/api
 
 curl -o myfile.zip http://example.com/file.zip
 curl -O http://example.com/file.zip
-curl -H "Content-Type: application/json" http://example.com/api
+curl -H "Content-Type: application/json" -X POST -d '{"abc":123,"bcd":"nihao"}' http://example.com/api
 curl -X DELETE http://example.com/resource
 curl -u username:password http://example.com/api
 curl -L http://example.com
