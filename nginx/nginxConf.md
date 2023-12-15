@@ -1,3 +1,10 @@
+参考: https://nginx.org/en/docs/
+
+1. 重定向: 
+    内部: 不经过浏览器等; 
+    外部: 经过浏览器, 返回301,302等
+
+
 1. server
     server_name与host匹配优先级如下:
     1,完全匹配 =
@@ -72,20 +79,23 @@
     /bar 表示我们把bar当成一个文件,想要访问bar文件
     bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
 
-7. index
-    当查找的文件是目录, 会自动指向该目录下 index指定的文件(绝对路径,遵循路径拼接), 如果该目录中不存在index指定的文件,则会返回403
-    eg: http://localhost:20080/dir1/ D:\dev\nginx-1.22.0\html\dir1\index.html
-8. try_files
+7. index 与 try_files, 不能同时使用
+   1. index
+      url以/结尾: 拼接index, 文件不存在 404;
+      url不以/结尾: url为目录,指向index, 文件不存在 403, 不存在404
+   2. try_files
+      1. 路径拼接时没有加 /
+      2. try_files 更加可靠， 首先会查找"$uri"下的这个文件，如果不存在会查找$uri/,如果还不存在就会重定向到 /index.html页面。如果最后参数写错了，就会导致500的服务器错误。 todo
 
-9. nginx静态资源优化:
+8. nginx静态资源优化:
    使用 gzip 压缩
    合并文件
    redis缓存, 浏览器缓存
    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
    cdn,硬件,带宽
-10. return
-     location | if 中: return 301 https://$host\$request_uri;
-11. stream: 代理流
+9. return
+    location | if 中: return 301 https://$host\$request_uri;
+10. stream: 代理流
     stream {
        upstream mysql {
            hash $remote_addr consistent;
