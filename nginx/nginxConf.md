@@ -81,12 +81,15 @@
 
 7. index 与 try_files, 不能同时使用
    1. index
-      如果文件不存在,或者url为目录,拼接index
       url以/结尾: 拼接index, 文件不存在 404;
-      url不以/结尾: url为目录,指向index, 文件不存在 403, 不存在404
+      url不以/结尾: 不存在404; 但url实际为目录,拼接index, 文件不存在403
    2. try_files
-      根据try_files查找文件, 如果为url目录或者不存在,还会自动拼接index.html; index 指令无效;
-      所以 $uri是必须的, 拼接时不会自动添加 /
+      url以/结尾: 自动拼接/index.html, 文件不存在 404;
+      url不以/结尾: 不存在404; 但url实际为目录,自动拼接/index.html, 文件不存在403
+
+      根据try_files查找文件,所以 $uri是必须的; 
+      index 指令无效;
+      拼接时不会自动添加 /, index.html 转htmlindex.html 不是html/index.html; 参考nginx err日志
 
 8. nginx静态资源优化:
    使用 gzip 压缩
