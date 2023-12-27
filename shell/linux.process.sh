@@ -1,4 +1,3 @@
-# todo 书籍
 pid:     每个进程有一个,唯一标识
 ppid:    父进程id 子进程的创建进程的id, 若父id死亡??
 pgid:    进程组id, 简化组内发送信号, 组长的pid, 通过调用 setpgrp 归为一组
