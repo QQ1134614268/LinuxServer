@@ -4,6 +4,13 @@ git show --pretty=format:"%ci %cr" | head -1
 #查看最后一次提交记录的修改文件信息
 git show --raw
 
+git submodule add http://xxx.com/xxx
+git clone --recurse-submodules http://xxx
+git submodule init
+git submodule update
+git submodule update --init
+git submodule update --init --recurse
+
 /usr/local/python3.7/bin/pyinstaller -p /root/PythonTemplate/src --noconfirm -F main.py
 
 # mysql  查看mysql连接情况(进入mysql) show processlist
