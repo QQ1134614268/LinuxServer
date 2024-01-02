@@ -30,7 +30,7 @@ du -sk ./* | sort -rn # -r 降序; -n选项，来告诉sort，“要以数值来
 top -p pidxxx
 
 #查找: find whereis grep awk
-find / -name '*.png' # 正则 加上 引号
+find / -name '*.png' # 如果不加'', 先解析 *.png 为 a.png b.png ... , b.png识别为路径, 需在 -name前面
 find / -name file_xxx | grep content_xxx
 
 #软件: yum nginx mysql docker

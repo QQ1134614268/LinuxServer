@@ -1,7 +1,7 @@
 
 grep -rl server-addr /home/ns-coastal/coastal_be
 grep -r server-addr /home/ns-coastal/coastal_be
-grep -r server-addr `find /home/ns-coastal/coastal_be -name *.yml`
+grep -r server-addr `find /home/ns-coastal/coastal_be -name '*.yml'`
 
 grep -r server-addr  *
 grep -r server-addr  *yml
