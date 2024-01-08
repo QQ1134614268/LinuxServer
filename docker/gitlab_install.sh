@@ -10,13 +10,13 @@ external_url "http://ggok.top:9980"
 gitlab_rails["gitlab_ssh_host"] = "ggok.top"
 # ssh连接端口
 gitlab_rails["gitlab_shell_ssh_port"] = 9922
-'> gitlab.rb
+'> /usr/local/gitlab/etc/gitlab.rb
 
 
 docker pull gitlab/gitlab-ce:latest
 
 docker run \
- -it  \
+ -itd  \
  -p 9980:80 \
  -p 9922:22 \
  -v /usr/local/gitlab/etc:/etc/gitlab  \
@@ -25,4 +25,4 @@ docker run \
  --restart always \
  --privileged=true \
  --name gitlab \
- -d gitlab/gitlab-ce
+ - gitlab/gitlab-ce
