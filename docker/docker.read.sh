@@ -2,7 +2,7 @@
 docker run -itd ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 #端口映射
 docker run -itd -p port:port 镜像名
-#文件挂载
+#文件挂载 覆盖掉容器目录
 docker run -itd -v /宿主机/目录:/容器目录 镜像名
 # -e 传参
 docker run -itd --name mysql9 -e MYSQL_ROOT_PASSWORD=123456 --restart=always mysql
@@ -36,3 +36,7 @@ docker commit -a 'wg' -m 'world_mysql' 镜像名|id 新名:tag
 #导入导出 本地多一个镜像
 docker export 容器名|容器id > ubuntu.tar
 docker import - test/ubuntu:v1
+
+# network
+docker network create -d bridge test-net
+docker run -itd --name test1 --network test-net ubuntu /bin/bash

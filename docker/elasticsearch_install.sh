@@ -34,14 +34,3 @@ docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
 # -e ELASTIC_PASSWORD="123456"   # 账号密码默认是elastic  这里设置密码 123456
 
 # elasticsearch -Xms256M 实际占用两倍? 有两个进程
-
-docker logs elasticsearch
-
-docker rm elasticsearch
-
-docker stop elasticsearch
-
-docker ps -a
-docker exec -it elasticsearch /bin/bash
-ll /opt/elasticsearch/config
-
