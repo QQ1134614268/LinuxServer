@@ -15,14 +15,10 @@ gitlab_rails["gitlab_shell_ssh_port"] = 9922
 
 docker pull gitlab/gitlab-ce:latest
 
-docker run \
- -itd  \
- -p 9980:80 \
- -p 9922:22 \
+docker run -d --name gitlab -p 9980:80 -p 9922:22 \
  -v /usr/local/gitlab/etc:/etc/gitlab  \
  -v /usr/local/gitlab/log:/var/log/gitlab \
  -v /usr/local/gitlab/opt:/var/opt/gitlab \
  --restart always \
  --privileged=true \
- --name gitlab \
- - gitlab/gitlab-ce
+ gitlab/gitlab-ce

@@ -1,7 +1,7 @@
 # 3 docker 部署
-docker pull kubebiz/kafka:2.13-3.6.1
+docker pull bitnami/kafka
 
-docker run  --name kafka -p 9092:9092 -p 9093:9093 \
+docker run --name kafka -p 9092:9092 -p 9093:9093 \
   -e KAFKA_ENABLE_KRAFT=yes \
   -e KAFKA_CFG_PROCESS_ROLES=broker,controller \
   -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
@@ -13,5 +13,4 @@ docker run  --name kafka -p 9092:9092 -p 9093:9093 \
   -e KAFKA_KRAFT_CLUSTER_ID=iZWRiSqjZAlYwlKEqHFQWI \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
   -e KAFKA_HEAP_OPTS="-Xms512M -Xmx512M" \
- -d kafka
-# -v /tmp/kraft-combined-logs:/tmp/kraft-combined-logs \
+  -d bitnami/kafka
