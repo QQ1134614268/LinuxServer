@@ -6,6 +6,8 @@ docker run -d -p port:port 镜像名
 docker run -d -v /宿主机/目录:/容器目录 镜像名
 # -e 传参
 docker run -d --name mysql9 -e MYSQL_ROOT_PASSWORD=123456 --restart=always mysql
+# 注意事项: 挂载文件权限( 配置文件 日志 运行数据), 安全https(用户账号密码), 端口 网络, 重启策略
+
 # 进入容器
 docker exec -u root -it 容器id /bin/bash
 
