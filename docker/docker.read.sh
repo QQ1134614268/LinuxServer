@@ -1,8 +1,8 @@
-#启动容器 后台模式 -d 有时容器会直接退出 -itd不会
+# 启动容器 后台模式 -d 有时容器会直接退出 -itd不会, 进入start失败的容器?
 docker run -itd ubuntu:15.10 /bin/sh -c "while true; do echo hello world; sleep 1; done"
-#端口映射
+# 端口映射
 docker run -d -p port:port 镜像名
-#文件挂载 覆盖掉容器目录
+# 文件挂载 覆盖掉容器目录
 docker run -d -v /宿主机/目录:/容器目录 镜像名
 # -e 传参
 docker run -d --name mysql9 -e MYSQL_ROOT_PASSWORD=123456 --restart=always mysql
@@ -16,7 +16,7 @@ docker stop|start|restart|rm 容器名|容器id
 docker images
 docker search|pull|rmi 镜像名
 
-docker cp 容器名:文件完整路径 本地路径 # copy 容器 到 本地
+docker cp 容器名:文件完整路径 本地路径 # copy 容器 到 本地, 支持退出的容器
 docker cp 本地路径 容器名:文件完整路径 # copy 本地 到 容器
 
 # docker debug 查看镜像的
