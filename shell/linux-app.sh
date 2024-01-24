@@ -17,3 +17,9 @@ git submodule update --init --recurse
 SELECT * from information_schema.processlist;
 
 python3 -m venv fastapi_test
+
+### 文件上传下载
+ftpput -u root -p xxx -P 50221 44.39.19.14
+scp
+sshpass -p "password" scp -r -o StrictHostKeyChecking=no /root/.jenkins root@44.39.19.14:/root/.jenkins # 一键 , 无交互式
+sftp
