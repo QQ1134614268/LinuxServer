@@ -13,3 +13,24 @@ docker run -d --name kafka -p 9092:9092 -p 9093:9093 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
   -e KAFKA_HEAP_OPTS="-Xms512M -Xmx512M" \
   bitnami/kafka
+
+#kafka-web可视化工具
+docker stop kafka-ui && docker rm kafka-ui
+docker run -p 8080 \
+    --name kafka-ui \
+    -p 8092:8080 \
+    -e KAFKA_CLUSTERS_0_NAME=kafka9092 \
+    -e KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=ggok.top:9092 \
+    -e TZ=Asia/Shanghai \
+    -e LANG=C.UTF-8 \
+    -d provectuslabs/kafka-ui:latest
+docker logs -f kafka-ui
+
+#账号
+#-e SERVER_SERVLET_CONTEXT_PATH="/" \
+#-e AUTH_TYPE="LOGIN_FORM" \
+#-e SPRING_SECURITY_USER_NAME=admin \
+#-e SPRING_SECURITY_USER_PASSWORD="admin" \
+# 第二个账号
+#-e KAFKA_CLUSTERS_1_NAME=kafka9093 \
+#-e KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS=ggok.top:9093 \
