@@ -11,13 +11,14 @@ wget https://www.python.org/ftp/python/3.7.5/Python-3.7.5.tgz
 #3. 解压，编译
 tar -zxvf  Python-3.7.5.tgz
 cd Python-3.7.5
-./configure --prefix=/usr/local/python3.7 --enable-optimizations
-make
+./configure --prefix=/usr/local/python3.7.5
+make -j8
 make install
 #4. python2 与 python3 并存
-ln -s /usr/local/python3.7/bin/python3.7 /usr/bin/python3.7
-ln -s /usr/local/python3.7/bin/pip3 /usr/bin/pip3.7
-
+ln -s /usr/local/python3.7.5/bin/python3.7 /usr/bin/python3.7
+ln -s /usr/local/python3.7.5/bin/pip3 /usr/bin/pip3.7
+# 4.2 升级pip
+pip3.7 install --upgrade pip
 #5. 更换源
 echo '[global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple' > ~/.pip/pip.conf

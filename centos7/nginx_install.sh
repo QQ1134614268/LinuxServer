@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # 1. yum安装
-# yun install -y nginx
+yun install -y nginx
+systemctl enable nginx
+nginx -c /etc/nginx/nginx.conf
+
 # 2. Nginx的源码 复杂安装
 #下载 编译
 cd /tmp
