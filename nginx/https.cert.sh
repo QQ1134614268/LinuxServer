@@ -1,15 +1,27 @@
-https://blog.csdn.net/tianjiewang/article/details/106424699
 yum install certbot -y
+
 # yum install  python2-certbot-nginx -y
 certbot certonly --nginx -d test.ggok.top --agree-tos  --email 1134614268@qq.com
-certbot run --nginx -d root.ggok.top --agree-tos  --email 1134614268@qq.com
-certbot run --nginx -d *.ggok.top --agree-tos  --email 1134614268@qq.com
-certbot run --nginx -d *.ggok.top --preferred-challenges dns --agree-tos  --email 1134614268@qq.com
-sudo certbot --authenticator standalone --installer nginx -d example.com --pre-hook "service nginx stop" --post-hook "service nginx start"
+certbot run      --nginx -d root.ggok.top --agree-tos  --email 1134614268@qq.com
+certbot run      --nginx -d test.ggok.top --agree-tos  --email 1134614268@qq.com --preferred-challenges dns-01
+# 自动续签
+echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
 
-#定时任务
-echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root
-systemctl reload crond
+# 泛域名, 提示
+certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com
+certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns-01
+certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http-01
+certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --server https://acme-v02.api.letsencrypt.org/directory
+
+certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns-01
+certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http-01
+
+## 测试
+rm -rf /var/log/letsencrypt
+
+cat /etc/nginx/nginx.http.conf > /etc/nginx/nginx.conf &&  nginx -s reload
+rm -rf /etc/letsencrypt
+certbot --nginx -d *.ggok.top  --agree-tos --email 1134614268@qq.com
 
 certbot [子命令] [选项] [-d 域名] [-d 域名] ...
 # 子命令: certonly 获取证书; run 获取证书,安装到你的 web 服务器; renew 更新已经获取但快过期的所有证书
@@ -18,22 +30,16 @@ certbot [子命令] [选项] [-d 域名] [-d 域名] ...
 #1.2 nginx|apache|webroot
 
 #其他示例:
-certbot certonly -d test.ggok.top
 certbot certonly --manual -d test.ggok.top
-certbot certonly --manual -d 'test.ggok.top' \
-  --preferred-challenges dns \
-  --server https://acme-v02.api.letsencrypt.org/directory \
-  --agree-tos \
-  --email 1134614268@qq.com
+certbot certonly --manual -d test.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory
+certbot certonly --standalone -d www.domain.com
+# 泛域名
+certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com  --preferred-challenges dns
 #-d:  为那些主机申请证书,如果是通配符,输入 *.xxxx.com
 #--preferred-challenges:  使用 DNS 方式校验域名所有权
 #--server: Let’s Encrypt ACME v2 版本使用的服务器不同于 v1 版本,需要显示指定
 #--agree-tos: 默认同意 Let’s Encrypt 的一些 agreements,不加这个参数在命令执行过程中还是会问用户是否同意；
 #--email: 用来获取一些 Let’s Encrypt 的通知,比如证书过期之类；
-
-certbot certonly --standalone -d www.domain.com
-# 泛域名
-certbot certonly -d *.ggok.top --manual --preferred-challenges dns
 
 用法:
   certbot [子命令] [选项] [-d 域名] [-d 域名] ...
