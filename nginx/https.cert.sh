@@ -1,27 +1,39 @@
+#参考: https://certbot.eff.org/instructions?ws=nginx&os=centosrhel7&tab=wildcard
 yum install certbot -y
 
 # yum install  python2-certbot-nginx -y
 certbot certonly --nginx -d test.ggok.top --agree-tos  --email 1134614268@qq.com
-certbot run      --nginx -d root.ggok.top --agree-tos  --email 1134614268@qq.com
+certbot run      --nginx -d ggok.top      --agree-tos  --email 1134614268@qq.com
 certbot run      --nginx -d test.ggok.top --agree-tos  --email 1134614268@qq.com --preferred-challenges dns-01
-# 自动续签
+certbot run      --nginx -d ggok.top       --agree-tos  --email 1134614268@qq.com \
+ -d renren.ggok.top  -d worker.ggok.top  -d test.ggok.top  -d root.ggok.top \
+ -d tree.ggok.top -d file.ggok.top
+
+# 自动续期证书
 echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
 
-# 泛域名, 提示
+# 泛域名
+# 自动化 需要安装certbot 支持的dns 服务商插件,# yum install certbot-dns-<PLUGIN>;  或者通过dns API,下载第三方脚本完成验证
 certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com
 certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns-01
 certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http-01
-certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --server https://acme-v02.api.letsencrypt.org/directory
-
-certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns-01
+# 手动: preferred-challenges= dsn: 设置dns; dsn(preferred-challenges): ??
 certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http-01
-
-## 测试
-rm -rf /var/log/letsencrypt
-
-cat /etc/nginx/nginx.http.conf > /etc/nginx/nginx.conf &&  nginx -s reload
-rm -rf /etc/letsencrypt
-certbot --nginx -d *.ggok.top  --agree-tos --email 1134614268@qq.com
+# http 手动设置, 未验证
+#server {
+#    rewrite ^(/.well-known/acme-challenge/.*) $1 break; # managed by Certbot
+#    listen   80;
+#    server_name ggok.top;
+#    location / {
+#        root   /usr/share/nginx/html;
+#        index  index.html index.htm;
+#    }
+#    location = /.well-known/acme-challenge/vlYh97uXgTsWuzwlSQ-V_g6Z7cjHzTkmfvl8vqSUW-c{
+#      default_type text/plain;
+#      return 200 vlYh97uXgTsWuzwlSQ-V_g6Z7cjHzTkmfvl8vqSUW-c.1E1aVlRfrEI8KuqhiIkt49CJI_mQnd1C-QCfd0Cl3vk;
+#      }
+#}
+#
 
 certbot [子命令] [选项] [-d 域名] [-d 域名] ...
 # 子命令: certonly 获取证书; run 获取证书,安装到你的 web 服务器; renew 更新已经获取但快过期的所有证书
