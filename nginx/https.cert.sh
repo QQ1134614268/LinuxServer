@@ -1,50 +1,27 @@
 #参考: https://certbot.eff.org/instructions?ws=nginx&os=centosrhel7&tab=wildcard
 yum install certbot -y
+#certbot [子命令] [选项] [-d 域名] [-d 域名] ...
+# 子命令: certonly 获取证书; run 获取证书,安装到你的 web 服务器; renew 更新已经获取但快过期的所有证书
+# 验证方式; manual方式:使用交互式或脚本钩子的方式获取证书(设置dns); 验证插件(nginx|apache|webroot: ??); standalone: certbot作为web服务器,占用8端口。
+# 安装, 把生成ssl证书添加到web服务器上(eg:修改nginx配置文件)
+# preferred-challenges: 
 
-# yum install  python2-certbot-nginx -y
-certbot certonly --nginx -d test.ggok.top --agree-tos  --email 1134614268@qq.com
-certbot run      --nginx -d ggok.top      --agree-tos  --email 1134614268@qq.com
-certbot run      --nginx -d test.ggok.top --agree-tos  --email 1134614268@qq.com --preferred-challenges dns-01
-certbot run      --nginx -d ggok.top       --agree-tos  --email 1134614268@qq.com \
- -d renren.ggok.top  -d worker.ggok.top  -d test.ggok.top  -d root.ggok.top \
- -d tree.ggok.top -d file.ggok.top
+#1.1 使用交互式或脚本钩子的方式获取证书; preferred-challenges= dsn: 设置dns; dsn(preferred-challenges): ??
+certbot certonly # 获取证书, 需要输入域名, 确认协议,邮箱等; 可自动选择插件,日志输出: Plugins selected
+certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com
+certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns
+#1.2 使用插件 # yum install  python2-certbot-nginx -y
+certbot certonly --nginx -d ggok.top --agree-tos --email 1134614268@qq.com # 通过nginx验证, 不会修改nginx
+certbot run --nginx -d ggok.top --agree-tos --email 1134614268@qq.com -d test.ggok.top # 通过nginx验证,修改nginx; -d 多个域名
 
 # 自动续期证书
 echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
 
-# 泛域名
-# 自动化 需要安装certbot 支持的dns 服务商插件,# yum install certbot-dns-<PLUGIN>;  或者通过dns API,下载第三方脚本完成验证
-certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com
-certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns-01
-certbot run      --nginx -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http-01
-# 手动: preferred-challenges= dsn: 设置dns; dsn(preferred-challenges): ??
-certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http-01
-# http 手动设置, 未验证
-#server {
-#    rewrite ^(/.well-known/acme-challenge/.*) $1 break; # managed by Certbot
-#    listen   80;
-#    server_name ggok.top;
-#    location / {
-#        root   /usr/share/nginx/html;
-#        index  index.html index.htm;
-#    }
-#    location = /.well-known/acme-challenge/vlYh97uXgTsWuzwlSQ-V_g6Z7cjHzTkmfvl8vqSUW-c{
-#      default_type text/plain;
-#      return 200 vlYh97uXgTsWuzwlSQ-V_g6Z7cjHzTkmfvl8vqSUW-c.1E1aVlRfrEI8KuqhiIkt49CJI_mQnd1C-QCfd0Cl3vk;
-#      }
-#}
-#
+# 泛域名 需要安装certbot 支持的dns 服务商插件,# yum install certbot-dns-<PLUGIN>;  或者通过dns API,下载第三方脚本,插入hook完成验证
+certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com #默认 --preferred-challenges dns
+certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http # 提示 需要dns
+certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns # 提示 验证插件不支持 挑战
 
-certbot [子命令] [选项] [-d 域名] [-d 域名] ...
-# 子命令: certonly 获取证书; run 获取证书,安装到你的 web 服务器; renew 更新已经获取但快过期的所有证书
-#1.3 manual方式       使用交互式或脚本钩子的方式获取证书
-#1.1 standalone, 没有搭建服务器的情况，因为默认采用80端口，如果有其他程序占用了，如nginx，需要先关闭。
-#1.2 nginx|apache|webroot
-
-#其他示例:
-certbot certonly --manual -d test.ggok.top
-certbot certonly --manual -d test.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory
-certbot certonly --standalone -d www.domain.com
 # 泛域名
 certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com  --preferred-challenges dns
 #-d:  为那些主机申请证书,如果是通配符,输入 *.xxxx.com
@@ -97,7 +74,7 @@ Certbot工具用于获取和安装 HTTPS/TLS/SSL 证书。默认情况下，Cert
                         参数。当客户端发现参数缺失时会给出相应的说明。(默认: False)
   --force-interactive   无论Certbot是否以命令行的方式运行，强制交互式运行。当前参数不能
                         用于renew子命令。(默认: False)
-  -d 域名列表, --domains 域名列表, --domain 域名列表
+ -d 域名列表, --domains 域名列表, --domain 域名列表
                         指定域名列表。如果有多个域名，可以多次使用-d参数，也可以在-d参数后
                         使用逗号分隔的域名列表。(默认: 询问)
   --cert-name 证书名称   指定证书名称。每次Certbot运行只使用一个证书名称。可以使用命令
