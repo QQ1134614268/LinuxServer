@@ -12,12 +12,12 @@ certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com
 certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns
 #1.2 使用插件 # yum install  python2-certbot-nginx -y
 certbot certonly --nginx -d ggok.top --agree-tos --email 1134614268@qq.com # 通过nginx验证, 不会修改nginx
-certbot run --nginx -d ggok.top --agree-tos --email 1134614268@qq.com -d test.ggok.top # 通过nginx验证,修改nginx; -d 多个域名
+certbot run      --nginx -d ggok.top -d test.ggok.top --agree-tos --email 1134614268@qq.com # 通过nginx验证,修改nginx; -d 多个域名
 
 # 自动续期证书
 echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
 
-# 泛域名 需要安装certbot 支持的dns 服务商插件,# yum install certbot-dns-<PLUGIN>;  或者通过dns API,下载第三方脚本,插入hook完成验证
+# 泛域名,泛域名仅支持dns?? 需要安装certbot 支持的dns 服务商插件,# yum install certbot-dns-<PLUGIN>;  或者通过dns API,下载第三方脚本,插入hook完成验证
 certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com #默认 --preferred-challenges dns
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http # 提示 需要dns
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns # 提示 验证插件不支持 挑战
