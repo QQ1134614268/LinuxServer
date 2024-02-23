@@ -18,7 +18,8 @@ certbot run      --nginx -d ggok.top -d test.ggok.top --agree-tos --email 113461
 echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
 
 # 泛域名,泛域名仅支持dns?? 需要安装certbot 支持的dns 服务商插件,# yum install certbot-dns-<PLUGIN>;  或者通过dns API,下载第三方脚本,插入hook完成验证
-certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com #默认 --preferred-challenges dns
+certbot certonly --manual -d ggok.top -d *.ggok.top --agree-tos --email 1134614268@qq.com # 默认 --preferred-challenges dns
+certbot certonly -a manual -i nginx -d ggok.top -d *.ggok.top --agree-tos --email 1134614268@qq.com # 验证手动,安装到nginx
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http # 提示 需要dns
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns # 提示 验证插件不支持 挑战
 
