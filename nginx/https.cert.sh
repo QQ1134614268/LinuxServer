@@ -11,8 +11,8 @@ certbot certonly # 获取证书, 需要输入域名, 确认协议,邮箱等; 可
 certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com
 certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns
 #1.2 使用插件 # yum install  python2-certbot-nginx -y
-certbot certonly --nginx -d ggok.top --agree-tos --email 1134614268@qq.com # 通过nginx验证, 不会修改nginx
 certbot run      --nginx -d ggok.top -d test.ggok.top --agree-tos --email 1134614268@qq.com # 通过nginx验证,修改nginx; -d 多个域名
+certbot run      --nginx  --agree-tos --email 1134614268@qq.com # 没有-d, 选择nginx上配置域名
 
 # 自动续期证书
 echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
