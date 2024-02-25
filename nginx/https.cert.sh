@@ -22,12 +22,8 @@ certbot certonly --manual -d ggok.top -d *.ggok.top --agree-tos --email 11346142
 certbot certonly -a manual -i nginx -d ggok.top -d *.ggok.top --agree-tos --email 1134614268@qq.com # 验证手动,安装到nginx
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http # 提示 需要dns
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns # 提示 验证插件不支持 挑战
-
-# 泛域名
-certbot certonly --manual -d *.ggok.top --agree-tos --email 1134614268@qq.com  --preferred-challenges dns
 #-d:  为那些主机申请证书,如果是通配符,输入 *.xxxx.com
-#--preferred-challenges:  使用 DNS 方式校验域名所有权
-#--server: Let’s Encrypt ACME v2 版本使用的服务器不同于 v1 版本,需要显示指定
+#--preferred-challenges: 指定验证域名所有权防范
 #--agree-tos: 默认同意 Let’s Encrypt 的一些 agreements,不加这个参数在命令执行过程中还是会问用户是否同意；
 #--email: 用来获取一些 Let’s Encrypt 的通知,比如证书过期之类；
 
