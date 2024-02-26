@@ -4,7 +4,7 @@ yum install certbot -y
 # 子命令: certonly 获取证书; run 获取证书,安装到你的 web 服务器; renew 更新已经获取但快过期的所有证书
 # 验证方式; manual方式:使用交互式或脚本钩子的方式获取证书(设置dns); 验证插件(nginx|apache|webroot: ??); standalone: certbot作为web服务器,占用8端口。
 # 安装, 把生成ssl证书添加到web服务器上(eg:修改nginx配置文件)
-# preferred-challenges: 挑战类型 也就是验证方法，来证明您对所请求的域名的所有权
+# preferred-challenges: 挑战类型 也就是验证方法，验证域名的所有权
 
 #1.1 使用交互式或脚本钩子的方式获取证书; preferred-challenges= dsn: 设置dns; dsn(preferred-challenges): ??
 certbot certonly # 获取证书, 需要输入域名, 确认协议,邮箱等; 可自动选择插件,日志输出: Plugins selected
