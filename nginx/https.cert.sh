@@ -12,7 +12,7 @@ certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com
 certbot certonly --manual -d ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns
 #1.2 使用插件 # yum install  python2-certbot-nginx -y
 certbot run      --nginx -d ggok.top -d test.ggok.top --agree-tos --email 1134614268@qq.com # 通过nginx验证,修改nginx; -d 多个域名
-certbot run      --nginx  --agree-tos --email 1134614268@qq.com # 没有-d, 选择nginx上配置域名
+certbot run      --nginx --agree-tos --email 1134614268@qq.com # 没有-d, 选择nginx上配置域名
 
 # 自动续期证书
 echo '0 0 1 * * certbot renew --renew-hook "systemctl reload nginx"'>>/var/spool/cron/root && systemctl reload crond
@@ -22,6 +22,7 @@ certbot certonly --manual -d ggok.top -d *.ggok.top --agree-tos --email 11346142
 certbot certonly -a manual -i nginx -d ggok.top -d *.ggok.top --agree-tos --email 1134614268@qq.com # 验证手动,安装到nginx
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges http # 提示 需要dns
 certbot certonly --nginx  -d *.ggok.top --agree-tos --email 1134614268@qq.com --preferred-challenges dns # 提示 验证插件不支持 挑战
+# manual 手动,需要输入域名, 确认协议,邮箱等; 不支持自动化续订
 #-d:  为那些主机申请证书,如果是通配符,输入 *.xxxx.com
 #--preferred-challenges: 指定验证域名所有权防范
 #--agree-tos: 默认同意 Let’s Encrypt 的一些 agreements,不加这个参数在命令执行过程中还是会问用户是否同意；
@@ -71,7 +72,7 @@ Certbot工具用于获取和安装 HTTPS/TLS/SSL 证书。默认情况下，Cert
                         参数。当客户端发现参数缺失时会给出相应的说明。(默认: False)
   --force-interactive   无论Certbot是否以命令行的方式运行，强制交互式运行。当前参数不能
                         用于renew子命令。(默认: False)
- -d 域名列表, --domains 域名列表, --domain 域名列表
+  -d 域名列表, --domains 域名列表, --domain 域名列表
                         指定域名列表。如果有多个域名，可以多次使用-d参数，也可以在-d参数后
                         使用逗号分隔的域名列表。(默认: 询问)
   --cert-name 证书名称   指定证书名称。每次Certbot运行只使用一个证书名称。可以使用命令
