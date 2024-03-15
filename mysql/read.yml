@@ -1,0 +1,50 @@
+分组:
+    group_concat
+    select a,b from t group by a,b
+    select字段基本跟在group by 后
+    分组 聚合 having  分组后having再一次筛选
+链接:
+    union all
+    内外链接  自然链接 natual join X
+视图: 权限 增删改  数据的增删改 视图中的数据不直接来自基表,就不能修改
+事务:
+    加锁: 线程/事务/event/lockId;
+    排查锁来源: 数据-lockId-> event -> 事务->线程
+
+    死锁 会等待; 等待的不一定死锁; 
+    死锁-> 阻塞的线程/事务/eventId/lockId;
+
+    死锁条件:
+    解死锁条件:
+
+    锁超时 事务超时     innodb_lock_wait_timeout
+    名词: mvcc acid
+    隔离级别: 脏读, 幻读, 可重复读 读未提交, 读已提交
+    特点:
+        多个语句一起执行
+        update 某条数据, 给某个数据上锁;
+        多个update 加上多个锁;
+        累比 java锁, 锁住多个对象
+        分析锁
+        update where 从 符合条件的 给该数据 加锁, 并且被其他 快速看到, 索引, 主键, 唯一建
+    锁:
+        表锁
+        行锁
+        间隙锁: 表中不存在的数据; eg 插入
+
+        死锁: 相互等待; 数据被循环等待原因
+
+        分布式锁: todo
+    # todo 结构, 关键点;
+    # 事务:
+    #    一句sql是事物, 多句使用 start transtion;
+    #        锁id
+    # 开启事务 BEGIN; start TRANSACTION; for update??
+    # 结束事务: COMMIT; ROLLBACK;
+
+执行过程:
+    explain select * from user;
+    sql优化 日志 分析 缓存 profiles
+其他:
+    主从集群
+    帮助文档,help

@@ -29,8 +29,12 @@ Doris 的数据模型主要分为3类:
 
     - Bitmap:
         CREATE INDEX [IF NOT EXISTS] index_name ON table1 (siteid) USING BITMAP COMMENT 'balabala';
-        SHOW INDEX FROM example_db.table_name;
-        DROP INDEX [IF EXISTS] index_name ON [db_name.]table_name;
-导入
-导出
-数据更新,删除
+    - 查看索引: SHOW INDEX FROM example_db.table_name;
+    - 删除索引: DROP INDEX [IF EXISTS] index_name ON [db_name.]table_name;
+    - 修改索引: ALTER table `user_t`  ADD INDEX idx_id(id) USING inverted properties("parser"= "english") COMMENT 'index on id';
+
+数据更新,删除:
+    INSERT INTO `user_t` (id,name) VALUES (1, "tom");
+    UPDATE `user_t` SET `ship_name`='0'  WHERE `id`='1';
+    DELETE FROM user_t PARTITION p20230505 WHERE id='1'
+#导入 导出

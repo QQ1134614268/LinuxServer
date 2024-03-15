@@ -11,6 +11,7 @@ set global general_log = ON;
 set global general_log_file = '/usr/local/mysql/data/general_log_file.log';
 
 -- # 慢日志查询
+select @@global.long_query_time, @@global.log_output, @@session.long_query_time, @@session.log_output;
 SHOW VARIABLES LIKE '%long_query_time%'; # 慢查询 超时时间
 SHOW VARIABLES LIKE '%slow_query_log%'; # 慢查询 是否开启记录
 SHOW VARIABLES LIKE '%slow_query_log_file%'; # 慢查询日志的 文件路径
@@ -35,5 +36,5 @@ select event_time, command_type, CAST(argument as char) from mysql.general_log O
 
 SHOW VARIABLES LIKE '%log_error%';
 
-# 删除日志
+# mysqladmin -uroot -p flush-logs # 删除日志
 
