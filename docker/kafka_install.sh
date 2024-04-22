@@ -16,14 +16,14 @@ docker run -d --name kafka -p 9092:9092 -p 9093:9093 \
 
 #kafka-web可视化工具
 docker stop kafka-ui && docker rm kafka-ui
-docker run -p 8080 \
-    --name kafka-ui \
-    -p 8092:8080 \
+docker run -d --name kafka-ui \
+    -p 8080:8080 \
+    -p 8092:8092 \
     -e KAFKA_CLUSTERS_0_NAME=kafka9092 \
     -e KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=ggok.top:9092 \
     -e TZ=Asia/Shanghai \
     -e LANG=C.UTF-8 \
-    -d provectuslabs/kafka-ui:latest
+    provectuslabs/kafka-ui:latest
 docker logs -f kafka-ui
 
 #账号
