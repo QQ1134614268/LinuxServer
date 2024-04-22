@@ -19,8 +19,10 @@ docker stop kafka-ui && docker rm kafka-ui
 docker run -d --name kafka-ui \
     -p 8080:8080 \
     -p 8092:8092 \
-    -e KAFKA_CLUSTERS_0_NAME=kafka9092 \
+    -e KAFKA_CLUSTERS_0_NAME=kafka001 \
     -e KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=ggok.top:9092 \
+    -e KAFKA_CLUSTERS_1_NAME=kafka002 \
+    -e KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS=ggok.top:9092 \
     -e TZ=Asia/Shanghai \
     -e LANG=C.UTF-8 \
     provectuslabs/kafka-ui:latest
