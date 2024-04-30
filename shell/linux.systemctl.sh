@@ -3,6 +3,9 @@ systemctl start 服务名
 systemctl stop 服务名
 systemctl restart 服务名
 
+# 服务状态
+systemctl status 服务名
+
 #设置服务开机自启
 systemctl enable 服务名
 #禁止服务开机自启
