@@ -5,9 +5,10 @@ yum install -y docker-ce
 
 echo '{
   "registry-mirrors": [
-    "https://dockerhub.azk8s.cn",
-    "https://reg-mirror.qiniu.com",
-    "https://registry.docker-cn.com"
+    "https://registry.docker-cn.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "http://hub-mirror.c.163.com",
+    "https://cr.console.aliyun.com/"
   ]
 }' >  /etc/docker/daemon.json
 
