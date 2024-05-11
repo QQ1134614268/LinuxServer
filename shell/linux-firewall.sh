@@ -7,7 +7,7 @@ firewall-cmd --reload # 重启生效
 firewall-cmd --permanent --zone=public --add-port=3306/tcp
 firewall-cmd --permanent --zone=public --add-port=8000-10000/tcp
 #移除
-firewall-cmd --zone=public --remove-port=80/tcp --permanent
+firewall-cmd --permanent --zone=public --remove-port=80/tcp
 # 	–zone #作用域
 # 	–add-port=80/tcp #添加端口，格式为：端口/通讯协议
 # 	–permanent #永久生效，没有此参数重启后失效
