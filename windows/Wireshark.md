@@ -1,7 +1,14 @@
 ## Wireshark
+<pre>
+wireshark:
+  localhost: 捕获 loopback
+  卡死:
+    - 取消 编辑/首选项/Protocols/TLS 选项
+    - 取消 接口混杂模式
+</pre>
 
-1. 捕获过滤器(类似tcpdump语法)
-   host 127.0.0.1
+## 捕获过滤器(语法类似tcpdump)
+1. host 127.0.0.1
 
 ## 显示过滤器
 
