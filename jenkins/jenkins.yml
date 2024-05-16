@@ -17,7 +17,10 @@ java:
 maven:
     url: https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
     命令:
-        tar -zxvf apache-maven-3.6.3-bin.tar.gz
+        tar -zxvf apache-maven-3.6.3-bin.tar.gz -C /root/dev
+    方法一:
+        ln -s /root/dev/apache-maven-3.9.6/bin/mvn  /usr/bin/mvn
+    方法二:
         MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1 # vi /etc/profile
         export PATH=${MAVEN_HOME}/bin:${PATH}
         source /etc/profile
