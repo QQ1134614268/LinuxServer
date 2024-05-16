@@ -1,0 +1,33 @@
+jenkins:
+    url: https://mirrors.jenkins.io/war-stable/
+    配置:
+        插件国内仓库: https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/
+    命令:
+        nohup java -jar jenkins.war --httpPort=11080 &
+java:
+    url: https://download.oracle.com/otn/java/jdk/8u411-b09/43d62d619be4e416215729597d70b8ac/jdk-8u411-linux-x64.tar.gz
+    命令:
+        tar -xvfz jdk-8u411-linux-x64.tar.gz
+    配置:
+        编辑 /etc/profile:
+            export JAVA_HOME=/usr/local/jdk1.8.0_212
+            export PATH=$JAVA_HOME/bin:$PATH
+            export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+        配置生效: source /etc/profile
+maven:
+    url: https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+    命令:
+        tar -zxvf apache-maven-3.6.3-bin.tar.gz
+        MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1 # vi /etc/profile
+        export PATH=${MAVEN_HOME}/bin:${PATH}
+        source /etc/profile
+        mvn -version
+    配置:
+        url: http://maven.aliyun.com/nexus/content/groups/public/
+        jar: localRepository /mavenJarPath
+Node:
+    url: https://registry.npmmirror.com/-/binary/node/v14.5.0/node-v14.5.0-linux-x64.tar.gz
+    命令:
+        tar -xvf node-v14.5.0-linux-x64.tar.gz
+        ln -s /usr/local/node/bin/node /usr/bin/node  # 将node源文件映射到usr/bin下的node文件
+        ln -s /usr/local/node/bin/npm /usr/bin/npm

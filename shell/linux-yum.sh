@@ -1,5 +1,6 @@
 # 查找包 指定版本
-yum search all nginx
+yum search all java-1.8 # 一般用于搜索某个软件名称或者关键字
+yum list -y java* # 列出yum管理下的软件名称和版本
 yum list --showduplicates kubelet
 # 安装
 yum install -y xxx
