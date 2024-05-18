@@ -1,36 +1,37 @@
-jenkins:
-    url: https://mirrors.jenkins.io/war-stable/
-    配置:
-        插件国内仓库: https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/
-    命令:
-        nohup java -jar jenkins.war --httpPort=11080 &
 java:
-    url: https://download.oracle.com/otn/java/jdk/8u411-b09/43d62d619be4e416215729597d70b8ac/jdk-8u411-linux-x64.tar.gz
-    命令:
-        tar -xvfz jdk-8u411-linux-x64.tar.gz
-    配置:
-        编辑 /etc/profile:
-            export JAVA_HOME=/usr/local/jdk1.8.0_212
-            export PATH=$JAVA_HOME/bin:$PATH
-            export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-        配置生效: source /etc/profile
-maven:
-    url: https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
-    命令:
-        tar -zxvf apache-maven-3.6.3-bin.tar.gz -C /root/dev
-    方法一:
-        ln -s /root/dev/apache-maven-3.9.6/bin/mvn  /usr/bin/mvn
-    方法二:
-        MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1 # vi /etc/profile
-        export PATH=${MAVEN_HOME}/bin:${PATH}
-        source /etc/profile
-        mvn -version
-    配置:
-        url: http://maven.aliyun.com/nexus/content/groups/public/
-        jar: localRepository /mavenJarPath
+    下载url: https://download.oracle.com/otn/java/jdk/8u411-b09/43d62d619be4e416215729597d70b8ac/jdk-8u411-linux-x64.tar.gz
+    解压: tar -xvfz jdk-8u411-linux-x64.tar.gz -C /usr/local
+    环境变量配置:
+        /etc/profile:
+            文件末尾追加:
+                export JAVA_HOME=/usr/local/jdk1.8.0_212
+                export PATH=$JAVA_HOME/bin:$PATH
+                export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+            配置生效: source /etc/profile
 Node:
-    url: https://registry.npmmirror.com/-/binary/node/v14.5.0/node-v14.5.0-linux-x64.tar.gz
-    命令:
-        tar -xvf node-v14.5.0-linux-x64.tar.gz
+    下载url: https://registry.npmmirror.com/-/binary/node/v14.5.0/node-v14.5.0-linux-x64.tar.gz
+    解压: tar -xvf node-v14.5.0-linux-x64.tar.gz -C /usr/local
+    环境变量配置:
         ln -s /usr/local/node/bin/node /usr/bin/node  # 将node源文件映射到usr/bin下的node文件
         ln -s /usr/local/node/bin/npm /usr/bin/npm
+maven:
+    下载url: https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+    解压: tar -zxvf apache-maven-3.6.3-bin.tar.gz -C /usr/local
+    环境变量配置:
+        方法一: ln -s /usr/local/apache-maven-3.9.6/bin/mvn  /usr/bin/mvn # 快捷链接到/usr/bin目录下
+        方法二: # 类似windows Path变量
+            /etc/profile:
+                文件末尾追加:
+                    MAVEN_HOME=/usr/local/maven/apache-maven-3.6.1
+                    export PATH=${MAVEN_HOME}/bin:${PATH}
+            配置生效: source /etc/profile
+    验证: mvn -version
+    其他配置:
+        config/setting.xml:
+            maven下载到本地目录: localRepository /mavenJarPath #
+            maven仓库国内源: http://maven.aliyun.com/nexus/content/groups/public/
+jenkins:
+    下载url: https://mirrors.jenkins.io/war-stable/
+    启动命令: nohup java -jar jenkins.war --httpPort=11080 > jenkins.log 2>&1 &
+    其他配置:
+        插件国内仓库: https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/
