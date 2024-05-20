@@ -1,5 +1,5 @@
 调研/产品/需求/代码/测试/CICD
-# todo
+# todo 测试k8s
 # 测试k8s, docker-compose, Portainer,gitlab/CICD,Jenkins
 
 CI/CD:
