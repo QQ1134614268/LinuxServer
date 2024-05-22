@@ -1,4 +1,10 @@
 todo:
+    
+    nohup npm run serve &
+        检查系统日志：查看 /var/log/syslog、/var/log/messages 或其他相关日志文件，以查找与进程终止相关的任何系统消息。
+        使用 tail 命令：在后台运行 tail -f nohup.out（或相应的输出文件）以实时查看输出。
+
+
     医疗保险|手机推销电话
     
     docker: 服务器--软件-数据目录
