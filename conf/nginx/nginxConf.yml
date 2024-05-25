@@ -5,8 +5,7 @@
     外部: 经过浏览器, 返回301,302等
 
 
-1. server
-    server_name与host匹配优先级如下:
+1. server_name匹配优先级如下:
     1,完全匹配 =
     2,通配符在前的,如*.test.com
     3,在后的,如www.test.*
