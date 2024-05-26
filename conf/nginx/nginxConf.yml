@@ -13,7 +13,7 @@
     如果都不匹配
         1,优先选择listen配置项后有default或default_server的
         2,找到匹配listen端口的第一个server块
-2. listen
+2. listen:
     nginx里面的server模块可以配置相同的端口,然后这里会根据不同的域名,跳转到不同的server模块中
     server name 为虚拟服务器的识别路径;因此不同的域名会通过请求头中的HOST字段,匹配到特定的server块,转发到对应的应用服务器中去
 
@@ -70,7 +70,7 @@
             redirect是302,临时重定向,浏览器每次请求都请求原网址,搜索引擎不会记住新网址,而且还可能认为是作弊
             permanent是301,永久重定向,浏览器缓存会记住新网址,当请求原网址,会直接向新网址请求,搜索引擎也会记住新网址;这样就可以减少中间过程,目的只是保留之前被大家熟知的域名
 
-6. root, alias
+6. root, alias:
     http://example.com/foo/bar/hello.html
         root 	/home/hfy/;		/home/hfy/foo/bar/hello.html # 不替换匹配的路径
         alias	/home/hfy/;		/home/hfy/hello.html # 替换匹配的路径
@@ -78,11 +78,11 @@
     /bar 表示我们把bar当成一个文件,想要访问bar文件
     bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
 
-7. index 与 try_files, 不能同时使用
-   1. index
+7. index 与 try_files, 不能同时使用:
+   1. index:
       url以/结尾: 拼接index, 文件不存在 404;
       url不以/结尾: 不存在404; 但url实际为目录,拼接index, 文件不存在403
-   2. try_files
+   2. try_files:
       url以/结尾: 自动拼接/index.html, 文件不存在 404;
       url不以/结尾: 不存在404; 但url实际为目录,自动拼接/index.html, 文件不存在403
 
@@ -96,7 +96,7 @@
    redis缓存, 浏览器缓存
    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
    cdn,硬件,带宽
-9. return
+9. return:
     location | if 中: return 301 https://$host\$request_uri;
 10. stream: 代理流
     stream {
