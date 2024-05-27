@@ -8,10 +8,9 @@
     cat /proc/meminfo
 
 磁盘: # df du
-    du -sh
-    du -h --max-depth=1 /
-    du -sh ./* | sort -rn
-    du -sk ./* | sort -rn # -r 降序; -n选项，来告诉sort，“要以数值来排序”！
+    du -sh # -s 输出总数; -h 自动转换size单位
+    du --max-depth=1 -m dir1 # -m 以Mb显示
+    du -sk -m ./* | sort -rn # -r 降序; -n选项，来告诉sort，“要以数值来排序”！
 
 cpu: # lscpu top vmstat sar
     cat /proc/cpuinfo

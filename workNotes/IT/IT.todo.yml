@@ -1,0 +1,83 @@
+# todo 待解决问题:
+表结构设计(json嵌套与打平):
+    eg布控表:
+        case2: data:{type:1,ship:{}}; data:{type:2,car:{}}
+        case1: type:1,data:{ship:{}}; type:2, data:{car:{}}
+        case3: type:1,ship:{},car:{};
+    本质:
+        字段提出来,单独在表
+    结论:
+        json对比:
+            减少字段,
+            易于理解, 
+            符合 封装,领域
+            
+            json字段不固定
+            json字段不易查询, 
+            json字段产生 字符串sql,难以修改
+
+枚举表:
+    系统 自定义  -- 枚举 不再使用枚举Id关联, 使用value,code 或者, 翻译 字段使用
+    常量表
+    用户枚举
+    
+    增加枚举-- 运行枚举,同步数据库?? 还是代码中数据库查询???
+    场景:数字(不变化) 省市信息(很少变化), 百度api地址等
+
+推送数据:
+    - 最新  标识 记录上次访问的,类似kafka,携带上次请求记录
+    - 轨迹数据
+    - 实时数据
+
+分页查询,id查询, 条件单个查询:
+    结果: 使用单个查询
+    原因:
+        结构不一样, 参数返回值不一样
+        预期是一个,如果报错,就是参数有问题, 返回list同是
+        优化数据量, 预期一个
+进程自动退出:
+    现象: 某个服务器 nohup sleep 300 & ; exit; 后台进程 退出
+    分析:
+        -   关闭窗口: 发送sighup信号, & 屏蔽 sigint信号 ??
+        进程似乎接收: sigint信号
+        man kill
+        kill -l     # 信号列表
+        kill -9 pid # 发送信号
+        
+        nohup
+        setsid
+        diswn
+
+    strace跟踪进程信号(nohup sleep 300 &):
+        exit: 不发送信号; 没有用nohup指令, 后台也可以继续运行
+        直接关闭: 发送 SIGHUP; nohup 屏蔽SIGHUP, 可以继续运行;
+
+        异常服务器(systemd发出SIGTERM信号):
+            直接关闭, 收到SIGTERM; 结束 (bash 执行SIGCONT, SIGCHLD)
+            执行exit, 收到SIGTERM; 结束 (bash 执行SIG_BLOCK, SIGCHLD, SIGTTIN等)
+
+        # 屏蔽1-15信号(9不能捕捉), shell退出 还是中断进程了, killed
+tcp:
+    https://blog.csdn.net/qq_37674086/article/details/117754310
+    https://blog.csdn.net/qq_42986622/article/details/120989919
+    https://www.cnblogs.com/codingMozart/p/14210403.html
+    一：进程B Crash，但进程B所在的宿主机仍然正常工作。
+    二：进程B所在的宿主机宕机，又迅速重启。
+    三：进程B所在的宿主机宕机，短时间内没有重启，从A出发的所有报文都被网络丢弃。
+    四：B已经断网/宕机/进程Crash，但此时A主机也没有需要向B发送的数据。
+
+    http://t.zoukankan.com/alway6s-p-3717854.html
+
+    打开 KeepAlive 10分钟
+    ACK
+    Socket流这里还存在另外一个问题，socket流和文件流不太一样，文件流很容易知道文件末尾，到了文件末尾，直接就把流close掉就OK了。但是socket 流不一样，你无法知道它什么时候到末尾，所以连接一直保持着，流也一直保持阻塞状态。即使用了带参数的read方法，返回了有效数据，但其实流仍然没有关闭，处于阻塞状态。
+    针对这种请情况，一般就需要通信的双方约定数据传输的协议了。比如，约定消息的头部首先明确此次传输数据的大小。这样服务端就可以有目的性的读取数据。
+
+over:
+    关于日期边界:
+        - 查某一刻数据, 必须是两边闭合边界; [1,1] [1,1)
+        - 范围查询, 由前端补齐
+        - 所有时间,都带秒级数据
+    取消 assert 断言:
+        普通项目使用 junit4 asserttions
+        boot 项目 使用 spring asserttions

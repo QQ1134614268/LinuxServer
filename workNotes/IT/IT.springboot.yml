@@ -1,0 +1,45 @@
+SpringBoot配置文件:
+    优先级:
+        同优先级: 覆盖
+        高优先级: 直接返回
+    激活配置:
+        运行命令指定配置
+        配置文件中 spring.profiles.active
+    查找jar包(配置文件)(本地):
+        运行参数:
+            -classpath
+            -cp
+            -Djava.ext.dirs
+        运行参数eg:
+            java -cp foo.jar full.package.name.ClassName
+            java -classpath C:\java\MyClasse1;C:\java\MyClass2 com.yiibai.MainApp
+            java -Djava.ext.dirs=<多个jar包的目录> com.test.HelloWordMain
+        tomcat启动加载目录(https://www.cnblogs.com/zjdxr-up/p/17111093.html):
+            1. $java_home/lib 目录下的java核心api
+            2. $java_home/lib/ext 目录下的java扩展jar包
+            3. java -classpath/-Djava.class.path所指的目录下的类与jar包
+            4. $CATALINA_HOME/common目录下按照文件夹的顺序从上往下依次加载
+            5. $CATALINA_HOME/server目录下按照文件夹的顺序从上往下依次加载
+            6. $CATALINA_BASE/shared目录下按照文件夹的顺序从上往下依次加载
+            7. 项目路径/WEB-INF/classes下的class文件
+            8. 项目路径/WEB-INF/lib下的jar文件
+        SpringBoot启动加载目录(项目路径:运行时目录):
+            1. $java_home/lib 目录下的java核心api
+            2. $java_home/lib/ext 目录下的java扩展jar包
+            3. java -classpath/-Djava.class.path所指的目录下的类与jar包
+            
+            4. MANIFEST.MF中配置目录
+            
+            5. 项目路径下的config目录
+            6. 项目路径
+            7. classpath下的config目录
+            8. classpath目录
+    配置中心(nacos):
+        1. 本地查找bootstrap.yaml
+        2. 本地查找bootstrap-env.yaml
+        3. 查找 application.yaml
+        4. 查找 application-env.yaml
+    输出加载目录:
+        1. System.getProperty("java.class.path");
+        2. jdk8 可以通过     -XX:+TraceClassPaths    参数进行查看jar包的加载顺序
+        3. jdk11 可以通过    -Xlog:class+path=info   参数进行查看jar包的加载顺序

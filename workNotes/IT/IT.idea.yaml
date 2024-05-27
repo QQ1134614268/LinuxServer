@@ -1,0 +1,40 @@
+idea:
+  设置:
+      - 自动格式化(ctrl+s)
+      - 自动格式化 method chain, 注释, 关闭窗口
+      - 自动去除无效导入
+      - 自动下载文档
+      - git
+      - maven 配置 自动下载文档
+      - jdk
+      - 大小写提示
+      - 自动更新maven依赖
+      - 注释在文字前
+      - method chain
+      - yaml格式化 4个空格
+      - idea注释不顶行:
+          file/settings/editor/code style/java/codegenerator/line comment at first Colum
+          file/settings/editor/code style/wrapping and braces/comment at first colmun
+  idea 查看类:
+      ctrl+H 接口 显示实现, 类显示继承
+      ctrl+alt+u 继承,网图
+      
+      diagram 按钮
+  热部署策略(https://blog.csdn.net/qq_34381842/article/details/118339905):
+        1. spring-boot-devtools:
+            导入jar包 # devtools: class文件改变,自动重启
+            File/Settings/Compiler/Build Project automatically
+            ctrl + shift + alt + /,选择Registry,勾上 Compiler autoMake allow when app running
+        2. idea自动更新:
+            # 点击按钮， 我们每次修改代码后，可以点击该按钮，idea就会更新并加载class文件
+            Run Debug Configurations/Modify options/On 'Update' action: update classes and resource
+            # 切换窗口触发
+            Run Debug Configurations/Modify options/On frame deactivation: update classes and resource
+        3.  未验证:
+            Build,Execution,Deployment/Build tools/Reload project after changes in the build scripts/Any changes
+            Build,Execution,Deployment/Compiler/Build project automatically # 自动编译,当不在running/debuging
+            Advanced Setting/Allow auto-make to start even if developed application is currently running # 自动编译
+        4.  其他相关设置:
+            Build,Execution,Deployment/Debugger/HotSwap/Build project before reloading class
+            Build,Execution,Deployment/Debugger/HotSwap/Reload classes in background
+            Tools/action on save/Build project # 运行时不触发

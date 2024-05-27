@@ -1,0 +1,29 @@
+maven:
+    maven 插件:
+        maven-jar-plugin: 默认打包插件,打成普通的jar包, 可配置打包内容
+        maven-shade-plugin: 可执行jar包, fat jar
+        maven-assebly-plugiin: 支持自定义打包结构,定制依赖项等
+        spring-boot-maven-plugin: springboot专用插件 可定制
+
+        maven-dependency-plugin: 复制依赖的jar包到指定的文件夹里
+        maven-resources-plugin: 用于复制指定的文件
+        maven-surefire-plugin: 跳过单元测试等
+        maven-compiler-plugin: 早期编译插件??
+    maven:
+        下载jar包时:
+            - 生成 _remote.repositories
+            - 向 _remote.repositories 写入 仓库名称, 代表通过验证
+
+        删除 _remote.repositories:
+            - 不会自动生成, 触发下载时才会生成(首次下载)
+            - 不验证配置文件仓库名
+
+        存在 _remote.repositories 文件时: 验证 _remote.repositories 包含 配置文件仓库名
+
+        maven仓库名不存在_remote.repositories时(配置文件仓库更改),重新验证 jar包:
+            验证失败: idea提示异常 , 生成.lastUpdated 文件生成规律
+            验证通过: 并往_remote.repositories 写入仓库名称
+        maven爆红:
+            现象: 提示Failure to transfer xxx (全体爆红)
+            原因: maven 加载依赖, 会根据pom中的配置的版本查找依赖, 离线时不能下载
+            解决方案: 排除依赖(解决爆红), 添加依赖(指定版本,解决依赖); 或者配置dependencyManagement

@@ -1,0 +1,20 @@
+项目架构:
+  需求:
+    gitlab:
+      issue:
+        UI地址
+        接口/页面数量(代码量)
+        预期时间,截止日期, 优先级, 里程碑, 指派人
+        milestone 月度的
+  组织: pass
+  工具:
+    gitlab
+    idea
+    maven
+    java
+    nodejs
+  环境:
+    dev: pass
+    test: pass
+    pro: pass
+  UI: pass

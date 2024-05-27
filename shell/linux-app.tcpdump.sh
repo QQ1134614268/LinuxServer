@@ -1,30 +1,16 @@
 # 语法: tcpdump option [ expression ]
+#    option: -i -w 等
 #    expression(proto dir type):
-#      option: -i -w 等
 #      proto: 协议 ip tcp udp 等, 不支持应用协议 http sip
 #      dir: 方向 src dst
 #      type: 类型 host net port
 
-1. 根据ip/网段
-tcpdump -i enp0s20f0u1 -s 0 -w out.pcap src host 44.39.52.214
-2. 根据端口
-
-3. 根据协议
-tcpdump -i enp0s20f0u1 -s 0 -w out.pcap
-
-# 其他 过滤
-tcp.stream == 5
-tcp.options.sack
-tcp.analysis.out_of_order
-tcp.analysis.retransmission
-tcp.flags.reset == 1
-
-# 时间过滤
-frame.time >= "2023-01-00 10:10:10"
-
-# 长度过滤
-ip.len == 100 # 除了以太网头固定长度14，从IP Header到IP payload的总长度
-frame.len == 119 # 整个数据包长度，从ethernet层开始到最后
+#1. 根据ip/网段
+tcpdump -i any -s0 host 44.39.52.214
+#2. 根据端口
+tcpdump -i any -s0 port 80
+#3. 根据协议
+tcpdump -i any -s0 udp
 
 # demo
 tcpdump host 44.39.52.214 -i any -s 0 -vv -w 0612-1.pcap

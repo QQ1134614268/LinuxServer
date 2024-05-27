@@ -7,7 +7,7 @@ find / -name '*.png' # 如果不加'', 先解析 *.png 为 a.png b.png ... , b.p
 find / -name file_xxx | grep content_xxx
 
 # 管道 连用
-cp $(find / -type f -name '*.err.log') /outDir
+cp $(find / -type f -name '*.err.log') outDir
 find /var/log/redis/ -name '*' -exec grep -r "No" {} \;
 find /PATH -name "*.h" | xargs grep -in "helloworld"
 
@@ -16,6 +16,15 @@ find /PATH -name "*.h" | xargs grep -in "helloworld"
 # 复制移动: cp mv
 
 # 压缩: tar
+tar -cvf archive.tar file1 dir1 # 打包为tar -z 压缩为gz
+tar -xvf archive.tar -C outDir # 解压
+
+zip -r out.zip file1 dir1 #
+unzip -d outDir xxx.zip # -O GBK 指定编码,winRar打包,文件名会改为GBK编码; -o 覆盖; -n 不覆盖; -l 压缩文件内容列表; -q 安静,不输出信息
+
+# tail head
+history | tail -n 20 # head -n 20
+
 # 写入: >,>>
 # 系统: cd user su chown mkdir reboot
 cat /proc/version
