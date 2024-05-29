@@ -1,5 +1,48 @@
 todo:
-    
+    套餐流量
+    匠心:
+        UI:    参考网站 https://vr.justeasy.cn/micro/1184805.html
+        设计:
+            首页:
+                header/logo??:
+                    
+                图片
+                标签筛选 ?? 参考github 标签, 参考淘宝,京东, 多个品牌筛选, 二级分类? 风格, 用途, 自定义??, 搜索记录, 类似
+            图片详细展示:
+                参考站酷 ??
+                3D模型展示??
+                本地收藏
+                分享
+                点赞 评论
+                登录??
+            装修计划: ??
+            后台管理系统(若依风格?类似文件):
+                类别(标签)页:
+                    增 
+                    删 
+                    改
+                图片页:
+                    增删改
+                装修计划页:
+                    状态处理
+                登录页面
+        待优化:
+            UI 淘宝
+            小程序
+            面向文件编程, 练习框架
+            动效 -- 酷炫 有意思 温馨 ...
+            
+            logo 太细,不易区分
+        
+            vue 项目重写
+            模拟数据 
+            UI重构, UI优化
+            动态:
+                引入部分样式
+                @media container, container-md container-sm
+                row col
+                @media col-sm col-md offset-sm offset-md
+            
     nohup npm run serve &
         检查系统日志：查看 /var/log/syslog、/var/log/messages 或其他相关日志文件，以查找与进程终止相关的任何系统消息。
         使用 tail 命令：在后台运行 tail -f nohup.out（或相应的输出文件）以实时查看输出。

@@ -4,7 +4,7 @@
         需求串讲
     开发:
         其他:
-            开发工具: idea maven- git CiCd 面板, bug 需求
+            开发工具: idea maven- git CiCd 面板, bug 需求, 石墨, 钉钉, 视频会议
             框架: 缓存, mysql, redis,大数据-存储(es|mongo),消费(kafka),查询,中间件:kafka websocket等,性能-定时 线程池 缓存
             UI:
             仓库版本管理:
@@ -15,12 +15,6 @@
                         release分支
                         master分支
                         hotfix分支
-                    自定义:
-                        feature 分支
-                        dev分支
-                        master分支
-                        hotfix分支
-                版本记录: tag标签? master分支
         文档:
             使用:
             开发:
