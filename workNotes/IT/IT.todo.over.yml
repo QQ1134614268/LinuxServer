@@ -86,3 +86,12 @@ QA:
     1. 全局设置consumes 无效
     2. get 使用 urlencode ; post使用json
     3. swagger3 默认 json urlencode; swagger1 默认空
+升级openApi3:
+    import io.swagger.annotations.Api;                      import io.swagger.v3.oas.annotations.tags.Tag;
+    @Api(tags = "                                           @Tag(name = "
+    import io.swagger.annotations.ApiOperation;             import io.swagger.v3.oas.annotations.Operation;
+    @ApiOperation(value = "                                 @Operation(summary = "
+    import io.swagger.annotations.ApiModel;                 import io.swagger.v3.oas.annotations.media.Schema;
+    import io.swagger.annotations.ApiModelProperty;         import io.swagger.v3.oas.annotations.media.Schema;
+    @ApiModel(value = "                                     @Schema(name = "
+    @ApiModelProperty(value = "                             @Schema(name = "
