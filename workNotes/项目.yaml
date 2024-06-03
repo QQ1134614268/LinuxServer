@@ -2,7 +2,6 @@ todo:
     套餐流量
     ApiResult <> 优化 .vm 优化 vo目录
     TreeNode
-    required = true                 requiredMode = Schema.RequiredMode.REQUIRED
     匠心:
         UI:    参考网站 https://vr.justeasy.cn/micro/1184805.html
         设计:
@@ -19,7 +18,7 @@ todo:
                 点赞 评论
                 登录??
             装修计划: ??
-            后台管理系统(若依风格?类似文件):
+            后台管理系统(若依风格):
                 类别(标签)页:
                     增 
                     删 
@@ -32,7 +31,7 @@ todo:
         待优化:
             - UI 淘宝
             小程序
-            面向文件编程, 练习框架
+            面向文件编程, 练习框架  -- 取消, 不适合, 使用算子,mapreduce概念测试
             动效 -- 酷炫 有意思 温馨 ...
             
             logo 太细,不易区分
