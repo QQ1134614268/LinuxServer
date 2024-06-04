@@ -10,7 +10,6 @@ with t1(fusion_id, ship_name, start_time, code_value, end_time)
                         END  as end_time
              FROM entry_exit_port_record ep
              where fusion_id is not null
-               and fusion_id != ''
              ORDER BY fusion_id, cap_time)
 SELECT fusion_id,
        any_value(ship_name)                                                 as ship_name,
@@ -20,4 +19,4 @@ SELECT fusion_id,
 FROM t1
 WHERE end_time is NOT NULL
 GROUP BY fusion_id
-order by avg_time desc
+order by avg_time desc;
