@@ -1,14 +1,14 @@
 # 参考: https://blog.csdn.net/m0_51504545/article/details/123278429
-curl -Lkv http://example.com/api
+curl -Lkv https://example.com/api # 跟随重定向,忽略验证证书,打印详细
 
 curl -o myfile.zip http://example.com/file.zip
 curl -O http://example.com/file.zip
-curl -H "Content-Type: application/json" -X POST -d '{"abc":123,"bcd":"nihao"}' http://example.com/api
+curl -H "Content-Type: application/json" -X POST -d '{"id":1,"name":"tom"}' http://example.com/api
 curl -X DELETE http://example.com/resource
 curl -u username:password http://example.com/api
 curl -L http://example.com
+curl -v http://example.com
 curl -k https://example.com
-curl -v https://example.com
 
 -o 文件名: 将下载的文件保存为指定的文件名
 -O 将下载的文件保存为原始文件名 
