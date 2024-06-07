@@ -3,6 +3,7 @@ todo:
     ApiResult <> 优化 .vm 优化 vo目录
     TreeNode
     # todo 等级系统, 降级, 有序 无序, 映射0 1,
+    前端翻译-不好,缓存 数据不准确, 否则重复请求, 缓存枚举值?? styles
     匠心:
         UI:    参考网站 https://vr.justeasy.cn/micro/1184805.html
         设计:
