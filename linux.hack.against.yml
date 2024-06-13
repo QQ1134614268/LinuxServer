@@ -1,3 +1,9 @@
+杀毒:
+    yum install epel-release -y
+
+    yum install clamav -y && freshclam 
+    clamscan -r / # --exclude-dir=/sys/
+
 服务器被黑:
     重装系统
     迁移文件
