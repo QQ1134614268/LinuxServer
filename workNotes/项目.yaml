@@ -1,6 +1,14 @@
 todo:
+    容器化部署:
+        前端: 
+            接口使用绝对地址??
+            nginx 跨域, 一个地址? 80端口? 指定服务端口, 可以跨域? 总代理服务器?
+        后端: 缓存下载jar依赖
+    枚举:
+        // 省市县, 下拉菜单, 下拉级联菜单
+
+    测试接口,使用http上传文件 , httpclient4 与 5 ; MultipleFileEntity
     套餐流量 简历 
-    ApiResult <> 优化 .vm 优化 vo目录
     TreeNode
     # todo 等级系统, 降级, 有序 无序, 映射0 1,
     前端翻译:

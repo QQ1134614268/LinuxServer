@@ -13,12 +13,9 @@ docker exec -u root -it 容器id /bin/bash
 
 # 镜像
 docker images
-docker search --limit 5 --no-trunc \
+docker search --limit 10 --no-trunc \
 	--filter "stars=1" \
-	--filter "label=<标签名>:<标签值>" \
 	--filter "is-official=true" \
-	--filter "is-automated=true" \
-	--filter "name=<镜像名>" \
 	"alpine maven" # 或者关系
 docker pull provectuslabs/kafka-ui
 docker pull mirror.ccs.tencentyun.com/provectuslabs/kafka-ui
@@ -36,7 +33,7 @@ docker logs -f 镜像名|id # 查看镜像日志
 docker port 镜像名|id # 查看镜像端口
 docker top  镜像名|id # 查看系统信息
 docker info # 查看docker信息, 镜像源...
-docker history <镜像名> # 查看每个层的大小
+docker history 镜像名|id # 查看每个层的大小
 docker inspect 镜像名|id # 分析镜像 可以是container_name或者container_id
 docker inspect --format='{{.NetworkSettings.Networks.bridge.IPAddress}}' <container_name>      # format是go语言的template，还有其他的用法
 
@@ -52,3 +49,7 @@ docker import - test/ubuntu:v1
 # network
 docker network create -d bridge test-net
 docker run -d --name test1 --network test-net ubuntu /bin/bash
+
+# dockerfile多阶段, 查看,运行第一阶段容器
+#1. 将第一阶段作为一个单独的Dockerfile，并构建这个镜像。这样你就可以直接运行这个镜像来查看第一阶段的结果。
+#2. 在Dockerfile中，虽然你不能直接运行一个阶段，但你可以为每个阶段指定一个标签，并使用这些标签来保存中间镜像。然后，你可以基于这些中间镜像来运行容器。
