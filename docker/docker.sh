@@ -1,6 +1,6 @@
 # 启动容器 后台模式 -d 有时容器会直接退出 -itd不会, 进入start失败的容器?
 docker run -itd alpine:3.14 /bin/sh -c "while true; do echo hello world; sleep 1; done"
-# 端口映射
+# 端口映射; 0.0.0.0:3306:3306 只监听ipv4; :::3306:3306 只监听ipv6; 3306:3306/udp 只有udp端口
 docker run -d -p port:port 镜像名
 # 文件挂载 覆盖掉容器目录
 docker run -d -v /宿主机/目录:/容器目录 镜像名

@@ -95,3 +95,22 @@ QA:
     import io.swagger.annotations.ApiModelProperty;         import io.swagger.v3.oas.annotations.media.Schema;
     @ApiModel(value = "                                     @Schema(name = "
     @ApiModelProperty(value = "                             @Schema(name = "
+
+前端翻译:
+    -不好,缓存 数据不准确, 否则重复请求, 缓存枚举值??
+枚举表:
+    eg: 省市县, 下拉菜单, 下拉级联菜单, 百度api地址
+    表:
+      groupCode; // 标识下拉
+      parentId; // 标识级联
+      uniCode;//  value 的唯一值, 表级唯一
+      name;// 枚举的类别, 男女, 是否
+      value; // 类别的代表, 比如 是:1, 否:0; 用户创建就没有代表,使用id进行关联??
+
+关于日期边界:
+    - 查某一刻数据, 必须是两边闭合边界; [1,1] [1,1)
+    - 范围查询, 由前端补齐
+    - 所有时间,都带秒级数据
+取消 assert 断言:
+    普通项目使用 junit4 asserttions
+    boot 项目 使用 spring asserttions
