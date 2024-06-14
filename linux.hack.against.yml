@@ -1,8 +1,10 @@
 杀毒:
     yum install epel-release -y
-
     yum install clamav -y && freshclam 
-    clamscan -r / # --exclude-dir=/sys/
+    clamscan -ri --quiet --exclude-dir=/sys/ / # --exclude-dir 不扫描目录; -i 是只显示感染的文件名，不显示干净的文件
+    clamscan -ri --quiet --move=/home/bingduResult / # 移动
+    clamscan -ri --quiet --remove / # 清除
+    nohup clamscan -ri --quiet / 2>/dev/null > scan_result.txt & # 扫描结果
 
 服务器被黑:
     重装系统
