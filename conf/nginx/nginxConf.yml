@@ -1,23 +1,20 @@
 #参考: https://nginx.org/en/docs/
 
-1. 重定向: 
-    内部: 不经过浏览器等; 
+重定向:
+    内部: 不经过浏览器等;
     外部: 经过浏览器, 返回301,302等
-
-
-1. server_name匹配优先级如下:
+server_name匹配优先级如下:
     1,完全匹配 =
     2,通配符在前的,如*.test.com
     3,在后的,如www.test.*
     4,正则匹配,如~^\.www\.test\.com$
-    如果都不匹配
-        1,优先选择listen配置项后有default或default_server的
-        2,找到匹配listen端口的第一个server块
-2. listen:
+    5.优先选择listen配置项后有default或default_server的
+    6.找到匹配listen端口的第一个server块
+listen:
     nginx里面的server模块可以配置相同的端口,然后这里会根据不同的域名,跳转到不同的server模块中
     server name 为虚拟服务器的识别路径;因此不同的域名会通过请求头中的HOST字段,匹配到特定的server块,转发到对应的应用服务器中去
 
-3. location:
+location:
     以 = 开头,表示精确匹配;如只匹配根目录结尾的请求,后面不能带任何字符串;
     以 ^~ 开头,表示uri以某个常规字符串开头,不是正则匹配
     以 ~ 开头,表示区分大小写的正则匹配;
@@ -26,8 +23,8 @@
 
     (location =) > (location 完整路径) > (location ^~ 路径) > (location ~ ,~* 正则顺序) > (location 部分起始路径) > (/)
 
-4. proxy_pass :
-     http://localhost/proxy/abc.html:
+proxy_pass :
+    http://localhost/proxy/abc.html:
         /proxy 	http://127.0.0.1:20090 		http://127.0.0.1:20090/proxy/abc
         /proxy 	http://127.0.0.1:20090/ 	http://127.0.0.1:20090//abc
         /proxy 	http://127.0.0.1:20090/api 	http://127.0.0.1:20090/api//abc
@@ -36,78 +33,78 @@
         /proxy/ http://127.0.0.1:20090/ 	http://127.0.0.1:20090/abc
         /proxy/ http://127.0.0.1:20090/api 	http://127.0.0.1:20090/apiabc
         /proxy/ http://127.0.0.1:20090/api/ http://127.0.0.1:20090/api/abc
-
-     相对路径与绝对路径拼接, 类似 os.path.join("/api", "/proxy/", "abc.html")
-     location /ytq_visualization/proxy {
-        proxy_pass http://10_21_232_23_50001/proxy;	# 转发到 中的服务器中
+    相对路径与绝对路径的拼接: 类似 os.path.join("/api", "/proxy/", "abc.html")
+    eg:
+        location /ytq_visualization/proxy {
+        proxy_pass http://10_21_232_23_50001/proxy;    # 转发到 中的服务器中
         proxy_http_version 1.1;           # 默认http1.0, 不支持块传输,长连接等
         proxy_set_header Connection "";   # 默认 Connection close
         proxy_set_header Host $http_host; # 默认 upstream 代理名称
-        # proxy_cache my_cache;
-      }
-     upstream 10_21_232_23_50001 {
+      # proxy_cache my_cache;
+        }
+        upstream 10_21_232_23_50001 {
         server  10.21.232.23:50001;     # 代理服务器
         keepalive	32;                   # 长连接
         keepalive_timeout  65;
         keepalive_requests 1000;
         keepalive_time 1h;
-      }
+        }
 
-5. rewrite :
-    rewrite: rewrite跳转实现
-    rewrite 执行顺序
-    执行 server 块里面的 rewrite 指令;
-    执行 location 匹配;
-    执行选定的 location 中的 rewrite 指令;
+rewrite:
+    rewrite: 跳转实现
+    rewrite 执行顺序:
+        执行 server 块里面的 rewrite 指令;
+        执行 location 匹配;
+        执行选定的 location 中的 rewrite 指令;
 
     Nginx rewrite 的last,break,redirect,permanent有四种模式:
         last和break 都会跳转的rewrite的地址,区别是:
-        last跳转后,会重新发起请求再匹配一次location,而break则只进行跳转,不再重新请求;
-        当rewrite后的地址是一个直接可访问的地址时候,二者无区别
-        当rewrite后地址是本地地址,需要匹配location再次进行路由的时候,last会进行匹配,break则直接返回404
+            last跳转后,会重新发起请求再匹配一次location,而break则只进行跳转,不再重新请求;
+            当rewrite后的地址是一个直接可访问的地址时候,二者无区别
+            当rewrite后地址是本地地址,需要匹配location再次进行路由的时候,last会进行匹配,break则直接返回404
 
         redirect和permanent都是重定向,区别是:
             redirect是302,临时重定向,浏览器每次请求都请求原网址,搜索引擎不会记住新网址,而且还可能认为是作弊
             permanent是301,永久重定向,浏览器缓存会记住新网址,当请求原网址,会直接向新网址请求,搜索引擎也会记住新网址;这样就可以减少中间过程,目的只是保留之前被大家熟知的域名
 
-6. root, alias:
-    http://example.com/foo/bar/hello.html
+root, alias:
+    http://example.com/foo/bar/hello.html:
         root 	/home/hfy/;		/home/hfy/foo/bar/hello.html # 不替换匹配的路径
         alias	/home/hfy/;		/home/hfy/hello.html # 替换匹配的路径
-    末尾 '/'
-    /bar 表示我们把bar当成一个文件,想要访问bar文件
-    bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
+    末尾 '/':
+        /bar 表示我们把bar当成一个文件,想要访问bar文件
+        bar/ 表示我们把bar当成一个目录,想要访问bar目录下index指定的文件
 
-7. index 与 try_files, 不能同时使用:
-   1. index:
-      url以/结尾: 拼接index, 文件不存在 404;
-      url不以/结尾: 不存在404; 但url实际为目录,拼接index, 文件不存在403
-   2. try_files:
-      url以/结尾: 自动拼接/index.html, 文件不存在 404;
-      url不以/结尾: 不存在404; 但url实际为目录,自动拼接/index.html, 文件不存在403
+index 与 try_files, 不能同时使用:
+    1. index:
+        url以/结尾: 拼接index, 文件不存在 404;
+        url不以/结尾: 不存在404; 但url实际为目录,拼接index, 文件不存在403
+    2. try_files:
+        url以/结尾: 自动拼接/index.html, 文件不存在 404;
+        url不以/结尾: 不存在404; 但url实际为目录,自动拼接/index.html, 文件不存在403
+    结论:
+        根据try_files查找文件,所以 $uri是必须的;
+        index 指令无效;
+        拼接时不会自动添加 /, index.html 转htmlindex.html 不是html/index.html; 参考nginx err日志
 
-      根据try_files查找文件,所以 $uri是必须的; 
-      index 指令无效;
-      拼接时不会自动添加 /, index.html 转htmlindex.html 不是html/index.html; 参考nginx err日志
-
-8. nginx静态资源优化:
-   使用 gzip 压缩
-   合并文件
-   redis缓存, 浏览器缓存
-   nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
-   cdn,硬件,带宽
-9. return:
+nginx静态资源优化:
+    使用 gzip 压缩
+    合并文件
+    redis缓存, 浏览器缓存
+    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
+    cdn,硬件,带宽
+return:
     location | if 中: return 301 https://$host\$request_uri;
-10. stream: 代理流
+stream(代理流):
     stream {
-       upstream mysql {
-           hash $remote_addr consistent;
-           server 127.0.0.1:3306; # MySQL数据库集群 #server 192.168.1.111:3306;
-       }
-       server {
-           listen 13306;
-           proxy_connect_timeout 3s;
-           proxy_timeout 3s;
-           proxy_pass mysql; #通过mysql代理名称访问127.0.0.1:3306
-       }
+        upstream mysql {
+            hash $remote_addr consistent;
+            server 127.0.0.1:3306; # MySQL数据库集群 #server 192.168.1.111:3306;
+        }
+        server {
+            listen 13306;
+            proxy_connect_timeout 3s;
+            proxy_timeout 3s;
+            proxy_pass mysql; #通过mysql代理名称访问127.0.0.1:3306
+        }
     }
