@@ -2,9 +2,10 @@ SpringBoot配置文件:
     优先级:
         同优先级: 覆盖
         高优先级: 直接返回
-    激活配置:
-        运行命令指定配置
-        配置文件中 spring.profiles.active
+    boot 多环境配置:
+        pom 配置环境: 运行,时指定配置, 可以有默认配置, 支持动态选择打包配置文件
+        配置文件: 写死配置
+        配置文件加默认: ${active:dev} 默认dev, 可以指定-Dactive=pro;  #  -Dspring.profiles.active=pro 会导致激活多个配置(dev,pro)
     查找jar包(配置文件)(本地):
         运行参数:
             -classpath
