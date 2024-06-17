@@ -14,8 +14,8 @@ docker exec -u root -it 容器id /bin/bash
 # 镜像
 docker images
 docker search --limit 10 --no-trunc \
-	--filter "stars=1" \
-	--filter "is-official=true" \
+	-f stars=1 \
+	-f is-official=true \
 	"alpine maven" # 或者关系
 docker pull provectuslabs/kafka-ui
 docker pull mirror.ccs.tencentyun.com/provectuslabs/kafka-ui
