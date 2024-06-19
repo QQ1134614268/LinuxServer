@@ -4,7 +4,6 @@ todo:
     匠心??: 编辑页面, 淘宝优化, 手机页面适配
     左右联动 --匠心; 文件目录
     匠心:
-        参考网站UI: https://vr.justeasy.cn/micro/1184805.html
         设计:
             首页: 图片案例展示
             图片详细展示:
@@ -21,6 +20,7 @@ todo:
                 设计: 装修网站, 展示图片, 用户留言, 管理
                 价格: 10页面, 每个100元 -300元, 看设计
                 原型: https://jiangxin.ggok.top/Home
+                参考网站UI: https://vr.justeasy.cn/micro/1184805.html
                 加分项:
                     有类似作品, 非首次开发
                     手机, pc 小程序 一体, 类似 bootstrap 统一风格,
