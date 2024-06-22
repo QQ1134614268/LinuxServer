@@ -3,7 +3,13 @@
 # 索引 过滤后数据量大, 且查询字段不在索引上, 全表扫描;
 # 即: 查询字段命中索引,走索引; 索引过滤后小数据量, 走索引;
 DROP TABLE if EXISTS test.`user`;
-CREATE TABLE test.`test_index`(id INT PRIMARY KEY, name1 VARCHAR(60), name2 VARCHAR(60), createTime VARCHAR(60));
+CREATE TABLE test.`test_index`
+(
+    id         INT PRIMARY KEY,
+    name1      VARCHAR(60),
+    name2      VARCHAR(60),
+    createTime VARCHAR(60)
+);
 -- range索引; 查询字段命中索引;
 EXPLAIN SELECT id  FROM test.`test_index` WHERE createTime >='2020-10-10 10:00:00' AND createTime<='2020-10-10 11:00:00' ;
 EXPLAIN SELECT name2  FROM test.`test_index` WHERE createTime>='2020-10-10 10:00:00' AND createTime<='2020-10-10 11:00:00' ;
