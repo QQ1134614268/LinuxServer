@@ -60,8 +60,8 @@ if [[ $i <5 &&  $i <5 ]] ; then echo 1;fi
 for i in {1..5} ; do echo $i;done
 for i in $(seq 0 4) ; do echo $i;done
 for i in `seq 0 4` ; do echo $i;done
-for i in ((i=0;i<5;i++)) ; do echo $i;done
-
+for ((i=0;i<5;i++)) ; do echo $i;done
+a=(1 3 6) && for i in ${a[@]}; do echo $i; done
 # 异常直接退出
 set -e
 #测试语法 if while break return exit 异常
@@ -70,9 +70,9 @@ set -e
 
 # 函数
 function add() {
-
+  echo 1
 }
 
 sub(){
-
+  echo 1
 }

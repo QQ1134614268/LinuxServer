@@ -39,6 +39,7 @@ docker inspect --format='{{.NetworkSettings.Networks.bridge.IPAddress}}' <contai
 
 #运行dockerfile,构建镜像
 docker build -t 镜像名:tag -f dockerfile .
+docker build --target build -t my-app-build:latest . # 多阶段构建, 保存中间镜像
 docker commit 容器id 镜像名
 docker commit -a 'wg' -m 'world_mysql' 镜像名|id 新名:tag
 
