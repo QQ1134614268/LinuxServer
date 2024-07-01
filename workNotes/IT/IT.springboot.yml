@@ -44,3 +44,10 @@ SpringBoot配置文件:
         1. System.getProperty("java.class.path");
         2. jdk8 可以通过     -XX:+TraceClassPaths    参数进行查看jar包的加载顺序
         3. jdk11 可以通过    -Xlog:class+path=info   参数进行查看jar包的加载顺序
+    跨域5种:
+        @CrossOrigin 添加到Controller类或方法
+        WebMvcConfigurer
+        Filter/CorsFilter/response.setHeader
+        Interceptor/CorsInterceptor/response.setHeader
+        HttpServletResponse/response.setHeader
+        WebSecurityConfigurerAdapter/WebSecurityConfig/http.cors.configurationSource/CorsConfigurationSource
