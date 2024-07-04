@@ -1,0 +1,87 @@
+进程:
+    分类:
+        会话/进程组/进程:
+            会话(session): 进程有sid(sessionId)标识, 可包含多个进程组, sid 与 pid相同的是 会话领导进程(第一个进程)
+            程组id: 进程有进程组id标识,所有进程都属于某个进程组, 相同进程组id的进程为一组; 进程组id与pid相同的为领导进程
+
+            控制终端: 终端设备(伪终端); 一个会话最多一个; 一般我们都是通过网络ssh连接服务器,所以控制终端就是一个伪终端; tty查看当前的终端名。
+            控制进程: 会话领导进程
+            前台进程: 有控制终端的会话; 一个会话最多一个前台进程组
+            后台进程: 除了一个前台进程组, 会话中的其他进程组则为后台进程组。
+            作业(job): 会话中的每个进程组称为一个作业(job)
+        守护进程: 它独立于控制终端;运行在后台的一种特殊进程; 与控制终端无关,不随会话的退出而退出; 守护进程都是以超级用户启动的（UID为0）,没有控制终端（TTY为？）,TPGID(终端前台进程组)为-1
+        孤儿进程: 孤儿进程是因为父进程异常结束了，然后被1号进程init收养。
+        僵尸进程: 一个子进程退出,但是其父进程并没有调用子进程的wait()或waitpid()的情况下。这个子进程就是僵尸进程。杀死父进程可以直接回收僵尸进程。
+        #注意: 僵尸进程将会导致资源浪费，而孤儿进程则不会。
+    进程字段: PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    systemd进程: 守护进程一种, 系统启动第一个进程 pid=1 其他进程通过fork父进程产生
+    验证前后端: ps -ajxf  TPGID=-1 后台进程
+    eg场景: 登录服务器,后台运行sleep 100; tail -f 文件
+        xshell/pts0/后台进程
+
+进程信号: SIGHUP
+kill -1 PID: 这种就是当前进程向b进程发送了一个sighup信号
+
+xshell终端 伪终端: xshell客户端 与 伪终端进行连接,伪终端连接服务端shell进程; 伪终端(类似键盘,屏幕, 一般命名为pts/1, pts/2), 发送和接受数据
+xshell终端超时关闭: 伪终端还在运行,然后也会超时关闭
+xshell终端叉掉关闭: 发送信号
+终端关闭:
+    该信号被发送到session首进程以及作为作业(job)提交的进程（即用 & 符号提交的进程）
+    session首进程退出时，该信号被发送到该session中的前台进程组和后台进程组中的每一个进程。
+    若进程的退出，导致一个进程组变成了孤儿进程组，且新出现的孤儿进程组中有进程处于停止状态，则SIGHUP和SIGCONT信号会按顺序先后发送到新孤儿进程组中的每一个进程。
+终端关闭对应linux行为:
+    用户退出 session (正常退出、远程登录时的网络断开、sshd挂掉、手动叉掉 ssh 登陆窗口)
+    系统向该 session 发出SIGHUP信号
+    session 将SIGHUP信号发给所有子进程(包括前台进程和后台进程)。
+    子进程收到SIGHUP信号后，自动退出。
+
+cat /proc/{pid}/status:
+    SigQ: 待处理信号的个数
+    SigPnd: 屏蔽位,存储了该线程的待处理信号,等同于线程的PENDING信号.
+    SigBlk: 存放被阻塞的信号,等同于BLOCKED信号.
+    SigIgn: 存放被忽略的信号,等同于IGNORED信号.
+    SigCgt: 存放捕获的信号,等同于CAUGHT信号. 00000000280b2603 ==> 101000000010110010011000000011;右边的数字是位掩码。如果将其从十六进制转换为二进制，则每个1位代表捕获的信号，从1开始从右到左计数
+
+nohup: 使进程忽略SIGHUP信号; 实现方式- 系统/proc/{pid}/status 中记录忽略的信号, 系统就不会发该信号到进程
+nohup command & 失效: #https://blog.csdn.net/qq_34021712/article/details/115587702
+    原因: 程序运行时, 可以修改进程的忽略信号
+    解决办法:
+        exit: 手动执行退出终端; exit命令退出终端时不会向终端所属任务发SIGHUP信号，这是huponexit配置项控制的，默认是off，可以使用shopt命令查看
+        nohup ./MISS.GO.PayNotifyService & disown: disown可以将指定任务从"后台任务"列表(jobs命令的返回结果)之中移除。一个"后台任务"只要不在这个列表之中，session 就不会向它发出SIGHUP信号
+        setsid: setsid可以新建一个会话，调用setsid是有条件的, 即调用进程自己不能是进程组长，因此，调用setsid之前需要先fork，然后由产生的子进程调用setsid（这里我们不需要关心，我们使用ssh登录，在终端执行的每一条命令都是fock自bash进程）。
+        screen ./MISS.GO.PayNotifyService &: screen命令用于管理多个终端，它可以创建终端，让程序在里面运行。screen使用之前需要先执行yum install screen。
+proc:
+    cpuinfo: 包含CPU的详细信息，如型号、制造商、速度和核数等。
+    meminfo: 提供系统内存使用情况的详细信息，包括总内存、空闲内存、缓冲区和缓存的大小等。
+    uptime: 显示系统自上次启动以来的运行时间和空闲时间。
+    version: 显示当前运行的Linux内核版本和编译器版本的信息。
+    pid:
+        cmdline: 显示启动该进程的命令行参数。
+        environ: 显示进程的环境变量
+        fd: 包含指向进程打开的文件描述符的符号链接
+        status: 提供进程的状态信息，包括PID、PPID（父进程ID）、内存使用情况等。
+    devices: 显示系统中当前已注册的字符设备和块设备。
+    interrupts: 列出系统中断（interrupts）的使用情况和统计信息
+    ioports: 显示系统I/O端口的使用情况
+    pci: 显示系统中PCI总线和设备的信息（如果系统支持PCI）
+    mounts: 显示当前挂载的文件系统及其挂载点
+    partitions: 显示系统中所有分区的信息
+    filesystems: 列出系统中支持的文件系统类型
+执行脚本方式:
+    shell, sh, bash 执行
+    source 和 . 执行  当前环境生效
+    exec 执行 替换当前进程
+进程调试:
+    1.通过ps命令查看进程信号信息
+        ps ajx # 查看 sid,pgid,pid
+        ps -p pid -o pid,comm,sig,sigcatch,sigign
+    2.通过kill命令查看进程信号信息,
+        kill -l
+        kill -9 pidxxx # 发送信号
+    3.通过strace命令查看进程信号信息, 进程堆栈
+        strace -p pid -e signal
+        strace -e trace=signal -p 1359
+    4.通过signal命令查看进程信号信息
+        signal -l
+    # 查看进程
+    5. cat /proc/950285/status

@@ -51,3 +51,7 @@ SpringBoot配置文件:
         Interceptor/CorsInterceptor/response.setHeader
         HttpServletResponse/response.setHeader
         WebSecurityConfigurerAdapter/WebSecurityConfig/http.cors.configurationSource/CorsConfigurationSource
+    Scheduled:
+        默认: 单线程执行所有定时任务
+        配置taskScheduler: fixedRate 每隔N秒执行一次, 如果上次执行没有完毕,会等结束后立即开始.
+        async: 完全以fixedRate执行, 不考虑上次执行结果; 必须是Bean直接调用,触发代理类, 内部使用this不能触发async修饰的方法
