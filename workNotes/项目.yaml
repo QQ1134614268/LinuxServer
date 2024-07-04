@@ -1,8 +1,17 @@
 todo:
+    B@3Z6r&D8Yh9Rp
+    http://10.158.250.216
+    
+    springboot:
+        Scheduled: 单线程执行所有定时任务
+        配置taskScheduler: fixedRate 每隔N秒执行一次, 如果上次执行没有完毕,会等结束后立即开始.
+        async: 完全以fixedRate执行, 不考虑上次执行结果
+        
+    dorios docker| treeNode | date序列化 | 工具类
     套餐流量 简历(springBoot源码 面试题)  医疗保险
     发布 book1.0, 寻找伙伴
     匠心??: 编辑页面, 淘宝优化, 手机页面适配
-    左右联动 --匠心; 文件目录 kafka websocket进阶视频
+    左右联动 --匠心; 文件目录 kafka websocket进阶视频 cv pytorch
     适配中小屏:
         容器-div大小
         item 百分比大小

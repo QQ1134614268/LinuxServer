@@ -87,12 +87,6 @@ index 与 try_files, 不能同时使用:
         index 指令无效;
         拼接时不会自动添加 /, index.html 转htmlindex.html 不是html/index.html; 参考nginx err日志
 
-nginx静态资源优化:
-    使用 gzip 压缩
-    合并文件
-    redis缓存, 浏览器缓存
-    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
-    cdn,硬件,带宽
 return:
     location | if 中: return 301 https://$host\$request_uri;
 stream(代理流):
@@ -108,3 +102,17 @@ stream(代理流):
             proxy_pass mysql; #通过mysql代理名称访问127.0.0.1:3306
         }
     }
+
+路由转换:
+    return 301 http://www.example.com$request_uri;  
+    return 302 http://www.example.com$request_uri;  
+    rewrite ^/(.*)$ http://www.example.com/$1 permanent;  
+    rewrite ^/(.*)$ http://www.example.com/$1 redirect;
+    proxy_pass
+
+nginx静态资源优化:
+    使用 gzip 压缩
+    合并文件
+    redis缓存, 浏览器缓存
+    nginx参数:worker_processes worker_connections,send_file模式 tcp_nopush tcp_nodelay
+    cdn,硬件,带宽
