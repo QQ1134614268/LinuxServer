@@ -1,8 +1,5 @@
 todo:
-    B@3Z6r&D8Yh9Rp
-    http://10.158.250.216
-    
-    dorios docker| treeNode | date序列化 | 工具类
+    doris docker| treeNode | date序列化 | 工具类
     套餐流量 简历(springBoot源码 面试题)  医疗保险
     发布 book1.0, 寻找伙伴
     匠心??: 编辑页面, 淘宝优化, 手机页面适配
@@ -13,18 +10,6 @@ todo:
         内容布局
         
         UI样式
-    code低代码:
-        网页端 建表:
-            数据类型, 备注, 字段名, 校验正则, 
-            智能填充,引用填充
-            数据保存到库中
-        生成表: entity, service .controller, vue(save update 合并??)
-        上传组件(wrd-upload 为什么自定义?? 附带on-success, 测试自定义组件-avatr,包含样式??, 覆盖样式,传递样式??):
-            样式 大小 ... 
-            上传校验格式,
-            上传进度,
-            断点续传,
-            参考: https://blog.csdn.net/dh1021927867/article/details/111677335
     匠心:
         设计:
             首页: 图片案例展示
