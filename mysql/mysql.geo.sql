@@ -7,9 +7,9 @@ create table test_geo
     SHAPE geometry
 );
 INSERT INTO test_geo
-VALUES (1, 'A1', POINT(121.590347, 31.388094)),
-       (2, 'A2', ST_GeomFromText('POINT(121.366961 31.190049)'));
+VALUES (1, 'A1', POINT(100, 30)),
+       (2, 'A2', ST_GeomFromText('POINT(100.01, 31.01)'));
 
-SELECT st_distance_sphere(POINT(121.590347, 31.388094), SHAPE) AS distance FROM test_geo;
+SELECT st_distance_sphere(POINT(100, 30), SHAPE) AS distance FROM test_geo;
 
-SELECT st_distance_sphere(POINT(121.590347, 31.388094), POINT(121.590347, 31.388094));
+SELECT st_distance_sphere(POINT(100, 30), POINT(100, 30));
