@@ -8,16 +8,16 @@ sql执行顺序: FROM/JOIN/WHERE/GROUP BY/HAVING/SELECT/ORDER BY/LIMIT
     #    表锁: FLUSH TABLES WITH READ LOCK; LOCK TABLES 表名 READ/WRITE; 读锁; 写锁; 元数据锁
     #    行锁: 加锁都是在索引上加锁; 非索引字段会查找索引字段然后加锁
     共享锁(S锁): 允许持有锁的事务读取行
-    排它锁(X锁): 允许持有锁的事务更新或删除一行 #如果事务T1持有一个行r上的排它(X)锁，另一个事务T2无论读写请求都不会立即通过，而是需要等待T1释放在行r上的锁
-    # 意向锁(Intention Locks) 是表级锁，用于指示事务稍后对表中的行需要哪种类型的锁(共享或独占)。
+    排它锁(X锁): 允许持有锁的事务更新或删除一行 #如果事务T1持有一个行r上的排它(X)锁, 另一个事务T2无论读写请求都不会立即通过, 而是需要等待T1释放在行r上的锁
+    # 意向锁(Intention Locks) 是表级锁, 用于指示事务稍后对表中的行需要哪种类型的锁(共享或独占); 
     意向共享锁(IS): 表示事务打算在表中的各个行上设置共享锁
     意向排他锁(IX): 表示事务打算对表中的各个行设置排他锁
     
     记录锁(Record Locks): 对索引记录上的单条记录加锁
-    间隙锁(Gap Locks): 锁定一个范围，但不包括记录本身 # 间隙锁的主要目的是为了防止幻读(Phantom Reads)。
-    临键锁(Next-key Locks): 是记录锁与间隙锁的结合，锁定一个范围，并且锁定记录本身。InnoDB的默认隔离级别(Repeatable Read)下使用临键锁来锁定查询的索引范围。
-    插入意向锁(Insert Intention Locks): 在插入记录时，InnoDB会检查插入位置的间隙锁。如果其他事务已经持有间隙锁，那么InnoDB会允许第二个事务在间隙中插入一个记录，前提是这个事务必须持有插入意向锁。
-    自增锁(Auto-inc Locks): 用于确保自增列(如AUTO_INCREMENT)在插入新记录时能够生成唯一的值。
+    间隙锁(Gap Locks): 锁定一个范围, 但不包括记录本身 # 间隙锁的主要目的是为了防止幻读(Phantom Reads); 
+    临键锁(Next-key Locks): 是记录锁与间隙锁的结合, 锁定一个范围, 并且锁定记录本身; InnoDB的默认隔离级别(Repeatable Read)下使用临键锁来锁定查询的索引范围; 
+    插入意向锁(Insert Intention Locks): 在插入记录时, InnoDB会检查插入位置的间隙锁; 如果其他事务已经持有间隙锁, 那么InnoDB会允许第二个事务在间隙中插入一个记录, 前提是这个事务必须持有插入意向锁; 
+    自增锁(Auto-inc Locks): 用于确保自增列(如AUTO_INCREMENT)在插入新记录时能够生成唯一的值; 
 死锁:
     死锁: 相互等待
     加锁: 线程/事务/event/lockId;
@@ -27,7 +27,34 @@ sql执行顺序: FROM/JOIN/WHERE/GROUP BY/HAVING/SELECT/ORDER BY/LIMIT
     解死锁条件:
     锁超时(事务超时): innodb_lock_wait_timeout
 
-sql优化: explain
+explain(sql优化):
+    id: id值越大, 执行优先级越高; id相同, 从上到下执行
+    type: # system>const>eq_ref>ref>range>index>ALL
+        system: 表只有一行记录（等于系统表）
+        const: primary key或unique索引; where条件中将查询转换为一个常量; 通过一次索引就找到了结果
+        eq_ref: 唯一索引扫描, 对于每个索引键, 表中只有一条记录与之匹配; 常见主键或唯一索引扫描; 
+        ref: 非唯一性索引扫描, 返回匹配某个单独值的所有行; 本质上也是一种索引访问, 返回匹配某值（某条件）的多行值, 属于查找和扫描的混合体; 
+        range: 只检索给定范围的行, 使用一个索引来检索行, 可以在key列中查看使用的索引, 一般出现在where语句的条件中, 如使用between、>、<、in等查询; 
+        index: 全索引扫描, index和ALL的区别：index只遍历索引树, 通常比ALL快, 因为索引文件通常比数据文件小; 虽说index和ALL都是全表扫描, 但是index是从索引中读取, ALL是从磁盘中读取; 
+        ALL: 全表扫描
+    key: 实际中使用的索引, 如为NULL, 则表示未使用索引; 若查询中使用了覆盖索引, 则该索引和查询的select字段重叠; 
+    ref: 关联的字段, 常量等值查询, 显示为const, 如果为连接查询, 显示关联的字段; 
+    Extra: 额外信息, 使用优先级Using index>Using filesort（九死一生）>Using temporary（十死无生）
+    rows: 大致估算所要读取的行数; 当然该值越小越好; 
+    filtered: 百分比值, 表示存储引擎返回的数据经过滤后, 剩下多少满足查询条件记录数量的比例; 
+    select_type:
+        SIMPLE: 简单的select查询, 查询中不包含子查询或union查询; 
+        PRIMARY: 查询中若包含任何复杂的子部分, 最外层查询为PRIMARY(在未被SEMIJOIN的情况下)
+        DEPENDENT SUBQUERY: 最外层的查询依赖的SUBQUERY
+        SUBQUERY: 不被最外层的查询依赖的SUBQUERY
+        MATERIALIZED: 被查询优化器SEMIJOIN，生成临时表
+        DERIVED: 在from列表中包含的子查询会被标记为DERIVED(衍生), MySQL会递归执行这些子查询, 将结果放在临时表中;
+        UNION: 若第二个select出现在union后, 则被标记为UNION, 若union包含在from子句的子查询中, 外层select将被标记为DERIVED; 
+        UNION RESULT: 从union表获取结果的select;
+        DEPENDENT UNION: 直接依赖 UNION 查询的结果
+    possible_keys: 显示可能应用在表中的索引, 可能一个或多个; 查询涉及到的字段若存在索引, 则该索引将被列出, 但不一定被查询实际使用; 
+    key_len: 表示索引中所使用的字节数, 可通过该列计算查询中使用的索引长度; 在不损失精确性的情况下, 长度越短越好; key_len显示的值为索引字段的最大可能长度, 并非实际使用长度, 即key_len是根据表定义计算而得, 并不是通过表内检索出的; 
+    table: 显示sql操作属于哪张表的
 链接:
     from
     inner|left|right|outer|natual join
@@ -36,9 +63,9 @@ sql优化: explain
 临时表:
     create temporary table table_name;
     # 临时表 https://zhuanlan.zhihu.com/p/356718127
-    # 临时表和永久表类似，是需要插入到数据库储存在磁盘的临时区中，只有数据库连接断开MySQL自动删除临时表，或者drop 掉，才会消失。
-    # 汇总维度相同时，巧用union，不用join。取各个临时表所需的字段，收集齐全后，一次group by。
-    # 适用于：有很多复杂的关联子表查询。
+    # 临时表和永久表类似, 是需要插入到数据库储存在磁盘的临时区中, 只有数据库连接断开MySQL自动删除临时表, 或者drop 掉, 才会消失;
+    # 汇总维度相同时, 巧用union, 不用join; 取各个临时表所需的字段, 收集齐全后, 一次group by; 
+    # 适用于：有很多复杂的关联子表查询; 
 
 其他:
     主从集群
