@@ -13,10 +13,10 @@ tcpdump -i any -s0 port 80
 tcpdump -i any -s0 udp
 
 # demo
-tcpdump host 44.39.52.214 -i any -s 0 -vv -w 0612-1.pcap
-tcpdump src net 44.39.52.0/24 -i any -s 0 -w rtp_port.pcap
-tcpdump \( src net 44.39.52.0/24 or port 5060 \) and udp -i any -s 0 -vv -w test_01.pcap
-tcpdump -i any -w /path/to/output/file_prefix -C 100 -W 10 # 每个文件100M, 循环保留10个文件
+tcpdump host 44.39.52.214 -i any -s 0 -vv -w out.pcap
+tcpdump src net 44.39.52.0/24 -i any -s 0 -w out.pcap
+tcpdump \( src net 44.39.52.0/24 or port 5060 \) and udp -i any -s 0 -vv -w out.pcap
+tcpdump -i any -C 100 -W 10  -w out.pcap # 每个文件100M, 循环保留10个文件
 
 # 运算符 and or not && || ! ()
 

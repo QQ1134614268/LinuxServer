@@ -5,7 +5,10 @@
     开发:
         其他:
             开发工具: idea maven- git CiCd 面板, bug 需求, 石墨, 钉钉, 视频会议
-            框架: 缓存, mysql, redis,大数据-存储(es|mongo),消费(kafka),查询,中间件:kafka websocket等,性能-定时 线程池 缓存
+            框架:
+                数据库(大数据,低延时): mysql es mongo doris
+                性能: 中间件 kafka redis websocket 定时
+                web: nginx
             UI:
             仓库版本管理:
                 代码库分支:

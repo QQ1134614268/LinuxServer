@@ -1,4 +1,183 @@
 # todo 待解决问题:
+mysql:
+    SELECT id from xc_plan WHERE 1!=1 : N/A 空数据
+    SELECT sum(id) from xc_plan WHERE 1!=1 : null, 有一条数据, 没有行数据 sum也会计算为 null; list 接收, list不为空, 元素为空, 同理还有join连表导致的N/A与null
+思维限制:
+    doris分区事件:
+        问题: 影响性能,加分区,不影响不加分区
+        限制点: 影响不大,最好加上
+    设备录像断续问题: 重启设备,更换设备, 网络与设备问题定位, 此断续与华为云7秒断续问题
+
+效率: 标准,制式; 避免重复造轮子; 自上而下规划
+天问: 接口, 两个表, 是后台组装好, 还是前端单独调用
+
+优化发生的错误,:
+    逻辑分支不一样
+    影响对象不一样
+    重构,变量值最好是新增,然后修改逻辑,再重命名
+    层层关联-- 一点点验证
+    更快的测试 ??
+    抽象的接口, 验证后
+    
+    if 变反向, 条件也记得取反
+
+接口:
+    新增|编辑:
+        初始化: 创建人信息, 逻辑删除
+        权限: 子级,admin,role
+        唯一,名称重复: 新增,更新兼容
+        缓存:
+            若依缓存:
+                增删改 缓存数据
+                缓存为list
+                初始化 PostConstruct, 分布式重复执行??
+        日志:
+    查找:
+        - 分页
+        - 排序
+        - 分组
+        - 部分字段
+        - 条件查询: eq, in, le, like, or
+401:
+    1. chrome:
+        1.1 url携带密码:
+            首次http请求: response为401 ,携带 Www-Authenticate:Digest xxx
+            第二次请求: request携带 Authorization
+        1.2 url不携带密码:
+            首次http请求:
+                response为401 ,携带 Www-Authenticate:Digest xxx
+                弹出对话框,输入 用户名,密码(会被记住,chrome重启后失效;无痕模式,共享携带, 全部关闭也失效)
+            第二次请求:
+                request携带 Authorization: Digest username="admin", realm="Login to 2dbe1aac037ec86ef6c350ada579cb64", nonce="61Yw8AkxDaIVdVlb9t1iFh1L0i4dsIf5w2ge8dhjH2AEn8Z4RFpArCZqnNtjkUBq", uri="/onvifsnapshot/media_service/snapshot?channel=1&subtype=0", response="addb9c871f9179c4ffc0b58966f356bc", qop=auth, nc=00000003, cnonce="55ff314d506b7515"
+    2. httpClient:
+        2.1 url携带密码:
+        2.2  设置SslContext:
+    3. restTemplate:
+        3.1 url携带密码
+        3.2 设置SslContext ??
+https:
+    #https握手
+    C: SYN
+    S: SYN ACK
+    C: ACK
+
+    C: Client Hello
+        明文, 
+        版本, 
+        加密算法候选列表,
+            认证
+            密钥交换
+            堆成加密
+            摘要
+        压缩算法候选列表, 
+        随机数, 
+        扩展字段
+        SSLv2 -> SSLv3 -> TLSv1 -> TLSv1.1 -> TLSv1.2 -> TLSv1.3
+    S: ACK
+    S: Server Hello
+
+    C: Change Cipher Spec
+
+    C: Application Data
+    C: Application Data
+    S: ACK
+    C: Application Data
+    C: Application Data
+    S: ACK
+
+    C: FIN ACK
+    S: ACK
+    S: FIN ACK
+    C: ACK
+SpringBoot:
+    参数自动绑定:
+        方法:
+            RequestMapping: 不识别json
+            GetMappiing: json格式
+        consumes: JSON, APPLICATION_FORM_URLENCODED_VALUE
+        参数:
+            无: url中取值 映射对象
+            ModelAttribute: url中取值, 映射对象
+            RequestParam: url中取值, 单个参数, 可重复 不能映射对象
+            RequestBody: 从body中取值
+            PathVariable:
+            RequestAttribute: ??
+            RequestHeader:
+    page:
+        默认: Page.of(1,10,0,true)
+        current:
+            -1: 当做1;
+        size:
+            0: 只查总数;
+            -1: 直接查全部, 没有limit; 不查总数;
+        total:
+            -1: 不查总数;
+
+    x-www-form-urlencoded(RFC规范, 忽略get中body数据):
+        get方法: 拼到url后
+        post: 放在body中
+
+性能优化:
+    服务器资源统计:
+        网络
+        内存
+        磁盘读写
+        CPU
+
+    进程:
+        进程数/线程数
+        socket
+        file
+
+    服务器参数:
+        内存交换区:
+        内存超配:
+        最大打开文件数: /etc/security/limits.conf/soft nofile 65536  /etc/security/limits.conf/hard nofile 65536 # 进程同时打开的文件和 Socket 的数量。这个限制可以防止程序因为错误而耗尽系统资源。对于数据库系统，需要提高这个限制。
+        最大打开进程数: /etc/security/limits.conf/soft nproc 65536   /etc/security/limits.conf/hard nproc 65536
+        CPU 的能耗模式:
+        mq-deadline 调度算法:
+        kyber 调度算法:
+        在溢出时中止 TCP:
+        系统级别全连接队列最大长度:
+        最大打开文件数量（ulimit -n）与用户能够启动的最大进程数（ulimit -u):
+        绑定超过一个 NUMA 节点: lscpu
+
+数据:
+    数据库:
+        mysql:
+            B树:
+            HASH:
+            聚簇(磁盘空间索引): 内置
+
+            normal:
+            unique:
+            fullText:
+            spatial:
+
+        doris:
+            数据模型: 有修改-unique
+            索引(优化效果):
+                分区: cap_time
+                分桶:
+                前缀索引: 非varchar
+                bloomfilter:
+                倒排:
+                bitmap:
+
+                列式存储:
+                向量化查询:
+            修改性能:
+
+        查询字段: cap_time radarId
+
+    雷达: 16亿(一年), 每条数据0.2KB; cap_time radarId fusionId update_time lon lat
+    ais: 4亿(一年)
+    业务优化:
+        最近一个月数据
+        最近一天的数据
+        轨迹重点数据 地图级别, 拐点
+        
+        性能优化 对比结果
 表结构设计(json嵌套与打平):
     eg布控表:
         case2: data:{type:1,ship:{}}; data:{type:2,car:{}}

@@ -1,5 +1,13 @@
 # Doris
-引擎: OLAP, mysql es ...
+分区:
+    避免全表扫描, 优化数据分布式存储,单个分区备份,删除
+    跨区会更慢
+    分区太多,在每个服务器上, 网络资源呢?
+分桶:
+    一个桶 1G-10G数据
+    分布式查询, 跨区存储, 本地过滤后再进行聚合(不如本地直接完成)
+
+引擎: OLAP, mysql es ... ??
 
 Doris 的数据模型主要分为3类:
     - Aggregate:
@@ -9,32 +17,33 @@ Doris 的数据模型主要分为3类:
             REPLACE：替代，下一批数据中的 Value 会替换之前导入过的行中的 Value。
             MAX：保留最大值。
             MIN：保留最小值。
-    - Unique:
-        保证 Key 的唯一性; 相同时，新记录覆盖旧记录
-    - Duplicate:
-        在某些多维分析场景下，数据既没有主键，也没有聚合需求
-
-    - 排序存储
-    - Rollup
-    - Schema Change
-
+    - Unique: 保证 Key 的唯一性; 相同时，新记录覆盖旧记录; 支持修改, 部分更新;
+    - Duplicate: 在某些多维分析场景下，数据既没有主键，也没有聚合需求;  不支持修改; key仅做排序;
 索引:
-    - 前缀索引和 ZoneMap 索引;
-    - 倒排索引、 bloomfilter索引、 ngram bloomfilter索引 和bitmap索引。
+    - 前缀索引: 稀疏索引(类似kafka的稀疏索引??);到varchar字段前,每行数据前36字节;
+    - ZoneMap: 每一列 min,max等;
+    - 倒排索引(inverted index): 关键字,搜索引擎; https://doris.apache.org/zh-CN/docs/dev/data-table/index/inverted-index
+    - bloomfilter: 等值索引, 优化in,=查询;  存在误判
+    - N-Gram bloomfilter: 优化like查询
+    - bitmap: 适用于性别,城市等; 表字段形成 0101 数据
 
-    - HELP CREATE INDEX / HELP SHOW INDEX / HELP DROP INDEX
-
-    - inverted:
-        参考: https://doris.apache.org/zh-CN/docs/dev/data-table/index/inverted-index
-
-    - Bitmap:
-        CREATE INDEX [IF NOT EXISTS] index_name ON table1 (siteid) USING BITMAP COMMENT 'balabala';
+    - 创建Bitmap: CREATE INDEX [IF NOT EXISTS] index_name ON table1 (siteid) USING BITMAP COMMENT 'balabala';
     - 查看索引: SHOW INDEX FROM example_db.table_name;
     - 删除索引: DROP INDEX [IF EXISTS] index_name ON [db_name.]table_name;
-    - 修改索引: ALTER table `user_t`  ADD INDEX idx_id(id) USING inverted properties("parser"= "english") COMMENT 'index on id';
+    - 修改索引: ALTER table `user_t` ADD INDEX idx_id(id) USING inverted properties("parser"= "english") COMMENT 'index on id';
+
+    - 帮助语法: HELP CREATE INDEX / HELP SHOW INDEX / HELP DROP INDEX
 
 数据更新,删除:
     INSERT INTO `user_t` (id,name) VALUES (1, "tom");
     UPDATE `user_t` SET `ship_name`='0'  WHERE `id`='1';
     DELETE FROM user_t PARTITION p20230505 WHERE id='1'
 #导入 导出
+
+备注:
+    1. B树: 没有B树索引, 适当利用分区,分桶; 但是不要太多
+    2. 列式存储的MPP: (并行处理, 聚合,排序,过滤)
+    3. 列式存储: 根据字段存储数据, 压缩率高,查询快,向量查询(并行处理)
+    向量化查询: 执行引擎自动使用
+    并行处理: 每个桶一个??
+    修改: 不适合 修改 删除??
