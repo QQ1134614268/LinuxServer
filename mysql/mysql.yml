@@ -3,7 +3,7 @@ sql执行顺序: FROM/JOIN/WHERE/GROUP BY/HAVING/SELECT/ORDER BY/LIMIT
     开启事务: BEGIN; start TRANSACTION; for update??
     结束事务: COMMIT; ROLLBACK;
     名词: mvcc acid
-    隔离级别: 脏读, 幻读, 可重复读 读未提交, 读已提交
+    隔离级别: 脏读, 幻读,可重复读,读未提交,读已提交
 锁类型(InnoDB):
     #    表锁: FLUSH TABLES WITH READ LOCK; LOCK TABLES 表名 READ/WRITE; 读锁; 写锁; 元数据锁
     #    行锁: 加锁都是在索引上加锁; 非索引字段会查找索引字段然后加锁
@@ -26,6 +26,19 @@ sql执行顺序: FROM/JOIN/WHERE/GROUP BY/HAVING/SELECT/ORDER BY/LIMIT
         数据-lockId-> event -> 事务->线程
     解死锁条件:
     锁超时(事务超时): innodb_lock_wait_timeout
+
+mysql索引:
+    主键:
+    唯一索引:
+    普通索引:
+    全文索引:
+    前缀索引: 文本字段的前几个字符
+    空间索引:
+    联合索引:
+
+    索引方法:
+        B-Tree
+        Hash
 
 explain(sql优化):
     id: id值越大, 执行优先级越高; id相同, 从上到下执行
