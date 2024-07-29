@@ -4,7 +4,7 @@
 
 CI/CD:
   工具:
-    Jenkins
+    Jenkins:
     gitlab/CICD
     k8s:
       rancher
@@ -20,7 +20,7 @@ CI/CD:
     可扩展,持续改进
 
 需求指标:
-  一键部署,自动更新,webHook
+  一键部署,自动更新,webHook:
   易扩展,跨主机
   web可视化:
     监控功能
@@ -36,8 +36,8 @@ CI/CD:
 
 容器化技术:
   Docker:
-  LXC是一种轻量级虚拟化技术,可以提供隔离和安全性
-  Containerd
+  LXC是一种轻量级虚拟化技术,可以提供隔离和安全性:
+  Containerd:
 容器化平台:
   k8s: 容器编排系统, 非docker运行
   rancher: 搭建,管理k8s
