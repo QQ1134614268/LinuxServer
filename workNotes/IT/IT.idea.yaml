@@ -17,10 +17,21 @@ idea:
           file/settings/editor/code style/wrapping and braces/comment at first colmun
   idea快捷建:
       Alt+F 查找被引用的地方, find usages
-      ctrl+H 调用层次结构; 接口 显示实现, 类显示继承
+      ctrl+H 类的层次结构
+      ctrl+Alt+H 调用关系
+      ctrl+shift+H 方法层级结构
+      Ctrl + U：前往当前光标所在的方法的父类的方法 / 接口定义
+      Ctrl+鼠标左键 找变量、方法、类等的来源或者使用过的地方 同Ctrl+B
+      Ctrl + Alt + B：在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口
       ctrl+alt+u 继承,网图
       diagram 按钮
       ctrl+shift+num 设置快捷书签
+      7、智能提示类
+      Ctrl + P：方法参数提示显示
+      Ctrl + Q：光标所在的变量 / 类名 / 方法名等上面（也可以在提示补充的时候按），显示文档内容
+      Alt + Insert：代码自动生成，如生成对象的 set / get 方法，构造函数，toString()等
+      Alt+Enter：More actions错误提示信息列表，智能解决方案
+      Ctrl+Alt+V：根据右边的代码，自动生成左边的代码部分
   热部署策略(https://blog.csdn.net/qq_34381842/article/details/118339905):
         1. spring-boot-devtools: # 快速重启
             导入jar包 # devtools: class文件改变,自动重启
@@ -37,3 +48,7 @@ idea:
             Build,Execution,Deployment/Debugger/HotSwap/Build project before reloading class
             Build,Execution,Deployment/Debugger/HotSwap/Reload classes in background
             Tools/action on save/Build project # running/debugging不触发
+  edit configurations:
+      VM options: 运行时环境变量，它需要以-D或-X或-XX开头，每个参数使用空格分隔
+      Program arguments: 传入main方法的字符串数组args[]，它通常以--开头，如--spring.profiles.active=dev3
+      Environment variables: 没有前缀，优先级低于VM options，即如果VM options有一个变量和Environment variable中的变量的key相同，则以VM options中为准
