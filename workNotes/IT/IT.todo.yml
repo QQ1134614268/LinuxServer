@@ -90,10 +90,23 @@ https:
     S: FIN ACK
     C: ACK
 SpringBoot:
+    serverTimezone(mysql链接参数): # Asia/Tokyo Shanghai Bangkok
+        反序列化: 数据库查出来是字符串,使用date接收,会根据serverTimezone 与 本地时间进行转换; 11:00(Tokyo)=12:00(Shanghai)
+        序列化: 入库; 12:00(Shanghai)=11:00(Tokyo);
+    spring.jackson.time-zone: jackson默认使用0时区; date对象序列化成字符串, 12:00(Shanghai date)=4:00(unix 字符串)
+    date序列化:
+        RequestBody:
+            JsonFormat: 序列化body中 json数据
+            ObjectMapper: 序列化body中 json数据
+            spring.jackson.date-format: 序列化body中 json数据
+        RequestParam:
+            DateTimeFormat:
+            Convert:
+            InitBinder:
     参数自动绑定:
         方法:
             RequestMapping: 不识别json
-            GetMappiing: json格式
+            GetMapping: json格式
         consumes: JSON, APPLICATION_FORM_URLENCODED_VALUE
         参数:
             无: url中取值 映射对象
