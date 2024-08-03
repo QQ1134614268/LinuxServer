@@ -34,6 +34,10 @@ shutdown -r now
 source /etc/profile
 echo $PATH
 
+# 日志
+/var/log/syslog
+/var/log/messages
+
 # 软件: yum wget curl ssh nginx mysql docker
 yum install -y xxx
 mysql -uroot -pxxx -e "source /root/xxx.sql"
