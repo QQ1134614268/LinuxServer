@@ -1,46 +1,19 @@
 todo:
-    # 最新版本缺点: 学习资料,bug资料,第三方库
-    搬电脑愤怒事件:
-        对他的好处?
-        质问?
-        忍一下?
-        
-        愤怒前兆?
-
-    SpringBoot:
-        serverTimezone:
-            Asia/Tokyo Shanghai Bangkok
-            数据库查出来是字符串, 会根据serverTimezone 与 本地时间进行转换; 同理Date转字符串存入数据库
-            java时间转数据库时间:
-                上海-serverTimezone-Tokyo, new Date() = 10, 字符串为 11
-            数据库时间转java时间:
-                select now() = 10,  转Date 为 9
-    doris docker| treeNode | date序列化 | 工具类
-    简历(springBoot源码 面试题)  医疗保险
+    doris docker| treeNode | 工具类
+    简历(springBoot源码 面试题)  
+    医疗保险
     发布 book1.0, 寻找伙伴
     匠心??: 编辑页面, 淘宝优化, 手机页面适配
     左右联动 --匠心; 文件目录 kafka websocket进阶视频 cv pytorch
-
-    date, time, datetime, timestamp 受时区影响
-    spring.jackson.time-zone=GMT+8
-    // Gson 本
-    地时区 utc+7, , 影响datetime字段,datetime format 少1小时,web 少1小时
-    date不支持直接序列化:
-        RequestBody:
-            JsonFormat: 序列化body中 json数据
-            ObjectMapper: 序列化body中 json数据
-            spring.jackson.date-format: 序列化body中 json数据
-        RequestParam:
-            DateTimeFormat:
-            Convert: 
-            InitBinder: 
             
     适配中小屏:
-        容器-div大小
-        item 百分比大小
-        内容布局
+        div-Percentage: 等比缩放
+        div大小:
+            div-L:
+            div-S:
         
-        UI样式
+        文字,图像等: 固定大小, 适配文字
+        布局: 大屏
     匠心:
         设计:
             首页: 图片案例展示
@@ -150,6 +123,12 @@ over:
     社会  奋斗规则  更大的囚笼? 社会类似
 
 ran:
+    搬电脑愤怒事件 todo:
+        对他的好处?
+        质问?
+        忍一下?
+        
+        愤怒前兆?
     增加场,渲染一种信心,表示一种可以成功的场景,困难的可以想办法克服.要大且有我参与的.生活中也要大,用的物品,计算的金额; 细节丰满
     我的双标
     我虚无主义，未知因素，意外因素，怀疑主义，
