@@ -13,12 +13,16 @@ tcpdump -i any -s0 port 80
 tcpdump -i any -s0 udp
 
 # demo
-tcpdump host 44.39.52.214 -i any -s 0 -vv -w out.pcap
+tcpdump host 44.39.52.214 -i any -s 0 -vv
+tcpdump host 44.39.52.214 -i any -s 0 -vv | grep -E "POST" -C 3
 tcpdump src net 44.39.52.0/24 -i any -s 0 -w out.pcap
-tcpdump \( src net 44.39.52.0/24 or port 5060 \) and udp -i any -s 0 -vv -w out.pcap
-tcpdump -i any -C 100 -W 10  -w out.pcap # 每个文件100M, 循环保留10个文件
-
-# 运算符 and or not && || ! ()
+tcpdump \( src net 44.39.52.0/24 or port 5060 \) and udp -i any -s 0 -vv -w out.pcap # 运算符 and or not && || ! ()
+tcpdump -i any -s 0 -C 100 -W 10 -w out.pcap # 每个文件100M, 循环保留10个文件
+# 参数:
+# -i any   指定网络接口, 不指定为第一个网络接口 eth0, any 任意
+# -s 0     指定包大小, 0 不限制大小
+# -vv      输出详细的报文信息
+# -r       从指定的文件中读取包, 这些包一般通过-w选项产生
 
 # tcpdump 过滤
 tcpdump -i eth0 -s 0 -w out.pcap     #监听网络接口字节为0保存到out.pcap文件中
@@ -36,14 +40,6 @@ tcpdump -nX port 80 -r out.pcap #16进制显示80端口的信息
 tcpdump -A -n 'tcp[13]=24' -r out.pcap #ascll码 只显示tcp13位为24的
 
 tcpdump -i eth0 'port 1111' -c 3 -r out.pcap # 即可进行流量回放;
-
-# 参数:
-
--i any # 指定网络接口, 不指定为第一个网络接口 eth0, any 任意
--s 0 # 指定包大小, 0 不限制大小
--vv 输出详细的报文信息
--r 从指定的文件中读取包, 这些包一般通过-w选项产生
-
 
 参数:
     -A 以ASCII格式打印出所有分组,并将链路层的头最小化;
