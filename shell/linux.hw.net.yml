@@ -1,6 +1,6 @@
 ping: 发送ICMP回显请求消息到目标主机，并等待回复，可以确定网络是否通畅         # icmp Tracert原理: 是通过向目标发送不同IP生存时间（TTL）值的“Internet控制消息协议（ICMP）”回应数据包，来确定数据包从源地址到目的地址经过的路由器IP地址
-telnet: 测试端口连通性
-traceroute: 显示数据包从一个主机到另一个主机的路径。它们通过发送带有逐渐增加的TTL值的ICMP或UDP数据包来工作，并记录每个跃点的回复。 # win: tracert
+telnet 1.1.1.1 3306 : 测试端口连通性
+traceroute 1.1.1.1: 显示数据包从一个主机到另一个主机的路径。它们通过发送带有逐渐增加的TTL值的ICMP或UDP数据包来工作，并记录每个跃点的回复。 # win: tracert
 netstat: 系统的网络状态;显示网络连接、路由表、接口统计等信息的工具
 ip: addr 查看网卡; route 查看路由网关; 替换ifconfig # 实战 https://blog.csdn.net/whatday/article/details/84611940
 firewall-cmd|iptables: #

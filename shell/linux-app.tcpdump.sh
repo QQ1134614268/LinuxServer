@@ -16,7 +16,7 @@ tcpdump -i any -s0 udp
 tcpdump host 44.39.52.214 -i any -s 0 -vv
 tcpdump host 44.39.52.214 -i any -s 0 -vv | grep -E "POST" -C 3
 tcpdump src net 44.39.52.0/24 -i any -s 0 -w out.pcap
-tcpdump \( src net 44.39.52.0/24 or port 5060 \) and udp -i any -s 0 -vv -w out.pcap # 运算符 and or not && || ! ()
+tcpdump \( src net 44.39.52.0/24 or port 5060 \) and udp -i any -s 0 -w out.pcap # 运算符 and or not && || ! ()
 tcpdump -i any -s 0 -C 100 -W 10 -w out.pcap # 每个文件100M, 循环保留10个文件
 # 参数:
 # -i any   指定网络接口, 不指定为第一个网络接口 eth0, any 任意
