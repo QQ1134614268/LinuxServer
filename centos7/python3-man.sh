@@ -15,8 +15,8 @@ cd Python-3.7.5
 make -j8
 make install
 #4. python2 与 python3 并存
-ln -s /usr/local/python3.7.5/bin/python3.7 /usr/bin/python3.7
-ln -s /usr/local/python3.7.5/bin/pip3 /usr/bin/pip3.7
+ln -fs /usr/local/python3.7.5/bin/python3.7 /usr/bin/python3.7
+ln -fs /usr/local/python3.7.5/bin/pip3 /usr/bin/pip3.7
 # 4.2 升级pip
 pip3.7 install --upgrade pip
 #5. 更换源
