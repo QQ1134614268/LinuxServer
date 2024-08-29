@@ -1,11 +1,13 @@
 #!/bin/bash
 
-wget https://npm.taobao.org/mirrors/node/v12.13.0/node-v12.13.0-linux-x64.tar.xz
-tar -xvf node-v12.13.0-linux-x64.tar.xz
-mv node-v12.13.0-linux-x64 /usr/local
+wget https://npmmirror.com/mirrors/node/v20.17.0/node-v20.17.0-linux-x64.tar.xz
+tar -xvf node-v20.17.0-linux-x64.tar.xz
+mv node-v20.17.0-linux-x64 /usr/local
+rm -rf  /usr/bin/npm /usr/bin/node
 
-ln -s /usr/local/node-v12.13.0-linux-x64/bin/npm /usr/bin/
-ln -s /usr/local/node-v12.13.0-linux-x64/bin/node /usr/bin/
+ln -s /usr/local/node-v20.17.0-linux-x64/bin/npm /usr/bin/
+ln -s /usr/local/node-v20.17.0-linux-x64/bin/node /usr/bin/
+# centos7 安装node16以后的高版本,需要升级库
 
 # 切换源 默认 https://registry.npmjs.org/
 # npm config get registry

@@ -16,3 +16,9 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
 # 1.2 生效
 yum clean all
 yum makecache
+
+# 升级 eg glibc
+yum clean all
+yum check-update
+yum update glibc
+yum update
