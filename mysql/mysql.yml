@@ -3,7 +3,11 @@ sql执行顺序: FROM/JOIN/WHERE/GROUP BY/HAVING/SELECT/ORDER BY/LIMIT
     开启事务: BEGIN; start TRANSACTION; for update??
     结束事务: COMMIT; ROLLBACK;
     名词: mvcc acid
-    隔离级别: 脏读, 幻读,可重复读,读未提交,读已提交
+    隔离级别:
+        READ UNCOMMITTED（读未提交）: 允许事务读取未被其他事务提交的变更。可能会导致脏读、不可重复读、幻读。
+        READ COMMITTED（读已提交）: 只允许事务读取已经被其他事务提交的变更。可以避免脏读，但可能会导致不可重复读、幻读。 #  适用于对数据一致性要求不是非常严格，但希望提高并发性能的场景。
+        REPEATABLE READ（可重复读）: 确保事务可以多次从一个字段读取相同的值，在这个事务持续期间，禁止其他事务更新这个字段。可以避免脏读和不可重复读，但可能导致幻读。 # 适用于需要高度数据一致性和防止幻读的场景，如金融交易系统、库存管理系统等。
+        SERIALIZABLE（序列化）: 提供严格的事务隔离。事务串行化顺序执行，可以避免所有并发问题，但性能最差。
 锁类型(InnoDB):
     #    表锁: FLUSH TABLES WITH READ LOCK; LOCK TABLES 表名 READ/WRITE; 读锁; 写锁; 元数据锁
     #    行锁: 加锁都是在索引上加锁; 非索引字段会查找索引字段然后加锁
@@ -79,7 +83,6 @@ explain(sql优化):
     # 临时表和永久表类似, 是需要插入到数据库储存在磁盘的临时区中, 只有数据库连接断开MySQL自动删除临时表, 或者drop 掉, 才会消失;
     # 汇总维度相同时, 巧用union, 不用join; 取各个临时表所需的字段, 收集齐全后, 一次group by; 
     # 适用于：有很多复杂的关联子表查询; 
-
 其他:
     主从集群
     帮助文档,help
