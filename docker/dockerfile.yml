@@ -1,0 +1,8 @@
+# dockerfile 常见命令
+dockerfile:
+    FROM:
+    COPY: 复制文件 若为目标为目录,复制目录下文件; COPY srcDir 为3/app/outDir
+    ADD:
+    WORKDIR:
+    RUN:
+    EXPOSE:
